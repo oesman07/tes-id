@@ -1,0 +1,403 @@
+<div id="cart-mobile" class="hidden-md hidden-lg sm-margin-bottom-20 xs-margin-bottom-20">
+	<a class="show-cart-mobile btn btn-block btn-lg btn-default">
+		<div class="flex-vertical-middle flex-space-between">
+			<span>{{ 'checkout.general.show_order_summary' | t }} <i class="margin-left-5 fa fa-angle-down"></i></span>
+
+			{% if template == "checkout_payment" or template == "payment_completed" or template == "payment_reminder"%}
+			<span class="pull-right">{{currency_prefix}} 
+				<span data-amount-include-charge>
+					{% if cart.total_amount_include_transaction > 0.00 %}
+						{{cart.total_amount_include_transaction}}
+					{% else %}
+						{{cart.total_price}}
+					{% endif %}
+				</span> 
+				{{currency_suffix}}</span>
+			{% else %}
+			<span class="pull-right">{{currency_prefix}} {{cart.total_price}} {{currency_suffix}}</span>
+			{% endif %}
+		</div>
+	</a>
+
+	<!-- Cart for mobile -->
+	<div class="cart md-up-margin-top-20" id="cart">
+		{% if cart.item_taxable == true %}
+			<div class="margin-bottom-10 text-right">
+				<span class="color-light size-12">
+					{{ 'checkout.general.product_with' | t }} <span class="color-danger">*</span> {{ 'checkout.general.taxable_product' | t }}
+				</span>
+			</div>
+		{% endif %}
+
+		<ul class="list-unstyled list-style cart-list ">
+			{% for oi in cart.order_item %}
+			<li class="flex-vertical-middle flex-space-between">
+				<span class="cart-detail-item cart-detail flex-vertical-middle">
+					<span class="badge badge-primary cart-qty">{{oi.quantity}}</span>
+					<div class="cart-img display-inline margin-right-5">
+						<div class="perfect-square-wrap">
+							<img class="perfect-square-img" alt="{{oi.item_image.title}}" src="{{oi.item_image.url}}">
+						</div>
+					</div>
+					
+					<span class="cart-detail-item">
+						{{oi.product_name}} <br>
+						<div class="color-light size-12 margin-top-5">{{oi.variant_name}}</div>
+					</span>
+				</span>
+
+				<span class="cart-detail-item">
+					{% if oi.taxable == 1 %} 
+						<span class="color-danger">*</span>
+					{% endif %}
+					{{currency_prefix}} {{oi.subtotal}} {{currency_suffix}}
+				</span>
+			</li>
+			{% endfor %}
+		</ul>
+
+		<ul class="list-unstyled list-style">
+
+			<li class="flex-vertical-middle flex-space-between border-top margin-top-15">
+				<span>{{ 'checkout.general.subtotal' | t }}</span>
+				<span>{{currency_prefix}} {{cart.total_line_items_price}} {{currency_suffix}}</span>
+			</li>
+
+			{% if cart.total_discount > 0.00 and cart.discount_code == empty %}
+
+				<li class="flex-vertical-middle flex-space-between">
+					<span class="cart-detail">
+						{{ 'checkout.general.discount' | t }}
+					</span>
+					
+					<span>- {{currency_prefix}} {{cart.total_discount}} {{currency_suffix}}</span>
+				</li>
+			{% elsif cart.discount_code %}
+				<li class="flex-vertical-middle flex-space-between">
+					<span class="cart-detail">
+						{{ 'checkout.general.discount' | t }}
+						<span class="color-light size-12 discount-code">{{cart.discount_code}}</span>
+						<span class="btn-del-discount">({{ 'checkout.general.remove' | t }})</span>
+					</span>
+					
+					<span>- {{currency_prefix}} {{cart.total_discount}} {{currency_suffix}}</span>
+				</li>
+			{% endif %}
+
+			{% if template == "checkout_payment" or template == "payment_completed" or template == "payment_reminder"%}
+				
+				{% if cart.taxes_included == false%}
+					{% if cart.order_tax %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tax' | t }} ({{cart.order_tax.name}} {{cart.order_tax.rate}}%)</span>
+							<span>{{currency_prefix}} {{cart.total_tax}} {{currency_suffix}}</span>
+						</li>
+					{% endif %}
+				{% endif %}
+				
+				{% if cart.pickup_location == empty  and cart.shipping_id %}
+					<li class="flex-vertical-middle flex-space-between">
+						<span>{{ 'checkout.general.shipping' | t }}</span>
+						<span>{{currency_prefix}} {{cart.total_shipping}} {{currency_suffix}}</span>
+					</li>
+				{% elsif cart.pickup_location and cart.total_shipping > 0 %}
+					<li class="flex-vertical-middle flex-space-between">
+						<span>{{ 'checkout.general.pickup_fee' | t }}</span>
+						<span>{{currency_prefix}} {{cart.total_shipping}} {{currency_suffix}}</span>
+					</li>
+				{% elsif cart.total_shipping > 0 %}
+					<li class="flex-vertical-middle flex-space-between">
+						<span>{{ 'checkout.general.shipping' | t }}</span>
+						<span>{{currency_prefix}} {{cart.total_shipping}} {{currency_suffix}}</span>
+					</li>
+				{% endif %}
+
+				{% if cart.shipping_tax > 0 %}
+					<li class="flex-vertical-middle flex-space-between">
+						<span>{{ 'checkout.general.shipping_tax' | t }} ({{cart.order_tax.name}} {{cart.order_tax.rate}}%)</span>
+						<span>{{currency_prefix}} {{cart.shipping_tax}} {{currency_suffix}}</span>
+					</li>
+				{% endif %}
+
+				{% if cart.payment_status == 1 and cart.transaction_charge_rate_fee > 0.00%}
+					<li class="flex-vertical-middle flex-space-between">
+						<span>{{ 'checkout.general.tc_rate' | t }} ({{cart.pg_type_rate}}%)</span>
+						<span>
+							<span>{{currency_prefix}}</span>
+							<span>{{cart.transaction_charge_rate_fee}}</span>
+							<span>{{currency_suffix}}</span>
+						</span>
+					</li>
+				{% endif %}
+
+				{% if cart.credit_used > 0 and cart.total_amount_include_transaction != 0%}
+					{% if cart.payment_status != 1 and cart.transaction_charge_rate_fee >= 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span data-checkout-transaction-charge-rate></span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-rate></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status == 1 and cart.transaction_charge_fee > 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span>{{cart.transaction_charge_fee}}</span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status != 1 and cart.transaction_charge_fee >= 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-charge></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}	
+				{% elsif cart.credit_used == 0 and cart.total_amount_include_transaction == 0%}
+					{% if cart.payment_status != 1 and cart.transaction_charge_rate_fee >= 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span data-checkout-transaction-charge-rate></span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-rate></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status == 1 and cart.transaction_charge_fee > 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span>{{cart.transaction_charge_fee}}</span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status != 1 and cart.transaction_charge_fee >= 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-charge></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}	
+				{% elsif cart.total_amount_include_transaction > 0 %}
+					{% if cart.payment_status != 1 and cart.payment_status != 0 and cart.transaction_charge_rate_fee == 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span data-checkout-transaction-charge-rate></span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-rate></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status == 0 and cart.transaction_charge_rate_fee > 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc_rate' | t }} ({{cart.pg_type_rate}}%)</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span>{{cart.transaction_charge_rate_fee}}</span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status == 1 and cart.transaction_charge_fee > 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span>{{cart.transaction_charge_fee}}</span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}
+
+					{% if cart.payment_status != 1 and cart.payment_status != 0 and cart.transaction_charge_fee == 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span data-checkout-transaction-charge></span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}	
+
+					{% if cart.payment_status == 0 and cart.transaction_charge_fee > 0.00 %}
+						<li class="flex-vertical-middle flex-space-between">
+							<span>{{ 'checkout.general.tc' | t }}</span>
+							<span>
+								<span>{{currency_prefix}}</span>
+								<span>{{cart.transaction_charge_fee}}</span>
+								<span>{{currency_suffix}}</span>
+							</span>
+						</li>
+					{% endif %}	
+
+					
+				{% endif %}
+
+				{% if cart.credit_used > 0.00 %}
+					<li class="flex-vertical-middle flex-space-between">
+						<span class="cart-detail">
+							{{ 'checkout.general.store_credit' | t }}
+							{% if template != "payment_completed" %}
+								<span class="btn-del-credit" style="text-decoration:underline;font-size:12px;color:#ccc;cursor: pointer;">({{ 'checkout.general.remove' | t }})</span>
+							{% endif %}
+						</span>
+						
+						<span>- {{currency_prefix}} {{cart.credit_used}} {{currency_suffix}}</span>
+					</li>
+
+					<li class="flex-vertical-middle flex-space-between  border-top margin-top-15">
+						<span>{{ 'checkout.general.total' | t }}</span>
+						<span>
+							<span class="color-light weight-light">{{currency_prefix}}</span>
+							<span class="color-primary weight-bold size-20" data-amount-include-charge>
+								{{cart.total_amount_include_transaction}}
+							</span>
+							<span class="color-light weight-light">{{currency_suffix}}</span>
+						</span>
+					</li>
+					
+					{% if cart.total_tax > 0 or  cart.shipping_tax > 0 %}
+						<li class="border-top margin-top-15">
+							<span>{{ 'checkout.general.tax_summary' | t }}</span>
+						</li>
+
+						{% if cart.total_tax > 0 %}
+							<li>
+								<span class="color-light size-12">
+									{{cart.order_tax.name}}  {{cart.order_tax.rate}}% : <b>{{currency_prefix}} {{cart.total_tax}} {{currency_suffix}}</b>
+
+									{% if cart.taxes_included == true%}
+										 ( {{ 'checkout.general.tax_include' | t }} )
+									{% endif %}
+								</span>
+							</li>
+						{% endif %}
+
+						{% if cart.shipping_tax > 0 %}
+							<li>
+								<span class="color-light size-12">
+									{{ 'checkout.general.shipping_tax' | t }} : <b>{{currency_prefix}} {{cart.shipping_tax}} {{currency_suffix}}</b>
+								</span>
+							</li>
+						{% endif %}
+					{% endif %}
+
+				{% else %}
+					<li class="flex-vertical-middle flex-space-between  border-top margin-top-15">
+						<span>{{ 'checkout.general.total' | t }}</span>
+						<span>
+							<span class="color-light weight-light">{{currency_prefix}}</span>
+							<span class="color-primary weight-bold size-20" data-amount-include-charge>
+								{% if cart.total_amount_include_transaction > 0.00 %}
+									{{cart.total_amount_include_transaction}}
+								{% else %}
+									{{cart.total_price}}
+								{% endif %}
+							</span>
+							<span class="color-light weight-light">{{currency_suffix}}</span>
+						</span>
+					</li>
+
+					{% if cart.total_tax > 0 or  cart.shipping_tax > 0 %}
+						<li class="border-top margin-top-15">
+							<span>{{ 'checkout.general.tax_summary' | t }}</span>
+						</li>
+
+						{% if cart.total_tax > 0 %}
+							<li>
+								<span class="color-light size-12">
+									{{cart.order_tax.name}}  {{cart.order_tax.rate}}% : <b>{{currency_prefix}} {{cart.total_tax}} {{currency_suffix}}</b>
+
+									{% if cart.taxes_included == true%}
+										 ( {{ 'checkout.general.tax_include' | t }} )
+									{% endif %}
+								</span>
+							</li>
+						{% endif %}
+
+						{% if cart.shipping_tax > 0 %}
+							<li>
+								<span class="color-light size-12">
+									{{ 'checkout.general.shipping_tax' | t }} : <b>{{currency_prefix}} {{cart.shipping_tax}} {{currency_suffix}}</b>
+								</span>
+							</li>
+						{% endif %}
+					{% endif %}
+				{% endif %}
+
+			{% else %}
+				<li class="flex-vertical-middle flex-space-between border-top margin-top-15">
+					<span class="color-primary">{{ 'checkout.general.total' | t }}</span>
+					<span>
+						<span class="color-light weight-light">{{currency_prefix}}</span>
+						<span class="color-primary weight-bold size-20">
+							{{cart.total_price}}
+						</span>
+						<span class="color-light weight-light">{{currency_suffix}}</span>
+					</span>
+				</li>
+			{% endif %}
+
+		</ul>
+
+		{% comment %}Customer remarks{% endcomment %}
+		<div class="form-group margin-top-20">
+			<textarea class="form-control remark mobile-remark" placeholder="{{ 'checkout.general.remark' | t }}" {% if template == "payment_completed"%} disabled {% endif %}>{{cart.remark}}</textarea>
+		</div>
+
+		{% comment %}Apply Discount{% endcomment %}
+		{% if template != "payment_reminder"%}
+			{% if template != "payment_completed" and cart.discount_code == empty %}
+				{% if cart.credit_used == 0 %}
+					{% if cart.has_discounts %}
+
+						<div class="input-group margin-top-20">
+							<div class="">
+								<input type="text" class="form-control " name="discount_code"  placeholder="{{ 'checkout.general.discount_code' | t }}" />
+								<span></span>
+							</div>
+							<span class="input-group-btn">
+								<button class="btn  btn-default btn-discount" type="button">{{ 'checkout.general.apply' | t }}</button>
+							</span>
+						</div>
+						<div class="discount-error"></div>
+
+					{% endif %}
+				{% endif %}
+			{% endif %}
+
+		    {% if template == "checkout_payment" %}
+		        {% if cart.customer_id != NULL and customer_credit.total_credit > 0 and cart.credit_used == 0 %}
+	            	<div class="form-group margin-top-20">
+	                	<button class="btn btn-lg btn-default btn-block btn-credit" name="store_credit" type="button">{{ 'checkout.general.use_credit' | t }} ( {{ 'checkout.general.balance' | t }} : {{currency_prefix}} {{customer_credit.total_credit}} )</button>
+	                </div>
+	                <div class="credit-error"></div>
+		        {% endif %}
+		    {% endif %}
+		{% endif %}
+		
+		{% app_snippet 'checkout/content_right' %}
+	</div>
+</div>

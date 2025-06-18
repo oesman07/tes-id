@@ -1,0 +1,230 @@
+<ol class="breadcrumb">
+	<li><a href="/cart">{{ 'checkout.general.cart' | t }}</a></li>
+	<li><a href="/checkout/detail">{{ 'checkout.general.customer_info' | t }}</a></li>
+	<li><a href="/checkout/shipping">{{ 'checkout.general.shipping_method' | t }}</a></li>
+	<li class="active"><a href="/checkout/payments">{{ 'checkout.general.payment_method' | t }}</a></li>
+</ol>
+{% app_snippet 'checkout/content_top' %}
+
+{% include 'mobile-checkout-cart' %}
+
+	<form class="side-wrap" action="/checkout/payments" method="post">
+
+		<div class="side-left">
+			<div class="left-container">
+				{% if errors %}
+				<div class="margin-bottom-20 alert alert-danger">
+					{{errors}}
+				</div>
+				{% endif %}
+				<div class="row">
+					<div class="col-sm-6">
+						<h4 class="margin-bottom-20 weight-xbold">{{ 'checkout.detail.billing_address' | t }}</h4>
+						{% assign b = order.billing_address %}  
+						<div>{{ b.first_name }} {{b.last_name }}</div>
+						<div>{{ b.email }}</div>
+						<div>{{ b.company }}</div>
+						<div>{{ b.address1 }}</div>
+						<div>{{ b.address2 }}</div>
+						<div>{{ b.zip }}, {{b.city}}, {{b.province}}</div>
+						<div>{{ b.country }}</div>
+						<div>{{ b.phone }}</div>
+					</div>
+
+
+					<div class="xs-margin-top-40 col-sm-6">
+						{% if order.pickup_location == empty %}
+						<h4 class="margin-bottom-20 weight-xbold">{{ 'checkout.detail.shipping_address' | t }}</h4>
+						{% assign s = order.shipping_address %}  
+						<div>{{ s.first_name }} {{s.last_name }}</div>
+						<div>{{ s.email }}</div>
+						<div>{{ s.company }}</div>
+						<div>{{ s.address1 }}</div>
+						<div>{{ s.address2 }}</div>
+						<div>{{ s.zip }}, {{s.city}}, {{s.province}}</div>
+						<div>{{ s.country }}</div>
+						<div>{{ s.phone }}</div>
+
+						{% else %}
+						{% assign p = order.pickup_location %}  
+						<h4 class="margin-bottom-20 weight-xbold">{{ 'checkout.detail.pickup' | t }}</h4>
+						<div>{{ p.name }}</div>
+						<div>{{ p.email }}</div>
+						<div>{{ p.address1 }}</div>
+						<div>{{ p.address2 }}</div>
+						<div>{{ p.zip }}, {{p.city}}, {{p.province}}</div>
+						<div>{{ p.country }}</div>
+						<div>{{ p.phone }}</div>
+						{% if p.pickup_at %}
+						<div>{{ p.pickup_at | date: "%d %b %Y %I"}}:{{p.pickup_at | date: "%M %p" }}</div>
+						{% endif %}
+
+						{% endif %}
+					</div>
+				</div>
+
+				{% app_snippet 'checkout/note_attributes' %}
+
+				<input type="hidden" name="_token" value="{% csrf %}">
+				{% if testing %}
+				<input type="hidden" name="_testing" value="true">
+				{% endif %}
+
+				<h4 class="margin-top-50 margin-bottom-20 weight-xbold">{{ 'checkout.payment.choose_payment' | t }}</h4>
+
+				<div class="btn-group card-list-button-group" data-toggle="buttons">
+					{% for p in p_gateway%}
+						<label class="btn btn-block btn-default">
+							<input type="radio" name="payment_method" data-transaction-fee="{{p.transaction_charge_rate}}"
+							data-transaction-charge="{{p.transaction_charge_fee}}" class="r-payment" value="{{p.gateway_type}}"{%if forloop.index == 1 %}checked{% endif %}/>
+							<span class="weight-bold">
+								{%if p.custom_title == null %}
+								{{ p.title }} 
+								{% else %}
+								{{ p.custom_title | escape }} 
+								{% endif %}
+							</span>
+							{% if p.description or p.display_logo != 0 %}
+							<div class="payment-detail collapse">
+								{% if p.display_logo != 0 %}
+								<ul class="payment-logo">
+									{% if p.display_logo contains 'master' %}
+									<li><img src="/assets/images/payments/mastercard.svg" alt="mastercard"></li>
+									{% endif %}
+									{% if p.display_logo contains 'visa' %}
+									<li><img src="/assets/images/payments/visa.svg" alt="visa"></li>
+									{% endif %}
+									{% if p.display_logo contains 'amex' %}
+									<li><img src="/assets/images/payments/amex.svg" alt="amex"></li>
+									{% endif %}
+									{% if p.display_logo contains 'diners' %}
+									<li><img src="/assets/images/payments/diners.svg" alt="diners"></li>
+									{% endif %}
+									{% if p.display_logo contains 'discover' %}
+									<li><img src="/assets/images/payments/discover.svg" alt="discover"></li>
+									{% endif %}
+									{% if p.display_logo contains 'jcb' %}
+									<li><img src="/assets/images/payments/jcb.svg" alt="jcb"></li>
+									{% endif %}
+									{% if p.display_logo contains 'union' %}
+									<li><img src="/assets/images/payments/union.svg" alt="union"></li>
+									{% endif %}
+								</ul>
+								{% endif %}
+								{% if p.description %}
+								<div class="color-light description margin-top-10">{{p.description}}</div>
+								{% endif %}
+							</div>
+							{% endif %}
+						</label>
+					{% endfor %}
+				</div>
+
+				<div class="form-group margin-top-20 size-12">
+                    {{ shop_name | payment_tos: contents.terms-policy.links }}
+                </div>
+
+                {% app_snippet 'checkout/content_left' %}
+				
+			</div>
+		</div>
+		
+		<div class="side-right">
+			{% include 'desktop-checkout-cart' %}
+		</div>
+		
+		<div class="form-group margin-top-50 display-inline width-full">
+			<a href="/checkout/detail"><i class="fa fa-chevron-left margin-right-10"></i> {{ 'checkout.payment.back_to_cust' | t }}</a>
+			<input type="submit" value="{{ 'checkout.payment.place_order' | t }}" id="PlaceOrder" class="xs-margin-top-10 xs-btn-block btn-payment btn btn-primary btn-lg pull-right" />
+		</div>
+		<div data-app-checkout='{{checkout_app}}'></div>
+		
+		
+			
+	</form>
+
+	<script>
+		$(document).ready(function(){
+			$('input.r-payment').each(function( index ) {
+				if($(this).is(":checked")){    
+					$(this).parent().addClass("active");
+					$(this).parent().find('.payment-detail').addClass("in");
+					transaction_charge_function($(this));
+				}else{
+					$(this).parent().find('.payment-detail').removeClass("in");					
+				}
+			});
+			
+            $('input.r-payment').on("change", function(){
+            	$('input.r-payment').each(function( index ) {
+            		if($(this).is(":checked")){    
+            			$(this).parent().find('.payment-detail').addClass("in");
+            		}else{
+            			$(this).parent().find('.payment-detail').removeClass("in");					
+            		}
+            	});
+                transaction_charge_function($(this));
+            });
+
+            function thousandSeparator(g,h){
+            	g += '';
+            	x = g.split('.');
+            	x1 = x[0];
+            	x2 = x.length > 1 ? '.' + x[1] : '';
+            	var rgx = /(\d+)(\d{3})/;
+            	while (rgx.test(x1)) {
+            		x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            	}
+            	x1 = x1.replace(/,/g, h);
+            	return x1 + x2;
+            }
+
+            function transaction_charge_function(target_element){
+                var transaction_charge_rate = target_element.data("transaction-fee") == "FREE" ? 0 : target_element.data("transaction-fee");
+                var org_total_price = "{{cart.total_price}}";
+                var format_decimals = "{{cart.format_decimals}}";
+                var separator = "{{cart.separator}}";
+                var currency_rate = "{{cart.currency_rate}}";
+                var credit_used = "{{cart.credit_used}}";
+
+                if(org_total_price > 0)
+                {
+                	org_total_price = org_total_price.replace(/,/g, "");
+	                var origin_transaction_charge = target_element.data("transaction-charge") == "FREE" ? 0 : parseFloat(target_element.data("transaction-charge"));
+	                var transaction_charge = origin_transaction_charge * currency_rate 
+	                var total_transaction_charge = parseFloat(org_total_price*transaction_charge_rate/100);
+                }
+                else
+                {
+                	org_total_price = org_total_price.replace(/,/g, "");
+	                var transaction_charge = 0;
+	                var total_transaction_charge = 0;
+                }
+
+                var amount_include_charge = parseFloat(org_total_price) + parseFloat(total_transaction_charge) + parseFloat(transaction_charge) - parseFloat(credit_used)
+
+                var checkout_rate_target = target_element.parents().eq(5).find("[data-checkout-transaction-rate]");
+                var checkout_charge_target = target_element.parents().eq(5).find("[data-checkout-transaction-charge]");
+
+                element_hide(checkout_rate_target, total_transaction_charge);
+                element_hide(checkout_charge_target, transaction_charge);
+
+                target_element.parents().eq(5).find("[data-checkout-transaction-charge]").text(thousandSeparator(transaction_charge.toFixed(format_decimals), separator));
+                target_element.parents().eq(5).find("[data-checkout-transaction-charge-rate]").text("{{ 'checkout.general.tc_rate' | t }} "+" ("+transaction_charge_rate+"%)");
+                target_element.parents().eq(5).find("[data-amount-include-charge]").text(thousandSeparator(amount_include_charge.toFixed(format_decimals), separator));
+
+                function element_hide(element, transaction){
+                	element.each(function(){
+                		if(transaction == 0){
+                			$(this).parents().eq(1).css("display", "none");
+                		}else{
+                			$(this).parents().eq(1).css("display", "");
+                			$(this).text(thousandSeparator(transaction.toFixed(format_decimals), separator));
+                		}    
+                	});
+                }
+            }
+
+		});
+	</script>
+{% app_snippet 'checkout/content_bottom' %}

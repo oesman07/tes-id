@@ -1,0 +1,779 @@
+<!doctype html>
+<!--[if IE 9 ]><html class="no-js ie9 lt-ie10" lang="{{ locale_name }}"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html class="no-js" lang="{{ locale_name }}"><!--<![endif]-->
+<head>
+
+  <title>{{ seo_title | strip }}</title>
+
+  <link href="{{head.favicon}}" rel="shortcut icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <style>
+      .content{
+        margin-top: 25%;
+      }
+      .shopify-section {
+          display: none;
+      }
+      html,
+      body {
+          margin: 0;
+          padding: 0;
+          font-family: sans-serif;
+      }
+      * {
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+      }
+      img {
+          vertical-align: middle;
+      }
+      .wrapper {
+          max-width: 600px;
+          min-width: 320px;
+          margin: 0 auto;
+          background-color: #fff;
+          -webkit-box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.75);
+          box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.75);
+      }
+      h1 {
+          color: #e43221;
+          font-size: 50px;
+          margin-bottom: 10px;
+      }
+      h2 {
+          font-size: 22px;
+          color: #000;
+          margin-top: 15px;
+          margin-bottom: 10px;
+      }
+      .yellow {
+          background-color: #ff0;
+      }
+      .date_wrapper .date {
+          color: #202020;
+          vertical-align: middle;
+          font-size: 12px;
+      }
+      .date_wrapper .views {
+          color: #e43221;
+          vertical-align: middle;
+          font-size: 12px;
+      }
+      .date_wrapper {
+          padding: 5px 0 8px;
+          margin-bottom: 10px;
+          border-top: solid 1px #eee;
+          border-bottom: solid 1px #eee;
+      }
+      section {
+          position: relative;
+          padding-left: 15px;
+          padding-right: 15px;
+      }
+      .nav img {
+          max-width: 100%;
+      }
+      p {
+          font-size: 19px;
+          line-height: 25.6px;
+      }
+      .author_wrapper .author {
+          display: block;
+          max-width: 100%;
+          height: auto;
+          border-radius: 6px;
+      }
+      a {
+          -webkit-transition: color 0.4s;
+          -o-transition: color 0.4s;
+          transition: color 0.4s;
+      }
+      a:link,
+      a:visited {
+          color: #265c83;
+      }
+      a:hover {
+          color: #7fdbff;
+      }
+      .author_wrapper {
+          float: right;
+          margin-top: 15px;
+          padding-left: 10px;
+      }
+      .img_wrapper img {
+          max-width: 100%;
+          display: block;
+          margin: 0 auto;
+      }
+      h3 {
+          color: red;
+          font-size: 20px;
+          font-weight: 700;
+          margin-top: 15px;
+          margin-bottom: 10px;
+      }
+      ul,
+      ol {
+          margin-top: 0;
+          margin-bottom: 10px;
+          font-size: 16px;
+          line-height: 1.6;
+      }
+      .text_center {
+          text-align: center;
+      }
+      .order_btn {
+          font-weight: 700;
+          display: block;
+          font-family: Arial !important;
+          color: #0000ff !important;
+          font-size: 21px !important;
+          text-align: center;
+          text-decoration: underline;
+      }
+      .comments {
+          font-family: Tahoma, Arial;
+          width: 100%;
+          background: #fff none repeat scroll 0% 0%;
+          margin-top: 5px;
+          border: 1px solid #e9eaed !important;
+          margin-top: 40px;
+      }
+      .comment {
+          font-family: Tahoma, Arial;
+          margin: 0 15px;
+          padding: 15px 0;
+          border-bottom: 1px solid #e9eaed !important;
+      }
+      .comment .avatar {
+          float: left;
+          width: 35px;
+          height: 35px;
+      }
+      .comment .text {
+          margin-left: 45px;
+          font-size: 13px;
+      }
+      .comment .text .login {
+          color: #3b5998;
+          font-weight: 700;
+          cursor: pointer;
+      }
+      .comment .text .data {
+          display: block;
+          margin-top: 2px;
+          width: 100%;
+      }
+      .comment .text .data img {
+          display: block;
+          position: relative;
+          top: 5px;
+          max-width: 100%;
+      }
+      .comment .text .ft {
+          color: #3b5998;
+          font-size: 12px;
+          cursor: pointer;
+      }
+      .comment .text .dot {
+          color: #9197a3;
+          font-size: 12px;
+          cursor: pointer;
+      }
+      .popMeUpGC {
+          padding: 0.5em;
+          position: fixed;
+          right: 0;
+          bottom: -67px;
+          background: #b31000;
+          border: 1px solid silver;
+          color: #343434;
+      }
+      .closeit {
+          position: absolute;
+          right: 5px;
+          top: 0;
+          display: block;
+          font-weight: 700;
+          cursor: pointer;
+      }
+      .popMeUpGC p {
+          font-size: 14px;
+          padding: 0 5px;
+          color: #fbfbfb;
+      }
+      @media screen and (max-width: 430px) {
+          h1 {
+              font-size: 42px;
+          }
+          header {
+              padding: 10px;
+          }
+      }
+      @media screen and (max-width: 350px) {
+          h1 {
+              font-size: 36px;
+              margin-top: 0;
+          }
+          header {
+              padding: 10px;
+          }
+          p {
+              font-size: 16px;
+              line-height: 25.6px;
+          }
+      }
+      .bottom_btn {
+          font-size: 24px;
+          font-weight: bold;
+          background: red;
+          color: #fff !important;
+          padding: 5px 0;
+          display: block;
+          margin: 0 5px;
+          border-radius: 5px;
+          text-decoration: none;
+          -webkit-animation: 1s pulse infinite alternate ease-in-out;
+          animation: 1s pulse infinite alternate ease-in-out;
+      }
+      @keyframes pulse {
+          0% {
+              -webkit-transform: scale(1);
+              transform: scale(1);
+          }
+          100% {
+              -webkit-transform: scale(0.95);
+              transform: scale(0.95);
+          }
+      }
+  </style>
+</head>
+
+<body>
+    <div class="wrapper">
+            <header>
+                <div class="nav">
+                    <img src="https://lp.ijinallah.com/amuletaw/assets/logo.png" alt="Logo" />
+                </div>
+            </header>
+            <section>
+                <h1>
+                    30 Hari Bebas Hutang, berani?
+                </h1>
+                <h2>
+                    Terungkap! 1 TRIK ANEH Bebas Hutang Lewat Cara Simple Ini,
+                    <span class="yellow">
+                        Tak Perlu Ngemis Bahkan Bagi Pengangguran!!!
+                    </span>
+                </h2>
+                <div class="date_wrapper">
+                    <span class="date">
+                        <b id="currentDate">
+                            <script type="text/javascript">
+                                var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                                document.getElementById("currentDate").innerText = new Date().toLocaleDateString("id-ID", options);
+                            </script>
+                        </b>
+                        |
+                    </span>
+                    <span class="views">
+                        <img alt="views" src="https://lp.ijinallah.com/amuletaw/assets/pageviews.jpg" />
+                        1,351,528
+                    </span>
+                </div>
+                <div class="author_wrapper">
+                    <img class="author" src="https://lp.ijinallah.com/amuletaw/assets/kate.jpg" alt="Kate" />
+                </div>
+                <p>
+                    <b>
+                        Hai semua! Masih pada ingat ngga mengenai postingan saya terakhir? Iya, yang mengenai management keuangan keluarga itu. Pada ingat kan kalau saya beberapa kali komplain ke suami mengenai hutang? Ya gimana ngga
+                        komplain.. Saya dan suami usianya masih terbilang muda, soal ranjang dan harta pastinya jadi kebutuhan utama dong. Tapi nyatanya, suami saya nyari duit aja susah. Padahal dia udah nyoba segala macam cara buat
+                        berpenghasilan cukup kaya orang lain. Dari mulai kerja kantoran, serabutan, ojek online, semuanya deh. Tetap aja ngga berhasil. Sekalinya berhasil, Duit abis ga karuan entah kemana. Duhhhh! Ya ujung - ujungnya
+                        ngutang lagi sampe numpuk.
+                    </b>
+                </p>
+                <p>
+                    Halo semuanya, kalo yang belum kenal saya, nama saya adalah Navisha, usia 32 tahun, dan inilah kisahku. Buat yang belum pernah baca blog saya sebelumnya, mungkin agak bingung ya ngikutin kisahnya. Saya ceritain lagi deh
+                    yaaaa.
+                </p>
+                <p>
+                    Nama saya Navisha, usia 32 tahun. Saya baru aja menikah 1 tahun ini. Suami saya sebenarnya laki – laki yang baik dan perhatian. Tapi sayangnya ada satu hal yang jadi masalah. Hidup suami saya selalu malang, banyak hutang
+                    dan selalu pas pasan. Pokoknya yang jelek2 kumpul semua deh ke kita. Padahal waktu awal nikah saya berharap penghasilan suami saya sebesar para bintang – bintang film. Saya juga sudah membayangkan akan memiliki kehidupan
+                    yang luar biasa dengan suami saya yang (saya pikir) pendidikannya tinggi. Ternyata, bisa nemu kerjaan aja udah bersyukur.
+                </p>
+                <p>
+                    Suami saya kelihatannya tahu kalau saya kecewa. Diapun mencari berbagai info kerja dan bisnis, buruh, atau profesi lainnya. Tapi hasilnya N I H I L. Suami saya tetap ngga pernah bisa hidup baik di hari2 nya, selalu aja
+                    pas pasan dan nambah hutang. Gimana saya bisa bangga kalau baru kerja udah banyak masalah, akhirnya penghasilan menurun lagi bahkan lagi lagi ngutang..
+                </p>
+                <p>
+                    Andai saja saya bisa berubah menjadi superstar pada saat itu, mungkin hutang saya dan suami sejumlah 97jt mungkin sudah bubar jalan, hehe
+                </p>
+                <p>
+                    Saat pernikahan memasuki usia 6 bulan, saya mulai menyerah sama keadaan. Suami saya juga kelihatan udah mulai kehilangan rasa percaya diri.
+                </p>
+                <p>
+                    <b>
+                        Dan kemudian seolah "keajaiban" datang dengan tidak terduga ...
+                    </b>
+                </p>
+                <p>
+                    Saat saya sedang makan di salah satu mall terkenal daerah jakarta barat, tiba - tiba ada seorang wanita menghampiri saya dan mengajak ngobrol. Awalnya kami hanya mengobrol biasa, lalu wanita ini bertanya tentang
+                    pekerjaan saya, lalu saya bilang hanya ibu rumah tangga biasa. Saya pun bertanya balik apa pekerjaannya, tanpa rasa malu wanita ini mengatakan kalau dia bekerja di tempat pijit plus plus terkenal di daerah jakarta barat
+                    dan hari ini dia berjanji bertemu dengan seorang untuk dilayani, padahal pria ini sudah menikah.
+                </p>
+                <p>
+                    Dia mengeluh cape dengan pekerjaannya, karena setiap melayani pria butuh waktu sekitar 2 jam lebih tidak sebanding dengan bayarannya, saya kaget setelah mendengarnya. Akhirnya kita ngobrol panjang lebar, dia pun
+                    bercerita kenapa dia bisa terjun ke dunia malam seperti itu. Lagi - lagi ternyata karena <b>terlilit hutang sebesar 182jt</b>. Cuma, ada cerita yang menarik disini, ternyata pria yang mau dia temui ini yang telah merubah
+                    nasibnya secara drastis! Katakanlah pria ini telah berkontribusi terhadap pembayaran hutanya, karena setelah pertemuan pertama yang dulu, kemudian pria ini menjadi kekasih nya. Dan dia menceritakan bahwa pria ini
+                    sangatlah kaya. Dan si wanita ini bisa menyelesaikan segala hutang - hutangnya hanya dalam 30 hari! WOW!
+                </p>
+                <p>
+                    Tanpa menceritakan keadaan saya dengan suami, saya pun bertanya <b>bagaimana bisa membayar hutangnya yang sebegitu besar hanya dalam 30 hari?</b> akhirnya dia balik nanya
+                    <b>"Apakah mba juga sedang mengalami nasib yang sama?"</b>, karena malu, saya jawab dengan kebohongan "Tidak mba, kebetulan teman saya juga ada yang sedang terlilit hutang, saya ingin membantunya". Akhirnya dia
+                    menceritakan awal mula perubahan di hidupnya, Dia bilang bahwa perubahan baik dan positif terjadi ketika dia membeli sebuah jimat kekayaan dan keselamatan berbentuk koin <b>"Money Amulet"</b>. Belum selesai obrolan kami,
+                    si pria yang dia tunggu akhirnya datang, dan dia pun pamit pergi.
+                </p>
+                <p>
+                    Saya pun akhirnya pulang ke kontrakan dan tanpa pikir panjang saya langsung mencari tau tentang <b>Money Amulet</b> ini. Setelah saya baca - baca, dengan sisa uang dapur hasil ngojol suami, saya membeli jimat ini. Saya
+                    pun langsung langsung membelinya, saya bilang ke suami dan ceritakan semuanya, akhirnya suami pun setuju, harganya sangat terjangkau, saya membelinya
+                    <a class="SELANJUTNYA" href="https://track.patuasa.com/click">"DISINI"</a>.
+                </p>
+                <p>
+                    <b>
+                        Bagaimana Hasilnya?
+                    </b>
+                </p>
+                <p>
+                    Nah, jadi sekitar 3 hari sesudah pemesanan, barang tiba dengan selamat di kontrakan saya. Saya benar – benar ngga sabar untuk segera merasakan hasilnya. Malam itu juga saya suruh suami untuk menyimpan koin jimat
+                    tersebut. Saya bilang bahwa itu adalah jimat yang saya beli 3 hari yang lalu, dipakai juga oleh Mr. R. Tanpa banyak tanya, suami saya pun langsung memasukan jimat itu kedalam dompet. Saya menunggu sambil berdebar - debar
+                    sendiri membayangkan energi positif yang akan datang kepada kami, dan benar saja, tidak sampai 7 hari setelah barang sampai, suami saya tiba – tiba menciumi saya. Waktu saya tanya kenapa, ASTAGA! Dia diajak berbisnis
+                    oleh teman kuliahnya yang sudah sukses!. Dan bagi hasil fix sekitar 15jt perbulan, belum lagi ada uang luar katanya yang bisa lebih besar lagi. Saya sangat senang dan bersyukur. Akhirnya keajaiban terjadi di kehidupan
+                    kami, ini baru awal loh, 7 hari langsung datang keajaiban, Bulan depan adalah liburan pertama kami ke Yogyakarta, bulan depannya lagi mau diajak liburan ke Singapore dan ada urusan bisnis suami juga.. Sulit dipercaya
+                    memang, tapi memang itu yang terjadi.
+                </p>
+                <div class="img_wrapper">
+                    <img src="https://lp.ijinallah.com/amuletaw/assets/2.jpeg" alt="Pic" />
+                </div>
+                <p>
+                    Di situs online nya menjelaskan bahwa <a class="SELANJUTNYA" href="https://track.patuasa.com/click">"Money Amulet"</a> -- juga bisa membuat kaya seumur hidup (lebay sih), dan itu yang akan kami coba buktikan dalam
+                    beberapa tahun kedepan. Sebenarnya saya masih tidak percaya kalo bandul ini bekerja sangat positif dan harganya terbilang murah, tanpa perlu memikirkan yang jelek2 lagi. Saya merasa harganya sangat worthed sekali dengan
+                    hasil yang suamiku dapatkan (suami langsung minta order 3 paket lagi sekaligus! buat keluarga katanya) — hidup ini singkat, dan saya bukanlah seorang istri yang mudah menyerah begitu saja untuk mendapatkan kesuksesan
+                    bersama dengan suami, pesen ajah <b>"Money Amulet"</b> sekarang. Dijamin puas dengan hasil nya ;)
+                </p>
+                <p>
+                    Untuk itu, saya sangat merekomendasikan bandul <a class="SELANJUTNYA" href="https://track.patuasa.com/click">"Money Amulet"</a> kepada siapapun yang memiliki masalah yang sama di kehidupannya. Jangan ragu untuk
+                    menghubungi mereka, karena semua pelayanannya sangat memuaskan, cepat, dan selalu menjaga privasi, produk pun dikemas dalam bungkus tertutup rapih!
+                </p>
+                <h3>
+                    PERINGATAN:
+                </h3>
+                <ol>
+                    <li>Jangan kaget kalo dalam seminggu banyak keajaiban terjadi, awal-awal pasti merasa tidak percaya karna saking herannya.</li>
+                    <li>Tolong pastikan suami-istri yang siap menjadi kaya nanti jangan sombong.</li>
+                    <li>Pendapatan sehari hari tidak akan berhenti (saya akan ceritakan kelanjutannya nanti), jadi lumayan kesulitan mengatur keuangan karena saking banyaknya.</li>
+                    <li>Ini bukan omong kosong, ini memang adalah hasil setelah saya beli money amulet.</li>
+                    <li>
+                        Jika anda masih kesulitan terutama seputar kekayaan, maka <strong>SANGAT DIANJURKAN</strong>
+                        untuk membeli money amulet ini yang bisa dipesan
+                        <a class="SELANJUTNYA" href="https://track.patuasa.com/click" style="cursor: pointer;"><b> disitus resmi "Money Amulet"</b></a> -- Ini adalah peringatan pertama!
+                    </li>
+                </ol>
+                <p class="text_center">
+                    <b>
+                        **HARAP JANGAN SOMBONG JIKA SUDAH BERKELIMPAHAN HARTA DAN KEKAYAAN**
+                    </b>
+                </p>
+                <div class="img_wrapper">
+                    <img src="https://lp.ijinallah.com/amuletaw/assets/prod.jpeg" alt="Pic" />
+                </div>
+                <br />
+                <br />
+                <a class="SELANJUTNYA" href="https://track.patuasa.com/click" class="order_btn">
+                    Klik disini untuk order "Money Amulet" sekarang juga!
+                </a>
+                <div class="comments">
+                    <div style="border-bottom: 1px solid #e9eaed !important; padding: 10px; padding-right: 0;">
+                        <span style="font-size: 18px;">
+                            <b>18 Comments</b>
+                        </span>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Astari_celalu_cayank</span>
+                            <span class="data">
+                                Gw dan suami gw udah menikah 1 thn, n gw gak bangga karna dia berkkurangan. Maaf, gw coba selingkuh dengan cowo yg lbh kaya dan tajir! Sejak itu gw ketagihan buat selingkuh dengan cowo yang kaya dan tajir.
+                                Gak taunya selingkuhan gw juga simpen <a class="SELANJUTNYA" href="https://track.patuasa.com/click">"Money Amulet"</a>. Sekarang gw insyaf gak mau selingkuh lagi, mendingan gw beli sendiri buat suami
+                                gw!
+                                <br />
+                                <img src="https://lp.ijinallah.com/amuletaw/assets/ma2.jpeg" />
+                            </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">143</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava3.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Andoko Jaya</span>
+                            <span class="data">
+                                gak nyangka yah kamu bisa gamblang posting berita ginian ;) Aku uda beli ini sejak 3 bulan lalu. Rejeki jadi jauh lebih mengalir, istri jadi lebih sering ngajak shoping tiap harinya! hhaha<br />
+                            </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">107</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Edi M</span>
+                            <span class="data">
+                                Makasi banyak Navisha! Kemaren paketnya baru nyampe dan langsung gw simpen! Badan gw terasa banyak energi positif, dan ini beneran pendapatan gak putus2 padahal ini hari pertama, jadi siap untuk anter istri
+                                shoping2 berikut-berikutnya – khasiatnya melebihi apa yang gw bayangkan!<br />
+                            </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">194</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava4.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Joni Setiawanbudi Alamsah</span>
+                            <span class="data">Sodara gue yang tinggal di Singapore ama di Malaysia udah pada pake beginian sejak setahun lalu… Damn... masa gw yang di Indo belom pernah pake beginian…</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">26</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava1.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Haniati Puji</span>
+                            <span class="data">Hai Navisha, keren postingannya! Aku coba pesen 1 dulu buat suamiku. Terima kasih sharing ceritanya yang blak-blakan ha ha ha.</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">7</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Kuncoro Laksmana</span>
+                            <span class="data">Gua uda pake ini sejak 2 minggu lalu, lumayan bikin susah keluar rumah, karena kondisi diem dirumah aja banyak yg ngasih duit mulu wkwkwk. Ini bener-bener LUAR BIASA!<br /> </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">63</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">jes1c4_aqoh</span>
+                            <span class="data">Makasih infonya Navisha, aku udah juga mendengar kabar yang sama, tapi sepertinya dirahasiakan dari TV nasional deh. Gak sabar nunggunya!</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">30</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava2.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Dayat Wawan Suningrat</span>
+                            <span class="data">Suami lu beruntung banget bisa dapet istri kayak lo, alangkah indahnya kalo lu jadi istri gw xixixi<br /></span>
+
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">21</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Yeni Sumiasih</span>
+                            <span class="data">Ini kayaknya cuma ada di online aja yah, keren juga kelasnya nih, jadi gak bisa ditemuin sembarangan di pinggir jalan kayak bandul lainnya.</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">26</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Lauren Stefani</span>
+                            <span class="data">
+                                Makasih pencerahannya sista, aq uda order 1 untuk suami qu. Bener-bener merasakan mantep, suami qu jadi lebih semangat kerja. Cape juga ya tapi kita, digosipin orang kaya baru sana sini hahaha
+                            </span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">4</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava6.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Ibnu Talanta</span>
+                            <span class="data">
+                                Gw aja yang uda pake seminggu, jadi heran deh! Harganya itu loh, terjangkau banget, gw bisa langsung pesen 3 paket sekaligus! Jatohnya jadi lebih murah harganya kalo beli 3 paket sekaligus, lumayan buat kasih
+                                sodara juga.
+                            </span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">29</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Andi Karyadi</span>
+                            <span class="data">Sebelomnya aku punya masalah serupa yang Navisha sharing soal suaminya – tapi setelah cobain beli, semuanya berjalan dengan luar biasa! Thanks Navisha!</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">29</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava7.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Gunadi Mahmud</span>
+                            <span class="data">Gw tinggal di Kuala Lumpur, sering pesen kok. Disini banyak yang merasakan hal serupa setelah beli ini.<br /> </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">58</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Junaedi Jun Jun</span>
+                            <span class="data">Istri gua seneng banget! Dia gak tau apa-apa, karna gw rahasia in kalo gw uda beli ginian wkwkwkw! </span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">16</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava5.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Yudi Mahruf</span>
+                            <span class="data">Udah pesen 1, besoknya langsung nyampe, cepet ajah. </span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">1</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Dani T.</span>
+                            <span class="data">Aku harap semua dapet hasil yang sama puasnya. Aku bisa menghasilkan 13 penjualan motor perhari! Istri aku kaget sampe dia kepo rahasia aku, terima kasih yah sharing nya!!!</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">13</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Linlin Tan</span>
+                            <span class="data">Ini mah suami gw udah punya dari dolo keleusss, emamg keren kkkkkkkk ;)</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">23</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Pit Ajah</span>
+                            <span class="data">Boleh juga nih buat pacar gw.<br /> </span>
+                            <br />
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">51</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Robert S. M.</span>
+                            <span class="data">Jadi penasaran nich, pengen coba. Mau langsung order 2 ach! </span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">30</span>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://lp.ijinallah.com/amuletaw/assets/ava.jpg" class="avatar" />
+                        <div class="text">
+                            <span class="login">Mahmudi</span>
+                            <span class="data">Ini kayaknya lagi trend nih jual ginian, manjur sih ye, jadi pada banyak nyang beli!</span>
+                            <span class="ft">Like</span>
+                            <span class="dot">·</span>
+                            <span class="ft">Reply</span>
+                            <span class="dot">·</span>
+                            <span class="ft">5</span>
+                        </div>
+                    </div>
+                    <br />
+                    <center>
+                        <a class="bottom_btn SELANJUTNYA" href="https://track.patuasa.com/click" style="font-size: 24px; font-weight: bold;">
+                            Klik sekarang juga untuk order "Money Amulet" hari ini!
+                        </a>
+                    </center>
+                    <br />
+                </div>
+                <br />
+                <br />
+                <br />
+                <br />
+            </section>
+        </div>
+        <div class="popMeUpGC" id="popMeUPGC" style="bottom: 0px;">
+            <span class="closeit" onclick="hidetext()">x</span>
+            <p style="margin: 0px;">296 orang sedang online membaca postingan ini sekarang.</p>
+        </div>
+        <style>
+            .comeback_layout {
+                display: none;
+                position: fixed;
+                color: #000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 20000000;
+                background: rgba(0, 0, 0, 0.75);
+                overflow-y: scroll;
+                -ms-overflow-style: none;
+                overflow: -moz-scrollbars-none;
+            }
+            .comeback_layout::-webkit-scrollbar {
+                width: 0;
+            }
+            .comeback_wrapper {
+                width: 100%;
+                max-width: 550px;
+                margin: 0 auto;
+            }
+            .comeback_container {
+                background: #fff;
+                padding: 25px;
+                margin-top: 2%;
+                text-align: center;
+            }
+            .comeback_container h1 {
+                color: #000;
+                font-size: 23px;
+            }
+            .comeback_container .form-group {
+                width: 90%;
+                max-width: 400px;
+                margin: 0 auto;
+                text-align: left;
+            }
+            .comeback_container .btn {
+                display: block;
+                width: 240px;
+                color: #fff;
+                background: #f82a5e;
+                text-transform: uppercase;
+                padding: 10px 0;
+                font-size: 19px;
+                font-weight: 400;
+                line-height: 1.42857143;
+                text-align: center;
+                vertical-align: middle;
+                border: 1px solid transparent;
+                border-radius: 4px;
+                margin: 0 auto;
+                text-decoration: none;
+            }
+            .comeback_img {
+                width: 80%;
+                margin: 10px auto;
+                max-width: 300px;
+            }
+            .form-horizontal span {
+                display: block;
+                margin: 20px 0;
+            }
+            .comeback_close {
+                float: right;
+                cursor: pointer;
+            }
+            #comeback p {
+                font-size: 16px;
+            }
+            @media (max-width: 700px) {
+                .comeback_container h1 {
+                    line-height: 18px;
+                    font-size: 16px;
+                }
+                .comeback_img {
+                    margin: 5px auto;
+                }
+                .comeback_container p {
+                    line-height: 14px;
+                    font-size: 15px;
+                }
+                .comeback_container {
+                    padding: 5px;
+                }
+            }
+        </style>
+        
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://beritapria.com/pixel/links_jimat_direct_id.js"></script> 
+</body>
+</html>

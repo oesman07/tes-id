@@ -1,0 +1,43 @@
+<div id="es_featured_blogs" class="wrapper featured-blog-section">
+    {% if settings.featured_blog_title != '""' and settings.featured_blog_title != '' %}
+      <h2 class="section-header__title">{{settings.featured_blog_title}}</h2>
+    {% endif %}
+    <div class="blog-cards grid-uniform">
+        {% assign placeholder = 0 %}
+        
+        {% for i in (1..3) %}
+            {% capture articles_handle %}articles_handle_{{ i }}{% endcapture %}
+            {% assign handle = settings[articles_handle] %}
+            {% if handle != '""' and handle != '' %}
+            {% assign placeholder = placeholder | plus:1 %}
+              <div class="grid__item small--one-whole medium--one-half large--one-third">
+                <div href="/blogs/{{handle}}" class="blog-card">
+                  {% if articles[handle].image.src != null and articles[handle].image.src != '' %}
+                    <a href="/blogs/{{handle}}" class="blog-img-wrapper">
+                        <img data-src="{{ articles[handle].image.src }}" width="300px" class="blog-img lozad">
+                    </a>
+                  {% endif %}
+                  <div class="blog-details">
+                    <span class="blog-author">{{ articles[handle].author }}</span>
+                    <h5 class="blog-title">
+                      <a href="/blogs/{{handle}}">
+                        {{ articles[handle].title }} 
+                      </a>
+                    </h5>
+                    <div class="blog-description">
+                        {{ articles[handle].description | strip_html | truncatewords: 30 }} 
+                    </div>
+                    <a href="/blogs/{{handle}}">{{ 'blogs.article.read_more' | t }}</a>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+        {% endfor %} 
+      
+    </div>
+    {% if placeholder < 1 %}
+    <div class="text-center" style="margin-top: -30px;">
+      <img src="{{settings.placeholder.featured-blog}}" width="1100px"/>
+      </div>
+    {% endif %}
+</div>

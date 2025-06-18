@@ -1,0 +1,91 @@
+<ul class="inline-list social-icons">
+  {% if settings.twitter_url != "" %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.twitter_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Twitter' }}" target="_blank">
+        {% include 'svg-definitions' with 'twitter-icon' %}
+        <span class="fallback-text">Twitter</span>
+      </a>
+    </li>
+  {% endif %}
+  {% unless settings.facebook_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.facebook_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Facebook' }}" target="_blank">
+        {% include 'svg-definitions' with 'facebook-icon' %}
+        <span class="fallback-text">Facebook</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.pinterest_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.pinterest_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Pinterest' }}" target="_blank">
+         {% include 'svg-definitions' with 'pinterest-icon' %}
+        <span class="fallback-text">Pinterest</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.instagram_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.instagram_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Instagram' }}" target="_blank">
+        {% include 'svg-definitions' with 'instagram-icon' %}
+        <span class="fallback-text">Instagram</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.tumblr_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.tumblr_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Tumblr' }}" target="_blank">
+        {% include 'svg-definitions' with 'tumblr-icon' %}
+        <span class="fallback-text">Tumblr</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.youtube_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.youtube_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'YouTube' }}" target="_blank">
+        {% include 'svg-definitions' with 'youtube-icon' %}
+        <span class="fallback-text">YouTube</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.vimeo_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.vimeo_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Vimeo' }}" target="_blank">
+        {% include 'svg-definitions' with 'vimeo-icon' %}
+        <span class="fallback-text">Vimeo</span>
+      </a>
+    </li>
+    {% endunless %}
+  {% unless settings.wechat_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.wechat_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Wechat' }}" target="_blank">
+        {% include 'svg-definitions' with 'wechat-icon' %}
+        <span class="fallback-text">Wechat</span>
+      </a>
+    </li>
+    {% endunless %}
+  {% unless settings.whatsapp_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.whatsapp_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Whatsapp' }}" target="_blank">
+        {% include 'svg-definitions' with 'whatsapp-icon' %}
+        <span class="fallback-text">Whatsapp</span>
+      </a>
+    </li>
+    {% endunless %}
+  {% unless settings.line_url == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.line_url }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'Line' }}" target="_blank">
+        {% include 'svg-definitions' with 'line-icon' %}
+        <span class="fallback-text">Line</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% unless settings.featured_blog == '' %}
+    <li>
+      <a class="icon-fallback-text" href="{{ settings.featured_blog }}" title="{{ 'layout.footer.social_platform' | t: shop.name, 'RSS' }}" target="_blank">
+        <span class="icon icon-rss" aria-hidden="true"></span>
+        <span class="fallback-text">RSS</span>
+      </a>
+    </li>
+  {% endunless %}
+  {% app_snippet 'global/social_link' %}
+</ul>

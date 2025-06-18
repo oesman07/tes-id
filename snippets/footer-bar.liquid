@@ -1,0 +1,23 @@
+{% if settings.footer_bar == '1' %}
+<div class="footer-bar large--hide">
+  <div>
+    {% for i in (1..4) %}
+        {% capture icon_img %}footer_bar_icon_{{ i }}{% endcapture %}
+        {% capture icon_text %}footer_bar_icon_{{ i }}_text{% endcapture %}
+        {% capture icon_link %}footer_bar_icon_{{ i }}_link{% endcapture %}
+    
+        {% if settings[icon_img] != '' or settings[icon_text] != '' %}
+        <a href="{{ settings[icon_link] }}">
+          {% if settings[icon_img] != '' %}
+          	<img src="{{ settings[icon_img] }}"/>
+          {% endif %}
+            <div>
+              {{ settings[icon_text] }}
+            </div>
+        </a>
+        {% endif %}
+
+    {% endfor %}
+  </div>
+</div>
+{% endif %}

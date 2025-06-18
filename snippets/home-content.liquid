@@ -1,0 +1,12 @@
+{% if settings.home_page_content %}
+  {% if settings.home_page_show_heading == 'true' or settings.home_page_show_heading == '1' %}
+  <div class="section-header section-header--small">
+    <h2 class="section-header__title">{{ settings.home_page_content.title }}</h2>
+  </div>
+  {% endif %}
+  <div class="home-content-wrapper wrapper"> 
+    <div class="rte">
+      {{ settings.home_page_content.content }}
+    </div>
+  </div>
+{% endif %}

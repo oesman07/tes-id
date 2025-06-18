@@ -1,0 +1,77 @@
+{% assign featured = settings.home_featured_products %}
+{% assign products_per_row = settings.products_list_per_row %}
+{% assign rows = settings.home_featured_products_row_num %}
+{% assign total_products = products_per_row | times: rows %}
+
+{% if settings.home_featured_products_show_heading %}
+<div class="section-header section-header--small">
+  <h2 class="section-header__title">
+    {% if featured == 'frontpage' %}
+      {{ 'home_page.sections.frontpage_title' | t }}
+    {% else %}
+      {{ collections[featured].title | escape }}
+    {% endif %}
+  </h2>
+</div>
+{% endif %}
+
+{% case products_per_row %}
+  {% when '2' %}
+    {% assign grid_item_width = 'small--one-whole medium--one-half large--one-half' %}
+  {% when '3' %}
+    {% assign grid_item_width = 'small--one-whole medium--one-half large--one-third' %}
+  {% when '4' %}
+    {% assign grid_item_width = 'small--one-half medium--one-half large--one-quarter' %}
+  {% when '5' %}
+    {% assign grid_item_width = 'small--one-half medium--one-half large--one-fifth' %}
+{% endcase %}
+
+<div id="es_feature_product" class="wrapper featured-product-wrapper">
+  
+  <h2 class="section-header__title">{{settings.featured_product_title}}</h2>
+  <div {% if settings.product_img_crop == "img-equal-height" %}data-equal-height="1"{% endif %} class="product-list-grid grid-uniform">
+    {% if collection.products %}
+    {% for product in collection.products %}
+      {% include 'product-grid-item' %}
+    {% endfor %}
+    {% else %}
+      {% if emptyState == blank %}
+        {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
+        {% assign emptyState = true %}
+      {% endif %}
+
+      <div class="grid__item">
+        <div class="helper-section">
+          <div class="helper-note">
+            {% comment %}<span class="helper-icon"></span>{% endcomment %}
+            <h3>{{ 'home_page.onboarding.modal_title' | t }}</h3>
+            <p>{{ 'home_page.onboarding.no_product_html' | t }}</p>
+            <p><a class="admin-btn-primary" href="http://admin{{GLOBALS.CP_DOMAIN}}/products/new">{{ 'home_page.onboarding.add_product' | t }}</a></p>
+          </div>
+
+          <div class="grid-uniform helper-content">
+            {% for i in (1..8) %}
+              <div class="grid__item one-half large--one-quarter">
+                <a href="http://admin{{GLOBALS.CP_DOMAIN}}/products/" class="grid-link">
+                  <span class="grid-link__image grid-link__image--product">
+                    <span class="grid-link__image-centered">
+                      {% capture imageUrl %}https://s3-ap-southeast-1.amazonaws.com/eesb.themes/onboarding/fall/p{{i}}.jpeg{% endcapture %}
+                      {{ imageUrl | img_tag }}
+                    </span>
+                  </span>
+                  <p class="grid-link__title">{{ 'home_page.onboarding.product_title' | t: i }}</p>
+                  <p class="grid-link__meta">
+                    <strong><span class="money">{{shop.money_prefix}} 19.99 {{shop.money_suffix}}</span></strong>
+                  </p>
+                </a>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    {% endif %}
+
+  </div>
+   
+</div>

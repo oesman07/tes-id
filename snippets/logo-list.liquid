@@ -1,0 +1,17 @@
+<div id="es_logo_list_section" class="logo-list-section">
+  	<h2 class="section-header__title">{{ settings.logo_list_title }}</h2>
+	<ul class="logo-list-wrapper">
+      	{% for i in (1..8) %}
+      		{% capture logo_list_img %}logo_list_{{ i }}_img{% endcapture %}
+      		{% capture logo_list_link %}logo_list_{{ i }}_link{% endcapture %}
+            {% if settings[logo_list_img] != '""' and settings[logo_list_img] != '' %}
+                  <li class="logo-list-item">
+                    {% if settings[logo_list_link] != '""' and settings[logo_list_link] != '' %}
+                    <a href="{{settings[logo_list_link]}}"></a>
+                    {% endif %}
+                    <img class="lozad" data-src="{{settings[logo_list_img]}}"/>
+                  </li>
+            {% endif %}
+      	{% endfor %}
+	</ul>
+</div>

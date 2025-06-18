@@ -1,0 +1,34 @@
+{% app_snippet 'home/content_top' %}
+
+{% if settings.home_section_1 != '' %}
+  {% include settings.home_section_1 %}
+{% endif %}
+
+{% app_snippet 'home/content_middle' %}
+
+{% if settings.home_section_2 != '' %}
+  {% include settings.home_section_2 %}
+{% endif %}
+
+{% if settings.home_section_3 != '' %}
+  {% include settings.home_section_3 %}
+{% endif %}
+
+{% if settings.home_section_4 != '' %}
+  {% include settings.home_section_4 %}
+{% endif %}
+
+{% if settings.home_section_5 != '' %}
+  {% include settings.home_section_5 %}
+{% endif %}
+
+{% if settings.home_section_6 != '' %}
+  {% include settings.home_section_6 %}
+{% endif %}
+
+{% if settings.home_section_7 != '' %}
+  {% include settings.home_section_7 %}
+{% endif %}
+
+
+{% app_snippet 'home/content_bottom' %}

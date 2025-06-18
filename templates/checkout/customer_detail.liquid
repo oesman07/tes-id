@@ -1,0 +1,834 @@
+<ol class="breadcrumb">
+	<li><a href="/cart">{{ 'checkout.general.cart' | t }}</a></li>
+	<li class="active"><a href="/checkout/detail">{{ 'checkout.general.customer_info' | t }}</a></li>
+	<li>{{ 'checkout.general.shipping_method' | t }}</li>
+	<li>{{ 'checkout.general.payment_method' | t }}</li>
+</ol>
+{% app_snippet 'checkout/content_top' %}
+{% include 'mobile-checkout-cart' %}
+
+<form class="side-wrap" method="post" action="/checkout/detail">
+	<div class="side-left">
+		<div class="left-container">
+			{% if errors %}
+			<div class="margin-bottom-20 alert alert-danger">
+				{{errors}}
+			</div>
+			{% endif %}
+			{% if pickup_warning %}
+			<div class="margin-bottom-20 alert alert-danger">
+				{{pickup_warning}}
+			</div>
+			{% endif %}
+			<input type="hidden" name="_token" value="{% csrf %}">
+			<div id="shipping-selector">
+			{% if arr_location > 0 and arr_shipping > 0 %}
+			<h4 class="margin-top-0 margin-bottom-20 weight-xbold">{{ 'checkout.detail.select_delivery_method' | t }}</h4>
+
+
+			<div class="form-group margin-bottom-50">
+				<div class="btn-group card-list-button-group" data-toggle="buttons">
+					<label for="r-shipping" class="btn btn-block  active">
+						<input type="radio" id="r-shipping" name="type" value="r_shipping" class="radio-type" {% if type == "shipping" or form_input.type == "r_shipping" %} checked {% endif %} >
+						{{ 'checkout.detail.shipping' | t }}
+					</label>
+
+
+					<label for="r-pickup" class="btn btn-block ">
+						<input type="radio" id="r-pickup" name="type" value="r_pickup" class="radio-type" {% if type == "pickup" or form_input.type == "r_pickup" %} checked {% endif %} >
+						{{ 'checkout.detail.pickup' | t }}
+					</label>
+
+				</div>
+			</div>
+			{% elsif arr_location > 0 %}
+			<div class="form-group margin-bottom-50" style="display:none">
+				<div class="btn-group card-list-button-group" data-toggle="buttons">
+
+					<label for="r-pickup" class="btn btn-block ">
+						<input type="radio" id="r-pickup" name="type" value="r_pickup" class="radio-type" checked >
+						{{ 'checkout.detail.pickup' | t }}
+					</label>
+
+				</div>
+			</div>
+			{% elsif arr_shipping > 0 %}
+			<input type="hidden" id="r-shipping" name="type" value="r_shipping">
+			{% endif %}
+			</div>
+
+			{% comment %}Pick Location part{% endcomment %}
+			<div class="pickup-wrapper" style="display:none">
+				<h4 class="margin-top-0 margin-bottom-20 weight-xbold display-inline">{{ 'checkout.detail.pickup_details' | t }}</h4>
+				<a role="button" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="margin-left-10">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
+				</a>
+				<div class="collapse" id="collapse">
+				  <div class="well">
+				    
+				  </div>
+				</div>
+				
+				<div class="form-style-table">
+					<div class="form-group row no-gutters">
+						<div class="col-sm-6 col-xs-12 float-label-wrap">
+							<label class="light" for="p-location">{{ 'checkout.detail.select_store' | t }}</label>
+							<select name="pickup_location" id="p-location" required class="form-control input-lg">
+								{% for l in p_locations %}
+								<option value="{{l.id}}" {% if l.id == p.location_id %} selected {% endif %} >{{l.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+
+						<div class="col-sm-6 col-xs-12 float-label-wrap is-active datetimepicker">
+							<label class="light" for="p-date">{{ 'checkout.detail.pickup_time' | t }}</label>
+
+							<input type='text' id='datetimepicker1' class="form-control input-lg" placeholder="DD/MM/YYYY HH:MM AM" name="pickup_date" readonly/>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-style-table">
+					<div class="form-group  float-label-wrap is-active">
+						<label class="light" for="pickup-venue">{{ 'checkout.detail.pickup_location' | t }}</label>
+						<textarea id="pickup-venue" class="form-control input-lg" readonly ></textarea>
+					</div>
+				</div>
+				<div class="margin-bottom-20 margin-top-10 alert alert-info pickup-charge">
+					MYR 100 pickup fee will be charged in this location
+				</div>
+
+			</div>
+
+
+			{% comment %}Shipping address part{% endcomment %}
+			<div class="shipping-wrapper" style="display:none">
+
+				<h4 class="margin-top-0 margin-bottom-20 weight-xbold">{{ 'checkout.detail.shipping_address' | t }}</h4>
+
+				<div class="form-style-table">
+					<div class="form-group row no-gutters">
+						<div class="col-xs-6 float-label-wrap" >
+							<label for="n-s-first-name">{{ 'checkout.detail.s_first_name' | t }}</label>
+							<input type="text" id="n-s-first-name" name="s_first_name" class="form-control input-lg" value="{{ s.first_name | _default:form_input.s_first_name }}" maxlength="45"/>
+						</div>
+
+						<div class="col-xs-6 float-label-wrap">
+							<label for="s-last-name">{{ 'checkout.detail.s_last_name' | t }}</label>
+							<input type="text" id="s-last-name" name="s_last_name" class="form-control input-lg" value="{{ s.last_name | _default:form_input.s_last_name }}" required maxlength="45"/>
+						</div>
+					</div>
+
+					<div class="form-group float-label-wrap">
+						<label for="s-email">{{ 'checkout.detail.s_email' | t }}</label>
+						<input type="email" id="s-email" name="s_email" class="form-control input-lg" value="{{ s.email | _default:form_input.s_email }}" maxlength="255"/>
+					</div>
+					
+          {% if form_phone != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-s-phone">{{ 'checkout.detail.s_phone' | t }}</label>
+						<input type="text" id="n-s-phone" name="s_phone"  class="form-control input-lg" value="{{ s.phone | _default:form_input.s_phone }}" maxlength="45"/>
+					</div>
+          {% endif %}
+					
+          {% if form_company != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-s-company">{{ 'checkout.detail.s_company' | t }}</label>
+						<input type="text" id="n-s-company" name="s_company" class="form-control input-lg" value="{{ s.company | _default:form_input.s_company }}" maxlength="255" />
+					</div>
+          {% endif %}
+
+					<div class="form-group float-label-wrap">
+						<label for="s-addr1">{{ 'checkout.detail.s_address1' | t }}</label>
+						<input type="text" id="s-addr1" name="s_address1" class="form-control input-lg" value="{{ s.address1 | _default:form_input.s_address1 }}" required maxlength="255" />
+					</div>
+					
+          {% if form_address2 != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-s-addr2">{{ 'checkout.detail.s_address2' | t }}</label>
+						<input type="text" id="n-s-addr2" name="s_address2" class="form-control input-lg" value="{{ s.address2 | _default:form_input.s_address2 }}" maxlength="255"/>
+					</div>
+          {% endif %}
+
+					<div class="form-group float-label-wrap is-active">
+						<label for="s-country">{{ 'checkout.detail.s_country' | t }}</label>
+						<select name="s_country_code" id="s-country" class="form-control g-country  input-lg" data-state-wrapper="s" required>
+							<option disabled selected value=""></option>
+							{% for c in countries %}
+							<option value="{{c.country_code}}" {% if c.country_code == s.country_code or c.country_code == form_input.s_country_code %} selected {% endif %}>{{ c.country_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+
+					<div class="form-group row no-gutters">
+
+						<div class="col-xs-4 float-label-wrap">
+							<label for="s-state">{{ 'checkout.detail.s_state' | t }}</label>
+							<span class="s-provinces-wrapper">
+								{% if s_r_provinces %}
+								<select name='s_province_code' id="s-state" class="form-control input-lg" required>
+									{% for r in s_r_provinces %}
+									<option value="{{r.code}}" {% if r.code == s.province_code or r.code == form_input.s_province_code %} selected {% endif %}>{{r.name}}</option>
+									{% endfor %}
+								</select> 
+								{% else %}
+								<input type="text" id="s-state" class="form-control input-lg" name="s_province" value="{{ s.province | _default:form_input.s_province }}" required maxlength="45"/>
+								{% endif %}
+							</span>
+						</div>
+
+						<div class="col-xs-4 float-label-wrap">
+							<label for="s-city">{{ 'checkout.detail.s_city' | t }}</label>
+							<span class="s-city-wrapper">
+								<input type="text" id="s-city" name="s_city" class="form-control input-lg" value="{{ s.city | _default:form_input.s_city }}" required  maxlength="45"/>
+							</span>
+						</div>
+
+						<div class="col-xs-4 float-label-wrap">
+							<label for="s-zip">{{ 'checkout.detail.s_postcode' | t }}</label>
+							<input type="text" id="s-zip" name="s_zip"  class="form-control input-lg" value="{{ s.zip | _default:form_input.s_zip }}" required  maxlength="45"/>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+
+			{% comment %}Billing address part{% endcomment %}
+			<h4 class="margin-top-50 margin-bottom-20 weight-xbold">{{ 'checkout.detail.billing_address' | t }}</h4>
+
+			<div class="form-group same-addr-wrapper">
+				<div class="checkbox checkbox-default">
+					<input type="checkbox" id="chk-s-addr" name="same_addr" class="chk-same-addr" {% if same_addr %}checked {% endif %}/>
+					<label for="chk-s-addr">{{ 'checkout.detail.same_bs' | t }}</label>
+				</div>
+			</div>
+
+			<div class="billing-wrapper" style="display:none">
+				<div class="form-style-table">
+					<div class="form-group row no-gutters">
+						<div class="col-xs-6 float-label-wrap">
+							<label for="n-b-first-name">{{ 'checkout.detail.b_first_name' | t }}</label>
+							<input type="text" name="b_first_name" class="form-control input-lg" id="n-b-first-name" value="{{ b.first_name | _default:form_input.b_first_name  }}" maxlength="45" />
+						</div>
+
+						<div class="col-xs-6 float-label-wrap">
+							<label for="b-last-name">{{ 'checkout.detail.b_last_name' | t }}</label>
+							<input type="text" name="b_last_name" class="form-control input-lg" id="b-last-name" value="{{ b.last_name | _default:form_input.b_last_name }}" required maxlength="45" />
+						</div>
+					</div>
+
+
+					<div class="form-group float-label-wrap">
+						<label for="b-email">{{ 'checkout.detail.b_email' | t }}</label>
+						<input type="email" name="b_email" class="form-control input-lg" id="b-email" value="{{ b.email | _default:form_input.b_email }}" requred maxlength="255" />
+					</div>
+					
+          {% if form_phone != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-b-phone">{{ 'checkout.detail.b_phone' | t }}</label>
+						<input type="text" name="b_phone"  class="form-control input-lg" id="n-b-phone" value="{{ b.phone | _default:form_input.b_phone }}" maxlength="45"/>
+					</div>
+          {% endif %}
+					
+          {% if form_company != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-b-company">{{ 'checkout.detail.b_company' | t }}</label>
+						<input type="text" name="b_company" class="form-control input-lg" id="n-b-company" value="{{ b.company | _default:form_input.b_company }}"  maxlength="255"/>
+					</div>
+          {% endif %}
+
+					<div class="form-group float-label-wrap">
+						<label for="b-addr1">{{ 'checkout.detail.b_address1' | t }}</label>
+						<input type="text" name="b_address1" class="form-control input-lg" id="b-addr1" value="{{ b.address1 | _default:form_input.b_address1 }}" required maxlength="255" />
+					</div>
+					
+          {% if form_address2 != 0 %}
+					<div class="form-group float-label-wrap">
+						<label for="n-b-addr2">{{ 'checkout.detail.b_address2' | t }}</label>
+						<input type="text" name="b_address2" class="form-control input-lg" id="n-b-addr2" value="{{ b.address2 | _default:form_input.b_address2 }}" maxlength="255"/>
+					</div>
+          {% endif %}
+
+					<div class="form-group float-label-wrap">
+						<label for="b-country">{{ 'checkout.detail.b_country' | t }}</label>
+						<select name="b_country_code" class="form-control g-country input-lg" data-state-wrapper="b"  id="b-country" required>
+							{% for c in countries %}
+							<option value="{{c.country_code}}" {% if c.country_code == b.country_code or c.country_code == form_input.b_country_code %} selected {% endif %}>{{ c.country_name}}</option>
+							{% endfor %}
+						</select>
+					</div>
+
+					<div class="form-group float-label-wrap row no-gutters">
+						<div class="col-xs-4 float-label-wrap is-active">
+							<label for="b-state">{{ 'checkout.detail.b_state' | t }}</label>
+							<span class="b-provinces-wrapper">
+								{% if b_r_provinces %}
+								<select name='b_province_code' class="form-control input-lg" id="b-state" required>
+									{% for r in b_r_provinces %}
+									<option value="{{r.code}}" {% if r.code == b.province_code  or r.code == form_input.b_province_code  %} selected {% endif %}>{{r.name}}</option>
+									{% endfor %}
+								</select> 
+								{% else %}
+								<input type="text" class="form-control input-lg" id="b-state" name="b_province" value="{{ b.province | _default:form_input.b_province }}" required maxlength="45"/>
+								{% endif %}
+							</span>
+						</div>
+						
+						<div class="col-xs-4 float-label-wrap" >
+							<label for="b-city">{{ 'checkout.detail.b_city' | t }}</label>
+							<span class="b-city-wrapper">
+								<input type="text" name="b_city" class="form-control input-lg" id="b-city" value="{{ b.city | _default:form_input.b_city }}" required/>
+							</span>
+						</div>
+
+						<div class="col-xs-4 float-label-wrap">
+							<label for="b-zip">{{ 'checkout.detail.b_postcode' | t }}</label>
+							<input type="text" name="b_zip"  class="form-control input-lg" id="b-zip" value="{{ b.zip |_default:form_input.b_zip }}" required maxlength="45"/>
+						</div>	
+					</div>
+
+
+					
+				</div>
+			</div>
+			{% app_snippet 'checkout/content_left' %}
+		</div>
+	</div>
+
+
+	<div class="side-right">
+		{% include 'desktop-checkout-cart' %}
+	</div>
+
+	<div class="form-group margin-top-40 display-inline width-full">
+		<a href="/cart"><i class="fa fa-chevron-left margin-right-10"></i> {{ 'checkout.detail.return_to_cart' | t }}</a>
+		<input type="submit" class="xs-margin-top-10 xs-btn-block btn btn-primary btn-lg pull-right" value="{{ 'checkout.detail.continue_to_shipping' | t }}"/>
+	</div>
+
+</form>
+
+<!-- Initiate datetime picker -->
+<script src="/assets/js/moment/moment.js"></script>
+<script src="/assets/js/eonasdan-bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+	$(function () {
+		var today = new Date();
+		var arr_business_week = [];
+		var arr_business_hour = [];
+		var timePeriod = [];
+		var pid;
+		var pickup_at = "{{p.pickup_at}}";
+
+		$('#datetimepicker1').datetimepicker({
+			defaultDate: pickup_at=="" ? today : moment(pickup_at),
+			ignoreReadonly: true,
+			minDate: today,
+            sideBySide: true,
+		});
+
+		$("#p-location").on('change', function () {
+
+			var pid = $(this).val();
+			var businessWeek = {{businessWeek}};
+			// var businessHour = {{businessHour}};
+			var operating = {{operating}};
+
+			$.each(businessWeek, function(k, v){
+				if(pid == k){
+					arr_business_week = v.split(',');
+				}
+			});
+
+			// $(document).on('dp.change', '#datetimepicker1', function() {
+				
+			// 	daySelected = new Date($(this).val()).getDay();
+
+			// });
+
+			$("#datetimepicker1").remove();
+			$(".datetimepicker").append("<input type='text' id='datetimepicker1' class='form-control input-lg' placeholder='DD/MM/YYYY HH:MM AM' name='pickup_date' readonly/>");
+
+			$('#datetimepicker1').datetimepicker({
+				useCurrent: false,
+				defaultDate: pickup_at=="" ? today : moment(pickup_at),
+				ignoreReadonly: true,
+				minDate: today,
+				sideBySide: true,
+				// enabledHours: ["16", "17", "18", "19"],
+				// enabledHours: arr_business_hour,
+				daysOfWeekDisabled: arr_business_week,
+				// disabledDates: [ new Date(2016, 06 - 01, 21, 18, 00) ]
+			});
+			$('.well').empty();
+			var table = $('<table style="width:100%" class="table"></table>');
+			$.each(operating, function(key, value){
+				$.each(value, function(k, v){
+					if(pid == k){
+						if(v.length === 0){
+							var row = $('<tr></tr>').text("No schedule at this moment.");
+							table.append(row);
+						}else{
+							$.each(v, function(k1, v1){
+								if(v1 == "closed"){
+									var row = $('<tr></tr>');
+									var row1 = $('<th></th>').text(k1.toUpperCase());
+									var row3 = $('<td></td>').text(v1.toUpperCase());
+									row.append(row1);
+									row.append(row3);
+									table.append(row);
+								}else{
+									timePeriod = [];
+									$.each(v1, function(k2, v2){
+										arr = v2.split(':');
+										hours = parseInt(arr[0]);
+										mins = arr[1];
+										var suffix = hours >= 12 ? "PM":"AM"; 
+										hours = ((hours + 11) % 12 + 1) + ":" + mins + suffix;
+										timePeriod.push(hours);
+									});
+									var row = $('<tr></tr>');
+									var row1 = $('<th></th>').text(k1.toUpperCase());
+									var row3 = $('<td></td>').text(timePeriod.join("-"));
+									row.append(row1);
+									row.append(row3);
+									table.append(row);
+								}
+							});
+						}
+					}
+				});
+			});
+
+			$('.well').append(table);
+
+		}).trigger("change");
+	});
+</script>
+
+<!-- Show/hide labels -->
+<script>
+
+	$(document).ready(function(){
+
+		$("input, select, textarea").each(function(){
+			var wrap = $(this).closest(".float-label-wrap");
+
+			if(!$.trim(this.value).length) {
+				wrap.removeClass('is-active');
+				wrap.find('label').addClass('is-visible');
+			} else { 
+				wrap.addClass('is-active');
+				wrap.find('label').addClass('is-visible');
+			}
+		});
+
+		$('body').on("change keyup", '.float-label-wrap .form-control',function() {
+			var wrap = $(this).closest(".float-label-wrap");
+			if(!$.trim(this.value).length) {
+				wrap.removeClass('is-active');
+				wrap.find('label').addClass('is-visible');
+			} else { 
+				wrap.addClass('is-active');
+				wrap.find('label').addClass('is-visible');
+			}
+		});
+
+
+		$("body").on("focusin", ".float-label-wrap .form-control", function(){
+			var wrap = $(this).closest(".float-label-wrap");
+
+			wrap.addClass('is-focus');
+		});
+
+		$("body").on("blur", ".float-label-wrap .form-control", function(){
+			var wrap = $(this).closest(".float-label-wrap");
+
+			wrap.removeClass('is-focus');
+		});
+	})
+	
+	</script>
+
+	<script>
+	function get_pickup_address(id){
+		
+		var pickup_addr = {{json_pickup_addr}};
+
+		$.each( pickup_addr, function( k, v ) {
+
+			if(id == v.id){
+				var address2 = (v.address2 != null? v.address2+",": "");
+				var address = v.address1+", "+address2+v.zip+" "+v.city+", "+v.province+", "+v.country;
+			
+				$("#pickup-venue").text(address);
+			
+				$(".pickup-charge").text("{{ 'checkout.general.pickup_fee_cn' | t }} "+v.pickup_charge+" {{cart.currency}} {{ 'checkout.general.pickup_fee_en' | t }}");
+				
+			
+			}
+		
+		});	
+		
+		$("#pickup-venue").parent(".float-label-wrap").addClass("is-active");
+	}
+
+	function display_billing_addr(){
+		if($("input.chk-same-addr").is(":checked")){
+			$(".billing-wrapper").hide();
+		}else{
+			$(".billing-wrapper").show();
+		}
+	}
+
+	function required_rules(){
+		if($('input.radio-type:checked').val() == "r_pickup" || $('input.radio-type:checked').val() == "r_pickup2" || $('input.radio-type:checked').val() == "r_p_pay"){
+			$("input[id^='b-'],select[id^='b-']").attr("required",true);
+			$("input[id^='s-'],select[id^='s-']").attr("required",false);
+      form_settings(1);
+			$("#s-email").attr('type', 'text'); 
+			$("#b-email").attr('type', 'email'); 
+			if($('input.radio-type:checked').val() == "r_pickup2" || $('input.radio-type:checked').val() == "r_p_pay"){
+				$("#p-location").attr("required",false);
+			}else{
+				$("#p-location").attr("required",false);				
+			}
+		}else{
+			if($("input.chk-same-addr").is(":checked")){
+				$("input[id^='b-'],select[id^='b-']").attr("required",false);
+				// $("input[id^='s-'],select[id^='s-']").attr("required",true);
+        form_settings(2);
+				$("#s-email").attr('type', 'email'); 
+				$("#b-email").attr('type', 'text'); 
+			}else{
+				$("input[id^='b-'],select[id^='b-']").attr("required",true);
+				// $("input[id^='s-'],select[id^='s-']").attr("required",true);
+        form_settings(3);
+				$("#s-email").attr('type', 'text'); 
+				$("#b-email").attr('type', 'email');
+			}
+			$("#p-location").attr("required",false);
+		}
+
+		// console.log("Shipping: "+$("#s-country").val());
+		// console.log("Billing: "+$("#b-country").val());
+
+		// Disable input field if country is HK or MO
+		if($("#s-country").is(":visible")){
+			if($("#s-country").val() == "HK" || $("#s-country").val() == "MO"){
+				$("#s-state").prop({"disabled":true, "required":false});
+				$("#s-zip").prop({"disabled":true, "required":false});
+			}
+			else{
+				$("#s-state").prop({"disabled":false, "required":true});
+				$("#s-zip").prop({"disabled":false, "required":true});
+			}
+		}
+
+		if($("#b-country").is(":visible")){
+			if($("#b-country").val() == "HK" || $("#b-country").val() == "MO"){
+				$("#b-state").prop({"disabled":true, "required":false});
+				$("#b-zip").prop({"disabled":true, "required":false});
+			}
+			else{
+				$("#b-state").prop({"disabled":false, "required":true});
+				$("#b-zip").prop({"disabled":false, "required":true});
+			}
+		}
+
+	}
+
+  function form_settings(type){
+    if({{form_name}} == 1){
+      if(type == 1){
+        $("#n-b-first-name").prop("required",true);
+        $("#n-s-first-name").prop("required",false);
+      }
+      else if(type == 2){
+        $("#n-b-first-name").prop("required",false);
+        $("#n-s-first-name").prop("required",true);
+      }
+      else{
+        $("#n-b-first-name").prop("required",true);
+        $("#n-s-first-name").prop("required",true);
+      }
+    }
+
+    if({{form_company}} == 2){
+      if(type == 1){
+        $("#n-b-company").prop("required",true);
+        $("#n-s-company").prop("required",false);
+      }
+      else if(type == 2){
+        $("#n-b-company").prop("required",false);
+        $("#n-s-company").prop("required",true);
+      }
+      else{
+        $("#n-b-company").prop("required",true);
+        $("#n-s-company").prop("required",true);
+      }
+    }
+
+    if({{form_address2}} == 2){
+      if(type == 1){
+        $("#n-b-addr2").prop("required",true);
+        $("#n-s-addr2").prop("required",false);
+      }
+      else if(type == 2){
+        $("#n-b-addr2").prop("required",false);
+        $("#n-s-addr2").prop("required",true);
+      }
+      else{
+        $("#n-b-addr2").prop("required",true);
+        $("#n-s-addr2").prop("required",true);
+      }
+    }
+
+    if({{form_phone}} == 2){
+      if(type == 1){
+        $("#n-b-phone").prop("required",true);
+        $("#n-s-phone").prop("required",false);
+      }
+      else if(type == 2){
+        $("#n-b-phone").prop("required",false);
+        $("#n-s-phone").prop("required",true);
+      }
+      else{
+        $("#n-b-phone").prop("required",true);
+        $("#n-s-phone").prop("required",true);
+      }
+    }
+  }
+
+	$(document).ready(function(){
+		if($('input.radio-type:checked').val() == "r_pickup"){
+			$(".pickup-wrapper").show();
+			$(".pickup-wrapper2").hide();
+			$(".shipping-wrapper").hide();
+			$(".same-addr-wrapper").hide();
+			$(".billing-wrapper").show();
+			$("label[for='r-pickup']").addClass("active");
+			$("label[for='r-shipping']").removeClass("active");
+			var pickup_id = $("select#p-location :selected").val();
+			get_pickup_address(pickup_id);
+		}else if($('input.radio-type:checked').val() == "r_pickup2"){
+			$(".pickup-wrapper2").show();
+			$(".pickup-wrapper").hide();
+			$(".shipping-wrapper").hide();
+			$(".same-addr-wrapper").hide();
+			$(".billing-wrapper").show();
+			$("label[for='r-pickup2']").addClass("active");
+			$("label[for='r-pickup']").removeClass("active");
+			$("label[for='r-shipping']").removeClass("active");
+		} 
+		else{
+			$(".pickup-wrapper").hide();
+			$(".pickup-wrapper2").hide();
+			$(".shipping-wrapper").show();
+			$(".same-addr-wrapper").show();
+			$("label[for='r-pickup']").removeClass("active");
+			$("label[for='r-shipping']").addClass("active");
+			display_billing_addr();
+		} 
+		
+
+		required_rules();
+		
+	});
+
+	// Safari browser temporary solve required error.
+	{% if cart.currency == "MYR" %}
+	$(document).ready(function(){
+		if($("#s-country").val() == null && $("#b-country").val() == null){
+			$("#s-country").val("MY");
+			$("#b-country").val("MY");
+			$(".g-country").change();
+		}
+	});
+	{% endif %}
+
+	$("form").submit(function(e) {
+
+		if( $('input.radio-type:checked').val() == 'r_pickup' ) {
+
+			var hour = {{arr_businessHour}};
+			var date = new Date($('input[name="pickup_date"]').val());
+			var pickup_id = $( "select#p-location option:checked" ).val();
+
+			$.each( hour, function( k, v ) {
+
+				if(pickup_id == k) {
+
+					var match = 0;
+
+					$.each( v, function( k1, v1 ) {
+						console.log(k1);
+						console.log(v1);
+						
+						if( date.getDay() == k1 || k1 == 'everyday') {
+							match = 1;
+							var start_time = Number(v1.start.replace(":", ""));
+							var end_time = Number(v1.end.replace(":", ""));
+							var selected_time = Number(moment(date).format('HH:mm').replace(":", ""));
+
+							if(selected_time < start_time || selected_time > end_time){
+								console.log("fail");
+								alert("{{ 'checkout.general.pickup_time_not_available' | t }}");
+								e.preventDefault();
+								return false;
+							}
+
+							// var valid_hour = $.inArray(""+date.getHours()+"", v1);
+
+							// if( valid_hour == -1 ){
+
+							// 	alert("{{ 'checkout.general.pickup_time_not_available' | t }}");
+							// 	e.preventDefault();
+							// 	return false;
+
+							// }
+						}
+
+					});
+					
+					if(match == 0){
+						alert("{{ 'checkout.general.pickup_time_not_available' | t }}");
+						e.preventDefault();
+						return false;
+					}
+				}
+			});
+		}
+
+		var ref = $(this).find("[required]");
+
+		$(ref).each(function(){
+			if ( $(this).val() == '' )
+			{
+				console.log($(this));
+				alert("{{ 'error.checkout.required_message' | t }}");
+
+				$(this).focus();
+
+				e.preventDefault();
+				return false;
+			}
+		});  return true;
+	});
+
+	// radio shipping and pickup
+	$("body").on("change","input.radio-type",function(){
+	
+		if($('input.radio-type:checked').val() == "r_shipping" || $('input.radio-type:checked').val() == "r_cod"){
+			$(".shipping-wrapper").show();
+			$(".pickup-wrapper").hide();
+			$(".pickup-wrapper2").hide();
+			$(".same-addr-wrapper").show();
+			display_billing_addr();
+		}
+		// pick up checked
+		else if($('input.radio-type:checked').val() == "r_pickup"){
+			$(".pickup-wrapper").show();
+			$(".shipping-wrapper").hide();
+			$(".pickup-wrapper2").hide();
+			$(".same-addr-wrapper").hide();
+			$(".billing-wrapper").show();
+			var pickup_id = $("select#p-location :selected").val();
+			get_pickup_address(pickup_id);
+		}else if($('input.radio-type:checked').val() == "r_pickup2" || $('input.radio-type:checked').val() == "r_p_pay"){
+			$(".pickup-wrapper2").show();
+			$(".pickup-wrapper").hide();
+			$(".shipping-wrapper").hide();
+			$(".same-addr-wrapper").hide();
+			$(".billing-wrapper").show();
+		}
+		required_rules();
+	});
+
+	// checkbox billing address is same with shipping
+	$("body").on("change","input.chk-same-addr",function(){
+		if($(this).is(":checked")){
+			$(".billing-wrapper").hide();
+		}else{
+			$(".billing-wrapper").show();
+		}
+		required_rules();
+	});
+
+	// Get pickup location address
+	
+	$("body").on("change","select#p-location",function(){
+			var id = $(this).val();
+			get_pickup_address(id);
+	});
+	// Get province (Billing and Shipping)
+	$(document).ready(function(){
+		var xhr = $.ajax();
+
+		$("body").on("change",".g-country",function(){
+
+			var country_code = $(this).val();
+			var s_wrapper = $(this).data("state-wrapper");
+			xhr = $.ajax({
+				type: "get",
+				async: true,
+				url: "/province",
+				dataType: "json",
+				data:{c_code:country_code},
+					beforeSend: function(){
+						// xhr.abort();
+					},
+					success:function(d){
+					// no province
+					if(d == 1){
+						// Apply only when element is visible
+						if($("."+s_wrapper+"-provinces-wrapper").is(":visible")){
+							$("."+s_wrapper+"-provinces-wrapper").closest(".float-label-wrap").removeClass("is-active");
+							$("."+s_wrapper+"-city-wrapper").closest(".float-label-wrap").removeClass("is-active");
+							$("input[name="+s_wrapper+"_zip]").parent().removeClass("is-active");
+
+							if(country_code == "HK" || country_code == "MO"){
+								$("."+s_wrapper+"-provinces-wrapper").html('<input type="text" id="'+s_wrapper+'-state" class="form-control input-lg" name="'+s_wrapper+'_province" maxlength="45" disabled>');
+								$("."+s_wrapper+"-city-wrapper").html('<input type="text" id="'+s_wrapper+'-city" class="form-control input-lg" name="'+s_wrapper+'_city" required>');
+								$("input[name="+s_wrapper+"_zip]").val("").prop({"disabled":true, "required":false});
+							}
+							else{
+								$("."+s_wrapper+"-provinces-wrapper").html('<input type="text" id="'+s_wrapper+'-state" class="form-control input-lg" name="'+s_wrapper+'_province" required maxlength="45">');
+								$("."+s_wrapper+"-city-wrapper").html('<input type="text" id="'+s_wrapper+'-city" class="form-control input-lg" name="'+s_wrapper+'_city" required>');
+								$("input[name="+s_wrapper+"_zip]").val("").prop({"disabled":false, "required":true});
+							}
+						}
+					}
+					else{
+						// $("."+s_wrapper+"-provinces-wrapper").closest(".float-label-wrap").removeClass("is-active");
+						// $("input[name="+s_wrapper+"_zip]").val("").prop({"disabled":false, "required":true});
+
+						// Apply only when element is visible
+						if($("."+s_wrapper+"-provinces-wrapper").is(":visible")){
+							$("."+s_wrapper+"-provinces-wrapper").closest(".float-label-wrap").addClass("is-active");
+							$("."+s_wrapper+"-city-wrapper").closest(".float-label-wrap").removeClass("is-active");
+							$("input[name="+s_wrapper+"_zip]").parent().removeClass("is-active");
+
+							$("."+s_wrapper+"-city-wrapper").html('<input type="text" id="'+s_wrapper+'-city" class="form-control input-lg" name="'+s_wrapper+'_city" required>');
+							$("input[name="+s_wrapper+"_zip]").val("").prop({"disabled":false, "required":true});
+
+							$("."+s_wrapper+"-provinces-wrapper").html("<select name='"+s_wrapper+"_province_code' id='"+s_wrapper+"-state' class='form-control input-lg' required></select>");
+							$.each(d, function(k, v){
+								$("#"+s_wrapper+"-state").append('<option value="'+ v.code +'" >'+ v.name +'</option>');
+							});
+						}
+
+					}
+				},
+				fail:function(d){
+					console.log("");
+				}
+			});
+
+		});
+	});
+</script>
+{% app_snippet 'checkout/content_bottom' %}

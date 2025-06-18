@@ -1,0 +1,61 @@
+{% if settings.video_section_id != '' and settings.video_section_id != '""' %}
+<div id="es_video_section" class="video-section">
+  <div id="homeTopSliderBg" class="playVideoTrigger"></div>
+  <div class="home-video-wrapper">    
+	<div id="ytplayer"></div>
+  </div>
+	
+  {% if settings.video_section_img != '' and settings.video_section_img != '""' %}
+    <div id="videoThumbnail" class="video-thumbnail playVideoTrigger">
+      <img src="{{settings.video_section_img}}"/>
+       <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"> <path d="M256,0C114.8,0,0,114.8,0,256s114.8,256,256,256s256-114.8,256-256S397.2,0,256,0z M357.8,265l-149.3,96 c-1.8,1.1-3.8,1.7-5.8,1.7c-1.8,0-3.5-0.4-5.1-1.3c-3.4-1.9-5.6-5.5-5.6-9.4V160c0-3.9,2.1-7.5,5.6-9.4c3.4-1.9,7.6-1.7,10.9,0.4 l149.3,96c3,2,4.9,5.3,4.9,9S360.8,263,357.8,265z"/> </svg>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  var youtube_url = '{{settings.video_section_id}}';
+  var VID_REGEX = /(?:youtube(?:-nocookie)?\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+  // alert(youtube_url.match(VID_REGEX));
+  // alert(youtube_url.match(VID_REGEX)[1]);
+  // console.log('youtube_url.match(VID_REGEX)',youtube_url.match(VID_REGEX),youtube_url.match(VID_REGEX)[1]);
+  if(youtube_url.match(VID_REGEX) != null){
+  	var youtube_url = youtube_url.match(VID_REGEX)[1];
+  }
+  
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // Replace the 'ytplayer' element with an <iframe> and
+  // YouTube player after the API code downloads.
+  var player;
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player('ytplayer', {
+      videoId: youtube_url,
+      playerVars:{
+        autoplay: 0,
+        autohide: 0,
+        cc_load_policy: 0,
+        playsinline: 1,
+        rel: 0
+      }
+    });
+    
+  }
+  
+  function playYTVideo(){
+  	player.playVideo(); 
+    
+  }
+  
+  $(document).on("click", ".playVideoTrigger, #playButton", function(){
+     playYTVideo(); 
+    $('#videoThumbnail').fadeOut();
+  });
+  
+</script>
+{% endif %}

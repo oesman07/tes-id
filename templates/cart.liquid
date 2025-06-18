@@ -1,0 +1,657 @@
+{% comment %}
+
+  This is your /cart template.
+
+{% endcomment %}
+{% app_snippet 'cart/content_top' %}
+{% if cart.item_count > 0 %}
+
+  <form action="/cart" method="post" novalidate class="cart">
+    <input type="hidden" name="_token" value="{% csrf %}">
+
+
+    <div class="section-header">
+      <h1 class="section-header__title">{{ 'cart.general.title' | t }}</h1>
+    </div>
+
+    {% if cart.announcements.size > 0 %}
+      <ul class="note">
+        {% for announcement in cart.announcements %}
+          <li>{{ announcement }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class='currency_country'></div>
+
+    {% if cart.errors.size > 0 %}
+      <ul class="note errors">
+        {% for error in cart.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="cart__row medium-down--hide cart__header-labels">
+      <div class="grid--full">
+        <div class="grid__item large--one-half push--large--one-half">
+          <div class="grid--full">
+            <div class="grid__item one-third medium-down--one-third">
+              <span class="h4">{{ 'cart.label.price' | t }}</span>
+            </div>
+            <div class="grid__item one-third medium-down--one-third text-center">
+              <span class="h4">{{ 'cart.label.quantity' | t }}</span>
+            </div>
+            <div class="grid__item one-third medium-down--one-third text-right">
+              <span class="h4">{{ 'cart.label.total' | t }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+      Loop through products in the cart
+    {% endcomment %}
+    {% for item in cart.items %}
+      <div class="cart__row">
+
+        {% if item.promotion_id %}
+          <div class="cart__row">
+            <div class="promotion__wrapper">
+              <div class="promotion__title">
+                <div class="promotion__badge">
+                  <div class="promotion__badge-text">{{ item.title }}</div>
+                </div>
+              </div>
+              {% for i in item.items %}
+                <div class="grid--full cart__row--table-large">
+                  <div class="grid__item large--one-half">
+                    <div class="grid">
+                      <div class="grid__item one-third">
+                        <a href="{{ i.url | within: collections.all }}" class="cart__image">
+                          <img src="{{ i | img_url: 'medium' }}" alt="{{ i.title | escape }}" style="width:240px;">
+                        </a>
+                      </div>
+                      <div class="grid__item two-thirds">
+                        <a href="{{ i.url }}" class="h5">
+                          {{ i.product.title }}
+                        </a>
+
+                        {% unless i.variant.title contains 'Default' %}
+                          <br>
+                          <small>{{ i.variant.title }}</small>
+                        {% endunless %}
+
+                        {% assign propertySize = i.properties | size %}
+                        {% if propertySize > 0 %}
+                          <br>
+                          {% for p in i.properties %}
+                            {% if p.last != blank %}
+                              {{ p.first }}:
+
+                              {% comment %}
+                                Check if there was an uploaded file associated
+                              {% endcomment %}
+                              {% if p.last contains '/uploads/' %}
+                                <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                              {% else %}
+                                {{ p.last }}
+                              {% endif %}
+
+                              <br>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif %}
+
+                        {% if i.freebie != true %}
+                          <a class="cart__remove" data-variant-id="{{i.variant.id}}" data-quantity="{{i.quantity}}" data-i_id="{{i.i_id}}">
+                            <small>
+                              <svg class="svg-icon" id="Es_1" data-name="Es 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486.4 486.4"><path d="M443.33,72.28H343.46V56A52.85,52.85,0,0,0,290.67,3.2H195.73A52.85,52.85,0,0,0,142.94,56V72.28H43.07a13.32,13.32,0,1,0,0,26.64H67.15V412A71.34,71.34,0,0,0,138.4,483.2H348A71.34,71.34,0,0,0,419.25,412v-313h24.08a13.32,13.32,0,0,0,0-26.64ZM169.58,56a26.2,26.2,0,0,1,26.15-26.16h94.94A26.21,26.21,0,0,1,316.82,56V72.28H169.58Zm223,356A44.69,44.69,0,0,1,348,456.56H138.4A44.7,44.7,0,0,1,93.79,412v-313H392.71V412Z"/><path d="M243.2,398.59a12.23,12.23,0,0,0,12.29-12.28V169.11a12.29,12.29,0,0,0-24.58,0v217.1A12.31,12.31,0,0,0,243.2,398.59Z"/><path d="M157.46,398.59a13.77,13.77,0,0,0,13.83-13.83V170.65a13.84,13.84,0,0,0-27.67,0V384.76A13.84,13.84,0,0,0,157.46,398.59Z"/><path d="M328.94,398.59a13.77,13.77,0,0,0,13.84-13.83V170.65a13.84,13.84,0,0,0-27.67,0V384.76A13.77,13.77,0,0,0,328.94,398.59Z"/></svg>
+                            </small>
+                          </a>
+                        {% endif %}
+
+                        {% if i.message.size > 0 %}
+                        <div class="grid grid--full">
+                          {% for m in i.message %}
+                            <div class="h5 grid--full promotion-suggestion">
+                              {% assign label_message = 'cart.label.' | append: m.display_title %} 
+                              {{ label_message | t }}
+                            </div>
+                          {% endfor %}
+                        </div>
+                        {% endif %}
+
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid__item large--one-half">
+                    <div class="grid--full cart__row--table-large">
+                      <div class="grid__item one-third">
+                        <span class="cart__mini-labels">{{ 'cart.label.price' | t }}</span>
+                        <span class="h5">
+                          {% if i.original_price != i.price %}
+                            <small class="cart-item__original-price"><s>{{cart.currency}} {{ i.original_price }}</s></small><br>
+                          {% endif %}
+                          {{cart.currency}} {{ i.price }}
+                        </span>
+                      </div>
+                      <div class="grid__item one-third text-center">
+                        <span class="cart__mini-labels">{{ 'cart.label.quantity' | t }}</span>
+                        {% if i.freebie != true %}
+                        <input type="number" class="cart__quantity-selector" name="updates[]" id="updates_{{ i.variant.id }}" value="{{ i.quantity }}" min="0">
+                        <input type="hidden" name="ids[]" value="{{ i.variant.id }}">
+                        <input type="hidden" name="i_ids[]" value="{{i.i_id}}">
+                        {% else %}
+                        <input type="number" class="cart__quantity-selector" value="{{i.quantity}}" disabled="disabled" style="background: transparent; border-color: transparent;">
+                        {% endif %}
+                      </div>
+                      <div class="grid__item one-third text-right">
+                        <span class="cart__mini-labels">{{ 'cart.label.total' | t }}</span>
+                        <span class="h5">
+                          {% if i.original_line_price != i.line_price %}
+                            <small class="cart-item__original-price"><s>{{cart.currency}} {{ i.original_line_price }}</s></small>
+                          {% endif %}
+                          {{cart.currency}} {{ i.line_price }}
+                        </span>
+
+                        {% comment %}
+                        {% if i.original_line_price != i.line_price %}
+                          {% for discount in i.discounts %}
+                            <small class="cart-item__discount">
+                              {{ discount.title }}
+                            </small>
+                          {% endfor %}
+                        {% endif %}
+                        {% endcomment %}
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+
+              {% if item.discount_amount > 0 %}
+              <div class="grid--full cart__row--table-large">
+                <div class="grid__item large--one-half push--large--one-half">
+                  <div class="grid text-right">
+                    <span class="grid__item h5 large--five-eighths"><b>{{ 'checkout.general.discount' | t }}</b></span>
+                    <span class="grid__item h5 large--three-eighths">- {{cart.currency}} {{ item.discount_amount }}</span>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+
+        {% else %}
+
+        <div class="grid--full cart__row--table-large">
+
+          <div class="grid__item large--one-half">
+            <div class="grid">
+
+              <div class="grid__item one-third">
+                <a href="{{ item.url | within: collections.all }}" class="cart__image">
+                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}" style="width:240px;">
+                </a>
+              </div>
+
+              <div class="grid__item two-thirds">
+                <a href="{{ item.url }}" class="h5">
+                  {{ item.product.title }}
+                </a>
+                {% unless item.variant.title contains 'Default' %}
+                  <br>
+                  <small>{{ item.variant.title }}</small>
+                {% endunless %}
+
+                {% comment %}
+                  <p>{{ item.vendor }}</p>
+                {% endcomment %}
+
+                {% comment %}
+                  Optional, loop through custom product line items if available
+                {% endcomment %}
+                {% assign propertySize = item.properties | size %}
+                {% if propertySize > 0 %}
+                  <br>
+                  {% for p in item.properties %}
+                    {% if p.last != blank %}
+                      {{ p.first }}:
+
+                      {% comment %}
+                        Check if there was an uploaded file associated
+                      {% endcomment %}
+                      {% if p.last contains '/uploads/' %}
+                        <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+                      {% else %}
+                        {{ p.last }}
+                      {% endif %}
+
+                      <br>
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+
+
+                <a class="cart__remove" data-variant-id="{{item.variant.id}}" data-quantity="{{item.quantity}}" data-i_id="{{item.i_id}}">
+                  <small>
+                    <svg class="svg-icon" id="Es_1" data-name="Es 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486.4 486.4"><path d="M443.33,72.28H343.46V56A52.85,52.85,0,0,0,290.67,3.2H195.73A52.85,52.85,0,0,0,142.94,56V72.28H43.07a13.32,13.32,0,1,0,0,26.64H67.15V412A71.34,71.34,0,0,0,138.4,483.2H348A71.34,71.34,0,0,0,419.25,412v-313h24.08a13.32,13.32,0,0,0,0-26.64ZM169.58,56a26.2,26.2,0,0,1,26.15-26.16h94.94A26.21,26.21,0,0,1,316.82,56V72.28H169.58Zm223,356A44.69,44.69,0,0,1,348,456.56H138.4A44.7,44.7,0,0,1,93.79,412v-313H392.71V412Z"/><path d="M243.2,398.59a12.23,12.23,0,0,0,12.29-12.28V169.11a12.29,12.29,0,0,0-24.58,0v217.1A12.31,12.31,0,0,0,243.2,398.59Z"/><path d="M157.46,398.59a13.77,13.77,0,0,0,13.83-13.83V170.65a13.84,13.84,0,0,0-27.67,0V384.76A13.84,13.84,0,0,0,157.46,398.59Z"/><path d="M328.94,398.59a13.77,13.77,0,0,0,13.84-13.83V170.65a13.84,13.84,0,0,0-27.67,0V384.76A13.77,13.77,0,0,0,328.94,398.59Z"/></svg>
+                  </small>
+                </a>
+
+                {% if item.message.size > 0 %}
+                <div class="grid grid--full">
+                  {% for m in item.message %}
+                  <div class="h5 grid--full promotion-suggestion promotion-popup-button" id="promotion-suggestion-{{m.id}}" data-promotion="{{m.id}}" data-promotion-type="{{m.r_discount_type_id}}" data-promotion-name="{{m.display_title}}">
+                    {{ m.display_title }}
+                  </div>
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="grid__item large--one-half">
+            <div class="grid--full cart__row--table-large">
+
+              <div class="grid__item one-third">
+                <span class="cart__mini-labels">{{ 'cart.label.price' | t }}</span>
+                <span class="h5">
+                  {% if item.original_price != item.price %}
+                    <small class="cart-item__original-price"><s>{{cart.currency}} {{ item.original_price }}</s></small><br>
+                  {% endif %}
+                  {{cart.currency}} {{ item.price }}
+                </span>
+              </div>
+
+              <div class="grid__item one-third text-center">
+                <span class="cart__mini-labels">{{ 'cart.label.quantity' | t }}</span>
+                <input type="number" class="cart__quantity-selector" name="updates[]" id="updates_{{ item.variant.id }}" value="{{ item.quantity }}" min="0">
+                <input type="hidden" name="ids[]" value="{{ item.variant.id }}">
+                <input type="hidden" name="i_ids[]" value="{{item.i_id}}">
+              </div>
+
+              <div class="grid__item one-third text-right">
+                <span class="cart__mini-labels">{{ 'cart.label.total' | t }}</span>
+                <span class="h5">
+                  {% if item.original_line_price != item.line_price %}
+                    <small class="cart-item__original-price"><s>{{cart.currency}} {{ item.original_line_price }}</s></small>
+                  {% endif %}
+                  {{cart.currency}} {{ item.line_price }}
+                </span>
+                {% if item.original_line_price != item.line_price %}
+                  {% for discount in item.discounts %}
+                    <small class="cart-item__discount">
+                      {{ discount.title }}
+                    </small>
+                  {% endfor %}
+                {% endif %}
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    {% if cart.discounts.size > 0 %}
+    <div class="cart-additional-savings text-right cart__row">
+      <span class="label cart-additional-savings__label">{{ 'cart.general.additional_savings' | t }}</span>
+      <span class="h5 cart-additional-savings__price">{{cart.currency}} {{ cart.discount.total_savings }}</span>
+      {% for discount in cart.discounts %}
+        <small class="cart-additional-savings__savings">{{ discount.title }}</small>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="cart__row">
+      <div class="grid">
+        {% comment %}
+          Optional, add a textarea for special notes
+            - Your theme settings can turn this on or off. Default is on.
+            - Make sure you have name="note" for the message to be submitted properly
+        {% endcomment %}
+        {% if settings.cart_notes_enable %}
+          {% assign noteSize = cart.note | size %}
+          <div class="grid__item large--five-twelfths">
+            <button type="button" class="text-link cart__note-add{% if noteSize > 0 %} is-hidden{% endif %}">
+              {{ 'cart.label.add_note' | t }}
+            </button>
+            <div class="cart__note{% if noteSize > 0 %} is-active{% endif %}">
+              <label for="CartSpecialInstructions">{{ 'cart.general.note' | t }}</label>
+              <textarea name="note" class="input-full" id="CartSpecialInstructions">{{ cart.note }}</textarea>
+            </div>
+          </div>
+        {% endif %}
+        <div class="grid__item text-right{% if settings.cart_notes_enable %} large--seven-twelfths{% endif %}">
+          {% for storewide in cart.storewide_discounts %}
+            {% if storewide.display == empty or storewide.display != false %}
+            <p>
+              <span class="cart__subtotal-title">{{storewide.display_title}}</span>
+              <span class="h5 cart__subtotal">{{cart.currency}} {{ storewide.amount }}</span>
+            </p>
+            {% endif %}
+          {% endfor %}
+
+          {% for voucher in cart.voucher_discounts %}
+            <div class="voucher_info">
+                <span class="cart__subtotal-title">{{voucher.display_title}} - {{voucher.voucher_code}} 
+                  <small><a id="remove_voucher" data-discount-id="{{voucher.id}}">({{ 'cart.general.remove' | t }})</a></small>
+                </span>
+                {% if voucher.amount != null %}
+                  <span class="h5 cart__subtotal">{{cart.currency}} {{ voucher.amount }}</span>
+                {% endif %}
+                {% if voucher.shipping_method %}
+                  <div>
+                    <small class="voucher_info-tooltip">
+                      <svg class="svg-icon" width="14px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,9.58a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0v-8A1,1,0,0,0,12,9.58Z"/><circle cx="12" cy="6.8" r="1.48"/><path d="M12,.85A11.15,11.15,0,1,0,23.15,12,11.16,11.16,0,0,0,12,.85Zm0,21A9.85,9.85,0,1,1,21.85,12,9.86,9.86,0,0,1,12,21.85Z"/></svg>
+                      {{ 'cart.general.voucher_message_shipping_only' | t }}
+                      <span class="voucher_info-tooltip-content">
+                       {% for x in voucher.shipping_method %}
+                         <span>{{x}}</span>
+                       {% endfor %}
+                      </span>
+                    </small>
+                  </div>
+                {% endif %}
+                {% if voucher.payment_method %}
+                  <div>
+                    <small class="voucher_info-tooltip">
+                      <svg class="svg-icon" width="14px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,9.58a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0v-8A1,1,0,0,0,12,9.58Z"/><circle cx="12" cy="6.8" r="1.48"/><path d="M12,.85A11.15,11.15,0,1,0,23.15,12,11.16,11.16,0,0,0,12,.85Zm0,21A9.85,9.85,0,1,1,21.85,12,9.86,9.86,0,0,1,12,21.85Z"/></svg>
+                      {{ 'cart.general.voucher_message_payment_only' | t }}
+                      <span class="voucher_info-tooltip-content">
+                       {% for x in voucher.payment_method %}
+                         <span>{{x}}</span>
+                       {% endfor %}
+                      </span>
+                    </small>
+                  </div>
+                {% endif %}
+            </div>
+          {% endfor %}
+          <p>
+            <span class="cart__subtotal-title">{{ 'cart.general.subtotal' | t }}</span>
+            <span class="h5 cart__subtotal">{{cart.currency}} {{ cart.total_price }}</span>
+            {% if cart.total_discounts > 0 %}
+              {% assign savings = cart.total_discounts %}
+              <small class="cart-subtotal__savings">{{cart.currency}} {{ 'cart.general.savings_html' | t: savings }}</small>
+            {% endif %}
+          </p>
+
+          {% for voucher in cart.shipping_discount %}
+            <div class="voucher_info">
+                <span class="cart__subtotal-title">{{voucher.display_title}} - {{voucher.voucher_code}} 
+                  <small><a id="remove_voucher" data-discount-id="{{voucher.order_discount_id}}">({{ 'cart.general.remove' | t }})</a></small>
+                </span>
+                {% if voucher.amount != null %}
+                  <span class="h5 cart__subtotal">{{cart.currency}} {{ voucher.amount }}</span>
+                {% endif %}
+                {% if voucher.shipping_method %}
+                  <div>
+                    <small class="voucher_info-tooltip">
+                      <svg class="svg-icon" width="14px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,9.58a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0v-8A1,1,0,0,0,12,9.58Z"/><circle cx="12" cy="6.8" r="1.48"/><path d="M12,.85A11.15,11.15,0,1,0,23.15,12,11.16,11.16,0,0,0,12,.85Zm0,21A9.85,9.85,0,1,1,21.85,12,9.86,9.86,0,0,1,12,21.85Z"/></svg>
+                      {{ 'cart.general.voucher_message_shipping_only' | t }}
+                      <span class="voucher_info-tooltip-content">
+                       {% for x in voucher.shipping_method %}
+                         <span>{{x}}</span>
+                       {% endfor %}
+                      </span>
+                    </small>
+                  </div>
+                {% endif %}
+                {% if voucher.pickup_location %}
+                  <div>
+                    <small class="voucher_info-tooltip">
+                      <svg class="svg-icon" width="14px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,9.58a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0v-8A1,1,0,0,0,12,9.58Z"/><circle cx="12" cy="6.8" r="1.48"/><path d="M12,.85A11.15,11.15,0,1,0,23.15,12,11.16,11.16,0,0,0,12,.85Zm0,21A9.85,9.85,0,1,1,21.85,12,9.86,9.86,0,0,1,12,21.85Z"/></svg>
+                      {{ 'cart.general.voucher_message_pickup_only' | t }}
+                      <span class="voucher_info-tooltip-content">
+                       {% for x in voucher.pickup_location %}
+                         <span>{{x}}</span>
+                       {% endfor %}
+                      </span>
+                    </small>
+                  </div>
+                {% endif %}
+                {% if voucher.zone %}
+                  <div>
+                    <small class="voucher_info-tooltip">
+                      <svg class="svg-icon" width="14px" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,9.58a1,1,0,0,0-1,1v8a1,1,0,0,0,2,0v-8A1,1,0,0,0,12,9.58Z"/><circle cx="12" cy="6.8" r="1.48"/><path d="M12,.85A11.15,11.15,0,1,0,23.15,12,11.16,11.16,0,0,0,12,.85Zm0,21A9.85,9.85,0,1,1,21.85,12,9.86,9.86,0,0,1,12,21.85Z"/></svg>
+                      {{ 'cart.general.voucher_message_zone_only' | t }}
+                      <span class="voucher_info-tooltip-content">
+                       {% for x in voucher.zone %}
+                         <span>{{x}}</span>
+                       {% endfor %}
+                      </span>
+                    </small>
+                  </div>
+                {% endif %}
+            </div>
+          {% endfor %}
+
+          {% if cart.active_voucher_promotion == true %}
+            {% if cart.voucher_discounts == empty or cart.multiple_voucher_enabled == true %}
+              <p class="promotion__code-input">
+                <span class="input-group">
+                  <input type="text" class="input-group-field" name="voucher_code" placeholder="{{ 'checkout.general.discount_code' | t }}">
+                  <span class="input-group-btn">
+                    <input type="button" class="btn" value="{{ 'checkout.general.apply' | t }}" name="apply" id="applycode">
+                  </span>
+                </span>
+              </p>
+            {% endif %}
+          {% endif %}
+
+          <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+          <input type="hidden" name="current_currency" value="{{cart.currency}}">
+          <input type="submit" name="update" class="btn btn--secondary update-cart" value="{{ 'cart.general.update' | t }}">
+          
+
+          {% if shop.plan_id == "0" or shop.plan_id == "5" or shop.plan_id == "6" %}
+            {% if shop.express_enabled %}
+              <a id="express-checkout-btn" class="btn checkout">{{ 'cart.general.checkout' | t }}</a>
+            {% else %}
+              <input type="submit" name="checkout" class="btn checkout" value="{{ 'cart.general.checkout' | t }}">
+            {% endif %}
+
+          {% else %}
+              <input type="submit" name="checkout" class="btn checkout" value="{{ 'cart.general.checkout' | t }}">
+          {% endif %}
+
+          {% if additional_checkout_buttons %}
+              <div class="cart__additional_checkout">{{ content_for_additional_checkout_buttons }}</div>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+
+    {% if shop.plan_id == "0" or shop.plan_id == "5" or shop.plan_id == "6" %}
+      {% if shop.express_enabled %}
+        {% comment %}
+          Express checkout dialog 
+        {% endcomment %}
+        <div id="express-checkout-dialog" class="modal__dialog">
+          <div class="modal__dialog-bg dialog__close-toggle"></div>
+          <div class="modal__dialog-wrapper small__dialog">
+            <span class="dialog__close dialog__close-toggle">×</span>
+            <div class="modal__dialog-content">
+              <div class="modal__dialog-express-checkout">
+                <div>
+                  <button type="submit" name="expresscheckout" class="btn btn--full checkout">{{ 'cart.general.express_checkout' | t }}</button>
+                </div>
+                <div>
+                  {{ 'cart.general.or' | t }}
+                </div>
+                <div class="text-center">
+                  <button type="submit" name="checkout" class="btn btn--full btn--tertiary checkout">{{ 'cart.general.standard_checkout' | t }}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript">
+          $( "#express-checkout-btn" ).click(function() {
+              var scrollbarWidth = window.innerWidth - document.body.clientWidth;
+              $('#express-checkout-dialog').addClass('show');
+              $('html').css({'overflow': 'hidden','margin-right': scrollbarWidth});
+            }
+          );
+          $( ".dialog__close-toggle" ).click(function() {
+              $('#express-checkout-dialog').removeClass('show');
+              $('html').css({'overflow': '','margin-right': ''});
+            });
+          $( "button.btn.checkout" ).click(function() {
+                $(this).addClass("btn--loading");
+              }
+            );
+        </script>
+      {% endif %}
+    {% endif %}
+
+  </form>
+
+  <script type="text/javascript">
+    $( "select.currency-picker" ).change(function(){
+      $("select.currency-picker").val($(this).val());
+      url=window.location.href;
+      newParam="currency=" + $( "select.currency-picker" ).val();
+      if(url.indexOf("currency=")===-1){
+        separator = (url.indexOf("?")===-1)?"?":"&";
+        newUrl= url + separator + newParam;
+      }else{
+        var url_currency = url.match(/(?:currency=)([^&]+)/);
+        oldParam="currency=" + url_currency[1];
+        newUrl=url.replace(oldParam,newParam); 
+      }
+      $("input[name=current_currency]").val($( "select.currency-picker" ).val());
+      window.location.href =newUrl;
+    });
+
+      $( ".cart__remove" ).click(function() {
+
+        $.ajax({
+          type: 'POST',
+          url: '../cart/remove_item_quantity',
+          data: {
+            variant_id: $(this).data( "variant-id"),
+            quantity: $(this).data( "quantity"),
+            i_id: $(this).data("i_id"),
+          },
+          dataType: 'json',
+          success: function(response){
+
+            if(response == true) {
+              location.reload();
+            } else {
+
+            }
+          },
+          error: function(xhr){
+
+          }
+        });
+
+      });
+
+
+      $( "#applycode" ).click(function() {
+
+        if($("input[name='voucher_code']").val() != '') {
+
+          $.ajax({
+            type: 'POST',
+            url: '../cart/apply_cart_voucher_code',
+            data: {
+              voucher_code: $("input[name='voucher_code']").val(),
+              category: 'create'
+            },
+            dataType: 'json',
+            success: function(response){
+
+              if(typeof(response.id) !== 'undefined') {
+
+                location.reload();
+
+              } else {
+
+                if(response.errors.Voucher_Code_Invalid){
+
+                  alert(response.errors.Voucher_Code_Invalid)
+  
+                }
+
+                if(response.errors.Voucher_Code_Exists){
+
+                  alert(response.errors.Voucher_Code_Exists)
+  
+                }
+
+                $("input[name='voucher_code']").val('')
+
+              }
+            },
+            error: function(xhr){
+
+            }
+          });
+
+        }
+
+      });
+
+
+      $( "#remove_voucher" ).click(function() {
+
+          $.ajax({
+            type: 'POST',
+            url: '../cart/apply_cart_voucher_code',
+            data: {
+              category: 'remove',
+              order_discount_id: $(this).data( "discount-id")
+            },
+            dataType: 'json',
+            success: function(response){
+
+              if(response == true) {
+
+                location.reload();
+
+              } else {
+
+                if(response.errors.Invalid_Order_Discount_Id){
+
+                  alert(response.errors.Invalid_Order_Discount_Id)
+  
+                }
+
+              }
+            },
+            error: function(xhr){
+
+            }
+          });
+
+      });
+     
+  </script>
+
+{% else %}
+  {% comment %}
+    The cart is empty
+  {% endcomment %}
+  <h2>{{ 'cart.general.title' | t }}</h2>
+  <p>{{ 'cart.general.empty' | t }}</p>
+  <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+{% endif %}
+
+{% app_snippet 'cart/content_bottom' %}

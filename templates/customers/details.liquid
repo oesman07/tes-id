@@ -1,0 +1,188 @@
+{% app_snippet 'account/content_top' %}
+<style type="text/css">
+  @media screen and (min-width: 480px) {
+    .change_password{
+      margin-top: 35px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .change_password{
+      margin-bottom: 35px;
+    }
+  }
+</style>
+<div class="section-header section-header--large text-center">
+  <h1 class="section-header__title">{{ 'customer.account.title' | t }}</h1>
+</div>
+
+<div class="grid">
+
+  <div class="grid__item two-thirds medium-down--one-whole">
+    <form action='/account/details' method='post' id='details_form'>
+    <input type="hidden" name="_token" value="{% csrf %}">
+
+    <div id="AddAddress">
+        <h2>{{ 'customer.account.details' | t }}</h2>
+        {{ form.errors | default_errors }}
+        <div class="note form-success" id="UpdateSuccess" style="display:none;">
+          {{ 'customer.details.update_success' | t }}
+        </div>
+        <div class="grid">
+
+          <div class="grid__item one-half small--one-whole">
+            <label for="DetailsFirstName">{{ 'customer.addresses.first_name' | t }}</label>
+            <input type="text" id="DetailsFirstName" class="address_form" name="details[first_name]" value="{{customer.first_name}}" autocapitalize="words">
+          </div>
+
+          <div class="grid__item one-half small--one-whole">
+            <label for="DetailLastName">{{ 'customer.addresses.last_name' | t }}</label>
+            <input type="text" id="DetailLastName" class="address_form" name="details[last_name]" value="{{customer.last_name}}" autocapitalize="words">
+          </div>
+
+          <div class="grid__item one-half small--one-whole">
+            <label for="DetailEmail">{{ 'customer.login.email' | t }}</label>
+            <input type="text" id="DetailEmail" class="address_form" name="details[email]" value="{{customer.cust_email}}">
+          </div>
+
+          <div class="grid__item one-half small--one-whole">
+            <label for="DetailPhone">{{ 'customer.addresses.phone' | t }}</label>
+            <input type="text" id="DetailPhone" class="address_form" name="details[phone]" value="{{customer.phone | _default: customer.default_address.phone }}">
+          </div>
+
+        </div>
+        <div class="grid">
+          <div class="grid__item one-half small--one-whole">
+            <label for="DetailPassword">{{ 'customer.login.password' | t }}</label>
+            <input type="password" placeholder="{{'customer.login.password' | t}}" id="DetailPassword" class="address_form" name="details[password1]" disabled="disabled">
+          </div>
+
+          <div class="grid__item one-half small--one-whole change_password">
+            <a href="javascript:void(0)" onclick="viewCP();">{{ 'customer.details.change_password' | t }}</a>
+          </div>
+
+          <div class="grid__item one-half small--one-whole confirm-password" style="display:none;">
+            <label for="DetailPasswordConfirm">{{ 'customer.details.new_password' | t }}</label>
+            <input type="password" placeholder="{{'customer.details.new_password' | t}}" id="DetailPasswordConfirm" class="address_form" name="details[password2]">
+          </div>
+        </div>
+
+        <p class="text-right">
+        	<a href="javascript:void(0)" onclick="window.history.back();">{{ 'customer.addresses.cancel' | t }}</a>&nbsp;&nbsp;
+          	<input type="submit" class="btn btn--large" value="{{ 'customer.recover_password.submit' | t }}">
+      	</p>
+        <hr>
+    </div>
+  </form>
+
+    {% app_snippet 'account/content_left' %}
+  </div>
+
+  <div class="grid__item one-third medium-down--one-whole">
+    <h4>{{ 'customer.addresses.primary' | t }}</h4>
+
+    <h5>{{ customer.name }}</h5>
+
+    {% if customer.default_address != nil %}
+      <p>
+      {{ customer.default_address.address1 }}<br>
+
+      {% if customer.default_address.address2 != "" %}
+        {{ customer.default_address.address2 }}<br>
+      {% endif %}
+
+      {% if customer.default_address.city != "" %}
+        {{ customer.default_address.city }}<br>
+      {% endif %}
+
+      {% if customer.default_address.province_code != "" %}
+        {{ customer.default_address.province_code | upcase }}<br>
+      {% endif %}
+
+      {% if customer.default_address.zip != "" %}
+        {{ customer.default_address.zip | upcase }}<br>
+      {% endif %}
+
+      {% if customer.default_address.country != "" %}
+        {{ customer.default_address.country }}<br>
+      {% endif %}
+
+      {% if customer.default_address.phone != "" %}
+        {{ customer.default_address.phone }}
+      {% endif %}
+      </p>
+
+    {% endif %}
+
+    <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+
+    {% app_snippet 'account/content_right' %}
+  </div>
+
+</div>
+<script type="text/javascript">
+  {% if update_success %}
+    document.getElementById('UpdateSuccess').style.display = 'block';
+  {% endif %}
+  function viewCP(){
+    $(".change_password").hide();
+    $("label[for='DetailPassword']").text("{{ 'customer.details.old_password' | t}}");
+    $(".confirm-password").show();
+    $("#DetailPassword").prop("disabled", false);
+
+  }
+</script>
+
+<div class="grid">
+  <div class="grid__item two-thirds medium-down--one-whole">
+    <h2>{{ 'Authentication Details' | t }}</h2>
+    <div class="note form-success" id="EmailVerify" style="display: none;">
+      {{ 'customer.details.verification_email_sent' | t }}
+    </div>
+
+    {% for kv in customer.authentications %}
+
+      {% assign key = kv[0] %}
+      {% assign value = kv[1] %}
+
+      {% if value.is_connected %}
+        <strong>{{ key | capitalize }}</strong>
+        <p>
+          {{ value.account }}
+          <br>
+          {% if value.is_verified %}
+            <span style="color: green;">{{ 'customer.details.verified' | t }}</span>
+          {% else %}
+            {% comment %} <a style="cursor: pointer;" href="/account/request-verify?customer_id={{ customer.id }}&method={{ key }}">Verify now</a> {% endcomment %}
+            <a id="request-verify-{{ customer.id }}" role="button" tabindex="0" style="cursor: pointer;" onclick="requestVerify('{{ customer.id }}', '{{ key }}')">{{ 'customer.details.verify_now' | t }}</a>
+          {% endif %}
+        </p>
+      {% endif %}
+
+    {% endfor %}
+
+  </div>
+</div>
+
+<script>
+
+  function requestVerify(customer_id, method) {
+
+    if(method == 'email') {
+      $(`#request-verify-${customer_id}`).css('display', 'none')
+      $('#EmailVerify').css('display', 'block')
+    }
+
+    $.get(`/account/request-verify?customer_id=${customer_id}&method=${method}`).done(res => {
+
+      if(res.redirect_to) {
+        window.location.replace(res.redirect_to)
+      }
+
+    })
+
+  }
+
+</script>
+
+{% app_snippet 'account/content_bottom' %}

@@ -1,0 +1,99 @@
+<ul id="MobileNav" class="mobile-nav">
+  {% assign supported_codes = settings.supported_currencies | split: ' ' %}
+  <li class="mobile-nav_icon-x{% if supported_codes.size > 2 and template != 'customers' %} has-currency-picker{% endif %}">
+    {% if settings.show_multiple_currencies %}
+      {% include 'currency-picker' %}
+  	{% endif %}
+  	<span class="MobileNavTrigger icon icon-x"></span>
+  </li>
+  
+  <li class="mobile-nav__link header-bar__search-wrapper">
+    {% if settings.header_search_enable %}
+    <div class="header-bar__module header-bar__search mobile-nav_search">
+      {% include 'search-bar' with 'mobile-nav' %}
+    </div>
+    {% endif %}
+  </li>
+  
+  {% for link in contents.main-menu.links %}
+  {% assign parent_handle = link.handle %}
+  <li class="mobile-nav__link" aria-haspopup="true">
+    {% if contents[parent_handle].links != '' %}
+    {% assign parent = contents[parent_handle].links %}
+    <a href="{{ link.url }}" class="mobile-nav__parent-link">
+      {{ link.title }}
+    </a>
+    <span class="mobile-nav__sublist-trigger">
+      {% include 'mobile-nav-icons' %}
+    </span>
+    <ul class="mobile-nav__sublist">
+      {% for parentlink in parent %}
+      {% assign child_handle = parentlink.handle %}
+      <li class="mobile-nav__sublist-link" aria-haspopup="true">
+        {% if contents[child_handle].links != '' %}
+        {% assign child = contents[child_handle].links %}
+        <a href="{{ parentlink.url }}" class="mobile-nav__parent-link">
+          {{ parentlink.title }}
+        </a>
+        <span class="mobile-nav__sublist-trigger">{% include 'mobile-nav-icons' %}</span>
+        <ul class="mobile-nav__sublist"> 
+          {% for childlink in child %}
+          {% assign child_handle = childlink.handle %}
+          <li class="mobile-nav__sublist-link" aria-haspopup="true">
+            {% if contents[child_handle].links != '' %}
+            {% assign grandchild = contents[child_handle].links %}
+            <a href="{{ childlink.url }}" class="mobile-nav__parent-link">
+              {{ childlink.title }}
+            </a>
+            <span class="mobile-nav__sublist-trigger">{% include 'mobile-nav-icons' %}</span>
+            <ul class="mobile-nav__sublist">
+              {% for grandlink in grandchild %}
+              <li class="mobile-nav__sublist-link">
+                <a href="{{ grandlink.url }}">{{ grandlink.title }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <a href="{{ childlink.url }}" {% if childlink.new_page == "true" %} target="_blank" {% endif %}>
+              {{ childlink.title }}
+            </a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <a href="{{ parentlink.url }}" {% if parentlink.new_page == "true" %} target="_blank" {% endif %}>
+          {{ parentlink.title }}
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <a href="{{ link.url }}" {% if link.new_page == "true" %} target="_blank" {% endif %}>
+      {{ link.title }}
+    </a>
+    {% endif %}
+  </li>
+  {% endfor %}
+
+  {% app_snippet 'global/main_menu_mobile' %}
+
+  {% if shop.customer_accounts_enabled %}
+  {% if customer %}
+  {% for link in contents.after-login.links %}
+  <li class="mobile-nav__link">
+    <a href="{{link.url}}">{{link.title}}</a>
+  </li>
+  {% endfor %}
+  {% else %}
+  {% for link in contents.before-login.links %}
+  <li class="mobile-nav__link">
+    <a href="{{link.url}}">{{link.title}}</a>
+  </li>
+  {% endfor %}
+  {% endif %}
+  {% endif %}
+  
+</ul>
+<div id="MobileNavOutside" class="mobile-nav-outside"></div>

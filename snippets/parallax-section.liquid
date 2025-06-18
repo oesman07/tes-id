@@ -1,0 +1,31 @@
+{% if settings.parallax_img != '""' and settings.parallax_img != '' %}
+
+<div id="es_parallax_section" class="parallax-section">
+  <div class="parallax-bg-wrapper paraWrapper">
+    <div class="parallax-img-wrapper paraImg">
+      {% if settings.parallax_mobile_img != '""' and settings.parallax_mobile_img != '' %}
+        <div class="parallax-img parallax-mobile-img">
+          <img class="lozad" data-src="{{ settings.parallax_mobile_img }}" alt="{{ shop.name | escape }} | {{ settings.parallax_title }}"/>
+        </div>
+      {% endif %}
+      <div class="parallax-img">
+        <img class="lozad" data-src="{{ settings.parallax_img }}" alt="{{ shop.name | escape }} | {{ settings.parallax_title }}"/>
+      </div>
+    </div>
+    <div class="parallax-content-wrapper">
+      <div class="parallax-content">
+        {% if settings.parallax_title != '""' and settings.parallax_title != '' %}
+          <h2>{{ settings.parallax_title }}</h2>
+        {% endif %}
+        {% if settings.parallax_subtitle != '""' and settings.parallax_subtitle != '' %}
+          <p>{{ settings.parallax_subtitle }}</p>
+        {% endif %}
+        {% if settings.parallax_button_text != '""' and settings.parallax_button_text != '' %}
+        <a href="{{ settings.parallax_button_link }}" class="btn">{{ settings.parallax_button_text }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}

@@ -1,0 +1,128 @@
+{% app_snippet 'account/content_top' %}
+<div class="section-header section-header--large text-center">
+  <h1 class="section-header__title">{{ 'customer.account.title' | t }}</h1>
+  {% for link in contents.after-login.links %}
+    {% if link.url == '/account/logout' %}
+  		<div class="text-right">
+            <a href="{{link.url}}"><u> {{link.title}} </u></a>
+  		</div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<div class="grid">
+
+  <div class="grid__item two-thirds medium-down--one-whole">
+    <h6 class="large--hide">{{ 'customer.orders.store_credit' | t }} : <strong class="h4">{{ customer.total_credit | money: shop.money_format }}</strong></h6>
+    <h2>{{ 'customer.orders.title' | t }}</h2>
+
+    {% comment %}
+      If we have past orders, loop through each one
+    {% endcomment %}
+
+    <!-- paginate customer.orders by 20 %} -->
+
+    {% if customer.orders.size != 0 %}
+
+      <div class="table-wrap table-order-control">
+        <table class="full">
+          <thead>
+            <tr>
+              <th>{{ 'customer.orders.order_number' | t }}</th>
+              <th style="min-width:120px;">{{ 'customer.orders.date' | t }}</th>
+              <th>{{ 'customer.orders.payment_status' | t }}</th>
+              <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th>{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+              <tr>
+                <td>{{ order.name | link_to: order.customer_url }}</td>
+                <td>{{ order.created_at | date: "%b %d, %Y" }}</td>
+                {% if order.is_cancelled == 1%}
+                <td colspan="2">{{ "customer.order.cancelled" | t }}</td>
+                {% else %}
+                <td>{{ order.financial_status_label }}</td>
+                <td>{{ order.fulfillment_status_label }}</td>
+                {% endif %}
+                <td>{{order.currency}} {{ order.total_price }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    {% else %}
+
+      <p>{{ 'customer.orders.none' | t }}</p>
+
+    {% endif %}
+
+    {% if paginate.pages > 1 %}
+      <div class="text-center">
+        {% include 'pagination-custom' %}
+      </div>
+    {% endif %}
+
+    <!-- endpaginate %} -->
+    {% app_snippet 'account/content_left' %}
+  </div>
+
+  <div class="grid__item one-third medium-down--one-whole">
+    <h6 class="medium--hide small--hide">{{ 'customer.orders.store_credit' | t }} : <strong class="h4">{{ customer.total_credit | money: shop.money_format }}</strong></h6>
+    <hr>
+    <div class="grid">
+      <div class="grid__item nine-twelfths">
+		<h2>{{ 'customer.account.details' | t }}</h2>
+      </div>
+      <div class="grid__item three-twelfths text-right">
+        <a href="/account/details" class="h6">{{ 'customer.addresses.edit' | t }}</a>
+      </div>
+    </div>
+    
+    
+
+    <h5>{{ customer.name }}</h5>
+
+    {% if customer.default_address != nil %}
+      <p>
+      {{ customer.default_address.address1 }}<br>
+
+      {% if customer.default_address.address2 != "" %}
+        {{ customer.default_address.address2 }}<br>
+      {% endif %}
+
+      {% if customer.default_address.city != "" %}
+        {{ customer.default_address.city }}<br>
+      {% endif %}
+
+      {% if customer.default_address.province_code != "" %}
+        {{ customer.default_address.province_code | upcase }}<br>
+      {% endif %}
+
+      {% if customer.default_address.zip != "" %}
+        {{ customer.default_address.zip | upcase }}<br>
+      {% endif %}
+
+      {% if customer.default_address.country != "" %}
+        {{ customer.default_address.country }}<br>
+      {% endif %}
+
+      {% if customer.default_address.phone != "" %}
+        {{ customer.default_address.phone }}<br>
+      {% endif %}
+
+      {% if customer.default_address.email != "" %}
+        {{ customer.default_address.email }}
+      {% endif %}
+      </p>
+
+    {% endif %}
+
+    <p><a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+    {% app_snippet 'account/content_right' %}
+  </div>
+
+</div>
+{% app_snippet 'account/content_bottom' %}

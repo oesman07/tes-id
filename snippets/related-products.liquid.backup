@@ -1,0 +1,36 @@
+<div id="recommend-products-content" class="wrapper">
+</div>
+<script>
+  console.log("Product recommendation enabled.");
+  $.ajax({
+    url: "{{ product.url }}/recommend",
+    type: 'GET',
+    dataType: "json",
+    success: function(res){
+      if(res.status == "success"){
+        console.log("Success");
+        $('#recommend-products-content').html(res.html);
+        theme.cache.$productGridImages = $('body').find('.grid-link__image--product');
+        theme.equalHeights();
+
+        var allCookies = document.cookie.split(";");
+        var cookies = {};
+        for (var i=0; i<allCookies.length; i++){
+          var pair = allCookies[i].split("=");
+          cookies[(pair[0]+'').trim()] = unescape(pair[1]);
+        }
+      
+        var shopCurrency = '{{ shop.currency }}';
+        var selectedCurrency = cookies['currency'] != undefined ? cookies['currency'] : '{{ shop.currency }}';
+        Currency.convertAll(shopCurrency, selectedCurrency);
+      }
+      else{
+        console.log("Not Success");
+      }
+    },
+    fail: function(){
+      console.log("Failed");
+    }
+  });
+</script>
+

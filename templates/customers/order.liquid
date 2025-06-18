@@ -1,0 +1,480 @@
+{% app_snippet 'account/content_top' %}
+<div class="section-header section-header--large text-center">
+  <h1 class="section-header__title">{{ 'customer.account.title' | t }}</h1>
+</div>
+
+{% if order.guest == 0 %}
+<p><a href="/account">← {{ 'customer.account.return' | t }}</a></p>
+{% endif %}
+<div class="grid">
+
+  <div class="grid__item two-thirds medium-down--one-whole">
+    <h2><strong>{{ 'customer.order.title' | t: order.name }}</strong></h2>
+
+    <p>{{ 'customer.order.date' | t }}{{order.created_at | date: "%b %d, %Y %r" }}</p>
+
+    {% if order.cancelled %}
+
+      <div class="errors">
+        {% assign cancelled_at = order.cancelled_at | date: "%b %d, %Y %r" %}
+        <p class="h5">{{ 'customer.order.cancelled' | t}}{{ cancelled_at }}</p>
+        {% comment %}<p>{{ 'customer.order.cancelled_reason' | t: order.cancel_reason }}</p>{% endcomment %}
+
+      </div>
+    {% endif %}
+
+    <div class="table-wrap table-order-control">
+      <div class="text-right">{{ 'checkout.general.product_with' | t }} <span style="color: red;">*</span> {{ 'checkout.general.taxable_product' | t }}</div>
+      <table class="full">
+        <thead>
+          <tr>
+            <th>{{ 'customer.order.product' | t }}</th>
+            <th>{{ 'customer.order.sku' | t }}</th>
+            <th>{{ 'customer.order.price' | t }}</th>
+            <th class="text-right">{{ 'customer.order.quantity' | t }}</th>
+            <th class="text-right">{{ 'customer.order.total' | t }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for line_item in order.line_items %}
+          <tr id="{{ line_item.id }}">
+            <td>
+              {{ line_item.title | link_to: line_item.product.url }}
+              {% if line_item.taxable %}<span style="color: red;">*</span>{% endif %}
+              {% if line_item.fulfillment %}
+                <div class="note">
+                  {% assign fulfilled_at = line_item.fulfillment.created_at | date: "%b %d" %}
+                  {{ 'customer.order.fulfilled_at' | t: fulfilled_at }}
+                  {% if line_item.fulfillment.tracking_number %}
+                    <a href="{{ line_item.fulfillment.tracking_url }}">{{ line_item.fulfillment.tracking_company }} #{{ line_item.fulfillment.tracking_number}}</a>
+                  {% endif %}
+                </div>
+              {% endif %}
+              {% if line_item.variant_title %}
+                <br> <small>{{line_item.variant_title}}</small>
+              {% endif %}
+            </td>
+            <td>{{ line_item.sku }}</td>
+            <td>{{currency_prefix}} {{ line_item.price }} {{currency_suffix}}</td>
+            <td class="text-right">{{ line_item.quantity }}</td>
+            <td class="text-right">{{currency_prefix}} {{ line_item.subtotal_price }} {{currency_suffix}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">{{ 'customer.order.subtotal' | t }}</td>
+            <td class="text-right">{{currency_prefix}} {{ order.subtotal_price }} {{currency_suffix}}</td>
+          </tr>
+
+          {% for discount in order.discounts %}
+            <tr class="order_summary discount">
+              <td colspan="4">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+              <td class="text-right">{{currency_prefix}} {{ discount.savings }} {{currency_suffix}}</td>
+            </tr>
+          {% endfor %}
+
+          {% if order.total_discount > 0 %}
+            <tr class="order_summary discount">
+              <td colspan="4">{{ discount.code }} {{ 'customer.order.discount' | t }}</td>
+              <td class="text-right">- ({{currency_prefix}} {{ order.total_discount }} {{currency_suffix}})</td>
+            </tr>
+          {% endif %}
+
+          {% for shipping_method in order.shipping_methods %}
+          <tr>
+            <td colspan="4">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+            <td class="text-right">{{currency_prefix}} {{ shipping_method.price }} {{currency_suffix}}</td>
+          </tr>
+          {% endfor %}
+
+          {% for tax_line in order.tax_lines %}
+            <tr>
+              <td colspan="4">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+              <td class="text-right">{{currency_prefix}} {{ tax_line.price }} {{currency_suffix}}</td>
+            </tr>
+          {% endfor %}
+
+          {% if order.credit_used > 0 %}
+            <tr>
+            <td colspan="4">{{ 'checkout.general.store_credit' | t }}</td>
+            <td class="text-right">- ({{currency_prefix}} {{ order.credit_used }} {{currency_suffix}})</td>
+          </tr>
+          {% endif %}
+
+          <tr>
+            <td colspan="4"><strong>{{ 'customer.order.total' | t }}</strong></td>
+            <td class="text-right"><strong>{{currency_prefix}} {{ order.total_price }} {{currency_suffix}}</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div style="width:100%;display:inline-block">
+        <div style="float:right; text-align:right" >
+          {% if order.financial_status_label == "Unpaid" and order.cancelled == 0 %}
+          <a class="btn" href="/payments/fail/{{order.cart_token}}?status=0">{{ 'customer.order.pay' | t }}</a>
+          {% endif %}
+          {% if order.amount_due %}
+          <div >({{ 'customer.order.amount_due' | t }} : {{currency_prefix}} {{order.amount_due}} {{currency_suffix}})</div>
+          {% elsif order.overpaid %}
+           <div>({{ 'customer.order.overpaid' | t }} : {{currency_prefix}} {{order.overpaid}} {{currency_suffix}})</div>
+          {% endif %}
+          <div>{{ 'customer.order.total_transaction_amount' | t }} : {{currency_prefix}} {{order.total_transaction_amount}} {{currency_suffix}}</div>
+          <div>{{ 'customer.order.total_refund_amount' | t }} : {{currency_prefix}} {{order.total_refund_amount}} {{currency_suffix}}</div>
+        </div>
+      </div>
+
+      <div style="width:100%;display:inline-block">
+        <div style="float:left; text-align:left" >
+          <div>{{ 'customer.order.remarks' | t }}</div>
+        </div>
+        <div>
+          <textarea name="remark" placeholder="{{ 'customer.order.add_a_remark' | t }}">{{order.remark}}</textarea>
+          <button class="btn" save-remark>{{ 'customer.order.save' | t }}</button>
+        </div>
+      </div>
+
+      {% if order.activity %}
+      <hr/>
+      <div>
+        {{ order.activity | activity_html }}
+      </div>
+      {% endif %}
+
+      {% if order.transfer_html %}
+      <hr/>
+      <div>
+        {{order.transfer_html}}
+      </div>
+      {% endif %}
+    </div>
+    {% app_snippet 'account/content_left' %}
+  </div>
+
+  <div class="grid__item one-third medium-down--one-whole">
+
+    <h3><strong>{{ 'customer.order.billing_address' | t }}</strong></h3>
+
+    <p>
+      <strong>{{ 'customer.order.payment_status' | t }}</strong>: 
+      {% if order.financial_status_label == "Paid" %}
+        {{ 'customer.financial_status.paid' | t }}
+      {% elsif order.financial_status_label == "Refund" %}
+        {{ 'customer.financial_status.refund' | t }}
+      {% elsif order.financial_status_label == "Pending" %}
+        {{ 'customer.financial_status.pending' | t }}
+      {% elsif order.financial_status_label == "Partially paid" %}
+        {{ 'customer.financial_status.partially_paid' | t }}
+      {% elsif order.financial_status_label == "Authorized" %}
+        {{ 'customer.financial_status.authorized' | t }}
+      {% else %}
+        {{ 'customer.financial_status.unpaid' | t }}
+      {% endif %}
+    </p>
+
+    <h5>{{ order.billing_address.name }}</h5>
+    <p>
+      {% if order.billing_address.company != '' %}
+        {{ order.billing_address.company }}<br>
+      {% endif %}
+      {{ order.billing_address.street }}<br>
+      {{ order.billing_address.city }}<br>
+      {% if order.billing_address.province != '' %}
+        {{ order.billing_address.province }}<br>
+      {% endif %}
+      {{ order.billing_address.zip | upcase }}<br>
+      {{ order.billing_address.country }}<br>
+      {{ order.billing_address.phone }}
+    </p>
+
+    <br>
+
+    {% if order.type == "pickup" %}
+      <h3><strong>{{ 'customer.order.pickup_location' | t }}</strong></h3>
+    {% else %}
+       <h3><strong>{{ 'customer.order.shipping_address' | t }}</strong></h3>
+    {% endif %}
+    <p><strong>{{ 'customer.order.fulfillment_status' | t }}</strong>: 
+      {% if order.fulfillment_status_label == "Fulfilled" %}
+        {{ 'customer.fulfillment_status.fulfilled' | t }}
+      {% elsif order.fulfillment_status_label == "Partially Fulfill" %}
+        {{ 'customer.fulfillment_status.partially_fulfilled' | t }}
+      {% else %}
+        {{ 'customer.fulfillment_status.unfulfilled' | t }}
+      {% endif %}
+    </p>
+
+    <h5>{{ order.shipping_address.name }}</h5>
+    <p>
+      {% if order.shipping_address.company != '' %}
+        {{ order.shipping_address.company }}<br>
+      {% endif %}
+      {{ order.shipping_address.street }}<br>
+      {{ order.shipping_address.city }}<br>
+      {% if order.shipping_address.province != '' %}
+        {{ order.shipping_address.province }}<br>
+      {% endif %}
+      {{ order.shipping_address.zip | upcase }}<br>
+      {{ order.shipping_address.country }}<br>
+      {{ order.shipping_address.phone }}
+    </p>
+
+    <div>
+      <h5>{{'customer.attachment.attachment' | t}}</h5>
+      <!-- <div class="attachment-wrapper">
+        {% if order.attachment != null %}
+        {% for attachment in order.attachment %}
+        <span class="attachment-item">
+          <a href="{{attachment.url}}" class="attachment-preview">{{ attachment.title }}.{{ attachment.extension }}</a>
+          <button type="button" class="remove-attachment btn" value="{{attachment.id}}">Remove</button><br/>
+        </span>
+        {% endfor %}
+        {% endif %}
+      </div> -->
+      <table class="attachment-wrapper">
+        {% if order.attachment != null %}
+        {% for attachment in order.attachment %}
+        <tr class="attachment-item">
+          <td><a href="{{attachment.url}}" class="attachment-preview">{{ attachment.title }}.{{ attachment.extension }}</a></td>
+          <td><button type="button" class="remove-attachment btn" value="{{attachment.id}}" style="text-align: right">{{'customer.attachment.remove' | t}}</button></td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+      </table>
+      <div class="note errors attachment-error"></div>
+      <input type="file" id="file_input" name="file" value="Browse">
+      <input type="button" class="btn" name="upload" value="{{'customer.attachment.upload' | t}}" disabled>
+    </div>
+    
+    <br>
+  
+    {% if order.has_manual_payment == true %}
+    <div>
+      <h5>{{ 'checkout.payment_reference._' | t }}</h5>
+      <input type="text" class="form-control" name="reference_id" placeholder="{{ 'checkout.payment_reference.reference_id' | t }}" value="{{ order.ref_number }}" maxlength="255" {% if order.ref_number %} disabled {% endif %}>
+      <div class="form-success note" id="success_message" style="display:none"></div>
+      <div class="errors note" id="error_message" style="display:none"></div>
+
+      <button id="edit_reference" class="btn btn-default{% if order.ref_number == empty or order.ref_number == '' %} hide{% endif %}">{{ 'checkout.payment_reference.edit' | t }}</button>
+      <button id="cancel_edit" class="btn btn-default hide">{{ 'checkout.payment_reference.cancel' | t }}</button>
+      <input type="button" class="btn{% if order.ref_number %} hide{% endif %}" id="submit_reference" value="{{ 'checkout.payment_reference.submit' | t }}">
+    </div>
+    {% endif %}
+
+    {% app_snippet 'account/content_right' %}
+  </div>
+
+</div>
+
+{{ 'magnific-popup.min.js' | asset_url | script_tag }}
+
+<script>
+  var xhr = $.ajax();
+  var ref_number = "{{ order.ref_number }}";
+  $(".attachment-error").hide();
+
+  function attachment_preview(){
+    $(".attachment-preview").magnificPopup({
+      type: 'image',
+      mainClass: 'mfp-fade',
+      closeOnBgClick: true,
+      closeBtnInside: false,
+      closeOnContentClick: true,
+      tClose: 'Close (Esc)',
+      removalDelay: 500,
+      callbacks: {
+        open: function(){
+          $('html').css('overflow-y','hidden');
+        },
+        close: function(){
+          $('html').css('overflow-y','');
+        }
+      },
+      gallery: {
+        enabled: true,
+        navigateByImgClick: false,
+        arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"><span class="mfp-chevron mfp-chevron-%dir%"></span></button>',
+        tPrev: 'Previous (Left arrow key)',
+        tNext: 'Next (Right arrow key)'
+      }
+    });
+  }
+
+  attachment_preview();
+
+  $("#file_input").on("change",function(){
+    var button = $("[name='upload']");
+    var input =  $(this).val();
+
+    if(input == '') {
+      button.prop("disabled", true);
+    } else {
+      button.prop("disabled", false);
+    }
+  });
+
+  $("input[name=upload]").on("click", function(){
+    var file_input = $("#file_input");
+    var form_data = new FormData();
+    var file_data = file_input.prop("files")[0];
+    form_data.append("file", file_data);
+    form_data.append("order_token", "{{ order.token }}");
+    form_data.append("_token", "{% csrf %}");
+
+    $.ajax({
+      url: '/account/orders/attachment/upload',
+      type: 'post',
+      dataType: "json",
+      processData: false,
+      contentType: false,
+      data: form_data,
+      beforeSend: function(){
+        $("input[name=upload]").prop("disabled", true);
+      },
+      success: function(res){
+        if(res.status == "success"){
+          $(".attachment-wrapper").append("<tr class='attachment-item'><td><a href='"+res.data.url+"' class='attachment-preview'>"+res.data.title+"."+res.data.extension+"</a></td><td><button type='button' class='remove-attachment btn' value='"+res.data.id+"'>{{'customer.attachment.remove' | t}}</button></td></tr>");
+          attachment_preview();
+          file_input.wrap('<form>').closest('form').get(0).reset();
+          file_input.unwrap();
+          $(".attachment-error").empty().hide();
+        }
+        else{
+          $(".attachment-error").html(res.data).show();
+          file_input.wrap('<form>').closest('form').get(0).reset();
+          file_input.unwrap();
+        }
+      },
+      error: function(x, t, m){
+        if(m == "Request Entity Too Large"){
+          $(".attachment-error").html("{{'customer.attachment.file_too_large' | t}}").show();
+        }
+        if(t == "timeout"){
+          $(".attachment-error").html("{{'customer.attachment.upload_fail' | t}}").show();
+        }
+        file_input.wrap('<form>').closest('form').get(0).reset();
+        file_input.unwrap();
+      }
+    });
+  });
+  
+  // Remove attachment
+  $("body").on("click", ".remove-attachment", function(){
+    var id = $(this).val();
+    var selected_row = $(this).closest(".attachment-item");
+
+    var c = confirm("Are you sure you want to remove this attachment?");
+
+    if(c == true){
+      xhr = $.ajax({
+        url: "/account/orders/attachment/"+id,
+        type: 'delete',
+        dataType: "json",
+        data: {
+          order_token: "{{ order.token }}",
+          _token: "{% csrf %}"
+        },
+        beforeSend: function(){
+          xhr.abort();
+        },
+        success: function(res){
+          if(res.status = "success"){
+            selected_row.remove();
+            // toastr.success("Attachment has been removed");
+          }
+        },
+        fail: function(){
+        }
+      });
+    }
+  });
+
+  $("#submit_reference").on("click", function(){
+    var reference_id = $("input[name='reference_id']").val();
+    var cart_token = "{{ order.cart_token }}";
+
+    xhr = $.ajax({
+      url: "/payments/reference",
+      type: 'post',
+      dataType: "json",
+      data: {
+        cart_token: cart_token,
+        reference_id: reference_id,
+        _token: "{% csrf %}"
+      },
+      beforeSend: function(){
+        $("#submit_reference").prop("disabled", true);
+        $("#cancel_edit").prop("disabled", true);
+        $("#success_message").hide().empty();
+        $("#error_message").hide().empty();
+        xhr.abort();
+      },
+      success: function(res){
+        if(res.status == "success"){
+
+          ref_number = reference_id;
+          $("#submit_reference").addClass('hide').prop("disabled", false);
+          $("input[name='reference_id']").prop("disabled", true);
+          $("#edit_reference").removeClass('hide');
+          $("#cancel_edit").prop("disabled", false).addClass('hide');
+
+          $("#success_message").append("<p>{{ 'checkout.payment_reference.update_reference_success' | t }}</p>").show();
+        }
+        else{
+          $("#submit_reference").prop("disabled", false);
+          $("#cancel_edit").prop("disabled", false);
+
+          $("#error_message").append("<p>{{ 'checkout.payment_reference.update_reference_fail' | t }}</p>").show();
+        }
+      },
+      fail: function(){
+        $("#error_message").append("<p>{{ 'checkout.payment_reference.update_reference_fail' | t }}</p>").show();
+        $('#submit_reference').prop("disabled", false);
+      }
+    });
+  });
+
+  $("#edit_reference").on("click", function(){
+    $("#success_message").hide().empty();
+    $("#error_message").hide().empty();
+    $(this).addClass('hide');
+    $("input[name='reference_id']").prop("disabled", false).focus();
+    $("#cancel_edit").removeClass('hide');
+    $("#submit_reference").removeClass('hide');
+  });
+
+  $("#cancel_edit").on("click", function(){
+    $(this).addClass('hide');
+    $("#error_message").hide().empty();
+    $("#submit_reference").addClass('hide');
+    $("input[name='reference_id']").val(ref_number).prop("disabled", true);
+    $("#edit_reference").removeClass('hide');
+  });
+
+
+  $("[save-remark]").on("click", function(){
+    xhr = $.ajax({
+      url: "/account/orders/remark",
+      type: 'put',
+      dataType: "json",
+      data: {
+        remark: $("textarea[name=remark]").val(),
+        order_token: "{{ order.token }}",
+        _token: "{% csrf %}"
+      },
+      beforeSend: function(){
+        xhr.abort();
+        $("[save-remark]").prop("disabled", true);
+      },
+      success: function(res){
+        if(res.status = "success"){
+          $("[save-remark]").prop("disabled", false);
+        }
+      },
+      fail: function(){
+      }
+    });
+  });
+
+</script>
+{% app_snippet 'account/content_bottom' %}

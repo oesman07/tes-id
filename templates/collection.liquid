@@ -1,0 +1,141 @@
+{% app_snippet 'collection/content_top' %}
+{% assign products_per_row = settings.products_list_per_row %}
+{% assign rows = settings.number_of_rows %}
+{% assign total_products = products_per_row | times: rows %}
+
+ <!-- paginate collection.products by total_products %} -->
+
+<div class="section-header section-header--breadcrumb">
+  {% include 'breadcrumb' %}
+</div>
+
+  {% if collection.description != blank %}
+    <div class="rte rte--header">
+      {{ collection.description }}
+    </div>
+  {% endif %}
+<header class="section-header section-header--large">
+  <h1 class="text-center section-header__title{% if settings.collections_tags_enable or settings.collections_sort_enable %} section-header__title--left{% endif %}">{{ collection.title }}</h1>
+  {% if settings.collections_tags_enable or settings.collections_sort_enable %}
+    <div class="section-header__link--right large--hide">
+      {% if settings.collections_tags_enable %}
+        {% include 'collection-tags' %}
+      {% endif %}
+      {% if settings.collections_sort_enable %}
+        {% include 'collection-sorting' %}
+      {% endif %}
+    </div>
+  {% endif %}
+</header>
+
+<div class="grid sticky-wrapper">
+
+  {% if template == 'collection' %}
+   <div class="grid__item medium-down--hide large--one-quarter sticky-top">
+     <nav class="collection-sidebar">
+       {% if settings.collections_tags_enable or settings.collections_sort_enable %}
+        {% if settings.collections_tags_enable %}
+          {% include 'collection-tags' %}
+        {% endif %}
+        {% if settings.collections_sort_enable %}
+          {% include 'collection-sorting' %}
+        {% endif %}
+       {% endif %}
+       <br>
+        <b class="h4">{{ 'collections.general.title' | t }}</b> 
+        {% for link in contents.catalog.links %}
+            <div class="collection-link">
+                <a href="{{link.url}}">{{link.title}}</a>
+            </div>
+        {% endfor %}
+      </nav>
+    </div>
+  {% endif %}
+  <div class="grid__item large--three-quarters">
+
+
+    {% case products_per_row %}
+      {% when '2' %}
+        {% assign grid_item_width = 'small--one-whole medium--one-half large--one-half' %}
+      {% when '3' %}
+        {% assign grid_item_width = 'small--one-whole medium--one-half large--one-third' %}
+      {% when '4' %}
+        {% assign grid_item_width = 'small--one-half medium--one-half large--one-third' %}
+      {% when '5' %}
+        {% assign grid_item_width = 'small--one-half medium--one-half large--one-fifth' %}
+    {% endcase %}
+
+    <div {% if settings.product_img_crop == "img-equal-height" %}data-equal-height="1"{% endif %} class="product-list-grid grid-uniform grid-link__container">
+      {% if collection.products %}
+      {% for product in collection.products %}
+
+        {% include 'product-grid-item' with 'collection' %}
+
+      {% endfor %}
+      {% else %}
+
+        {% if shop.products_count == 0 %}
+          {% if emptyState == blank %}
+            {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
+            {% assign emptyState = true %}
+          {% endif %}
+
+          <div class="grid__item">
+            <div class="helper-section">
+              <div class="helper-note">
+                {% comment %}<span class="helper-icon"></span>{% endcomment %}
+                <h3>{{ 'home_page.onboarding.modal_title' | t }}</h3>
+                <p>{{ 'home_page.onboarding.no_products_collection' | t }}</p>
+                <p><a class="admin-btn-primary" href="http://admin{{GLOBALS.CP_DOMAIN}}/products/new">{{ 'home_page.onboarding.add_product' | t }}</a></p>
+              </div>
+
+              <div class="grid-uniform helper-content">
+                {% assign index = 1 %}
+                {% for i in (1..8) %}
+                  {% case i %}
+                    {% when 7 %}
+                      {% assign index = 1 %}
+                    {% when 8 %}
+                      {% assign index = 2 %}
+                  {% endcase %}
+                  <div class="grid__item one-half large--one-quarter">
+                    <a href="http://admin{{GLOBALS.CP_DOMAIN}}/products" class="grid-link">
+                      <span class="grid-link__image grid-link__image--product">
+                        <span class="grid-link__image-centered">
+                          {% capture imageUrl %}https://s3-ap-southeast-1.amazonaws.com/eesb.themes/onboarding/shoe/shoe.jpg{% endcapture %}
+                          {{ imageUrl | img_tag }}
+                        </span>
+                      </span>
+                      <p class="grid-link__title">{{ 'home_page.onboarding.product_title' | t }}</p>
+                      <p class="grid-link__meta">
+                        <strong>$19.99</strong>
+                      </p>
+                    </a>
+                  </div>
+                  {% assign index = index | plus: 1 %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="grid__item">
+            <p><em>{{ 'collections.general.no_matches' | t }}</em></p>
+          </div>
+        {% endif %}
+
+      {% endif %}
+
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <hr class="hr--clear">
+
+      <div class="text-center">
+        {% include 'pagination-custom' %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+ <!-- endpaginate %} -->
+{% app_snippet 'collection/content_bottom' %}

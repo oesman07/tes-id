@@ -1,0 +1,196 @@
+<header id="es_header_bar" class="header-bar {{settings.nav_below_logo}} {% if settings.topbar_sticky == 'true' or settings.topbar_sticky == '1' %}sticky-topbar{% endif %}">
+  <div class="header-bg-wrapper">
+    <div class="header-wrapper wrapper">
+      
+
+      <div class="logo-header" role="banner">
+
+              {% if template == 'index' %}
+                <h1 class="site-header__logo" itemscope itemtype="http://schema.org/Organization">
+              {% else %}
+                    <div class="h1 site-header__logo" itemscope itemtype="http://schema.org/Organization">
+              {% endif %}
+                    {% if settings.logo_use_image == 'true' or settings.logo_use_image == '1' and settings.logo_img != '""' %}
+                        
+                      	{% if settings.logo_img != '' %}
+                          <a href="/" class="logo-wrapper" itemprop="url">
+                            <img src="{{ settings.logo_img }}" alt="{{ shop.name | escape }}" itemprop="logo">
+                          </a>
+                        {% else %}
+                          <a href="/" itemprop="url">{{ shop.name | escape }}</a>
+                        {% endif %}
+
+                    {% else %}
+                      <a href="/" itemprop="url">{{ shop.name | escape }}</a>
+                    {% endif %}
+              {% if template == 'index' %}
+                </h1>
+              {% else %}
+                </div>
+              {% endif %}
+
+      </div>
+
+      <div class="header-nav-bar medium-down--hide">
+          {% include 'site-nav' %}
+      </div>
+
+      <div class="desktop-header-nav medium-down--hide">
+
+
+        <div class="header-subnav">
+          {% include 'currency-picker' %}
+
+
+          <div class="header-icon-nav">
+
+                {% comment %}
+                  Add social links to header
+                {% endcomment %}
+
+                {% comment %}
+                <div class="header-bar__module header-bar__module--list">
+                  {% include 'social-links' %}
+                </div>
+                {% endcomment %}
+
+
+                {% if settings.header_message == '' %}
+                  {% if cart.announcements.size > 0 %}
+                    <div class="header-bar__module header-bar__message">
+                      {{ cart.announcements.first }}
+                    </div>
+                  {% elsif settings.header_search_enable %}
+                    <div class="header-bar__module">
+                      {% include 'search-bar' with 'header' %}
+                    </div>
+                  {% endif %}
+                {% else %}
+                  <div class="header-bar__module header-bar__message">
+                    {{ settings.header_message }}
+                  </div>
+                {% endif %}
+
+
+
+
+                {% if shop.customer_accounts_enabled %}
+                  <div class="header-bar__module">
+                    {% if customer %}
+                      {% for link in contents.after-login.links %}
+                        {% if link.url == '/account' %}
+                              <a href="{{link.url}}">{% include 'svg-definitions' with 'profile-icon' %}</a>
+                        {% endif %}
+                      {% endfor %}
+                    {% else %}
+                      {% for link in contents.before-login.links %}
+                        {% if link.url == '/account/login' %}
+                              <a href="{{link.url}}">{% include 'svg-definitions' with 'profile-icon' %}</a>
+                        {% endif %}
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                <div class="header-bar__module cart-page-link-wrapper">
+                  <span class="header-bar__sep" aria-hidden="true"></span>
+                  <a class="{% if template != 'cart' %}CartDrawerTrigger {% endif %}cart-page-link">
+                    {% include 'svg-definitions' with 'cart-icon' %}
+                    <span class="cart-count header-bar__cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+                  </a>
+                </div>
+
+
+                {% if settings.header_search_enable %}
+                  {% unless settings.header_message == '' and cart.announcements.size == 0 %}
+                    <div class="header-bar__module">
+                      {% include 'search-bar' with 'header' %}
+                    </div>
+                  {% endunless %}
+                {% endif %}
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+      
+	  <div class="mobile-header-icons large--hide">
+        
+        <div class="large--hide">
+          {% if shop.customer_accounts_enabled %}
+              {% if customer %}
+                {% for link in contents.after-login.links %}
+                  {% if link.url == '/account' %}
+                        <a href="{{link.url}}">{% include 'svg-definitions' with 'profile-icon' %}</a>
+                  {% endif %}
+                {% endfor %}
+              {% else %}
+                {% for link in contents.before-login.links %}
+                  {% if link.url == '/account/login' %}
+                        <a href="{{link.url}}">{% include 'svg-definitions' with 'profile-icon' %}</a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+          {% endif %}
+        </div>
+
+
+        <!--  Mobile cart  -->
+        <div class="large--hide">
+          <a class="{% if template != 'cart' %}CartDrawerTrigger {% endif %}cart-page-link mobile-cart-page-link">
+            {% include 'svg-definitions' with 'cart-icon' %}
+            <span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+          </a>
+        </div>
+
+        <!--  Mobile hamburger  -->
+        <div class="large--hide">
+          <a class="mobile-nav-trigger MobileNavTrigger">
+            {% include 'svg-definitions' with 'burger-icon' %}
+          </a>
+        </div>
+      
+      </div>
+
+
+    </div>
+  </div>
+</header>
+
+{% if settings.header_message != blank and settings.header_message != "" %}
+  <p class="header-message large--hide">
+    <small>{{ settings.header_message }}</small>
+  </p>
+{% endif %}
+
+{% if settings.topbar_sticky == '1' and template == 'index' %}
+  <script>
+  $( document ).ready(function() {
+		var winScroll = $(this).scrollTop(),
+            this_header = $("header.header-bar");
+
+        // Header bar
+        if(winScroll > 30){
+            this_header.addClass("on-stick-top");
+        }else{
+            this_header.removeClass("on-stick-top");
+        }
+    
+      $(window).scroll(function(){
+        var winScroll = $(this).scrollTop(),
+            this_header = $("header.header-bar");
+
+        // Header bar
+        if(winScroll > 30){
+            this_header.addClass("on-stick-top");
+        }else{
+            this_header.removeClass("on-stick-top");
+        }
+
+      });
+  });
+  </script>
+{% endif %}

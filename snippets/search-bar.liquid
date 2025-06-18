@@ -1,0 +1,70 @@
+{% if search-bar == 'header' %}
+  <a class="popup-with-form" href="#search-form">
+    {% include 'svg-definitions' with 'search-icon' %}
+  </a>
+{% elsif search-bar == 'mobile-nav' %}
+  <form action="/search" method="get" class="header-bar__search-form clearfix" role="search">
+    {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+    <button type="submit" class="btn icon-fallback-text header-bar__search-submit">
+      <span class="icon icon-search" aria-hidden="true"></span>
+      <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
+    </button>
+    <input type="search" name="q" value="{{ search.terms | escape }}" aria-label="{{ 'general.search.placeholder' | t }}" class="header-bar__search-input" placeholder="{{ 'general.search.placeholder' | t }}">
+  </form>
+{% elsif search-bar == 'topbar' %}
+  <a class="search-input-toggle popup-with-form large--hide" href="#search-form">
+    <span class="input-placeholder">{{ 'general.search.placeholder' | t }}</span>
+    <span class="icon icon-search" aria-hidden="true"></span>
+  </a>
+{% else %}
+  <form action="/search" method="get" class="input-group search-bar" role="search">
+    {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+    <span class="input-group-btn">
+      <button type="submit" class="btn icon-fallback-text">
+        <span class="icon icon-search" aria-hidden="true"></span>
+      </button>
+    </span>
+  </form>
+{% endif %}
+
+{% if search-bar == 'header' or search-bar == 'topbar' %}
+<!-- form itself -->
+<div id="search-form" class="white-popup-block mfp-hide popup-search">
+  <div class="popup-search-content">
+    <form action="/search" method="get" class="input-group search-bar" role="search">
+      {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+      <span class="input-group-btn">
+        <button type="submit" class="btn">
+        	{% include 'svg-definitions' with 'search-icon' %}
+        </button>
+      </span>
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}" placeholder="{{ 'general.search.placeholder' | t }}">
+    </form>
+  </div>
+</div>
+
+{{ 'magnific-popup.min.js' | asset_url | script_tag }}
+<script>
+$(document).ready(function() {
+	$('.popup-with-form').magnificPopup({
+		type: 'inline',
+		preloader: false,
+		focus: '#name',
+      	mainClass: 'popup-search-bg-wrapper',
+
+		// When elemened is focused, some mobile browsers in some cases zoom in
+		// It looks not nice, so we disable it:
+		callbacks: {
+			beforeOpen: function() {
+				if($(window).width() < 700) {
+					this.st.focus = false;
+				} else {
+					this.st.focus = '#name';
+				}
+			}
+		}
+	});
+});
+</script>
+{% endif %}

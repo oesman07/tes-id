@@ -1,0 +1,131 @@
+{% app_snippet 'register/content_top' %}
+<div class="grid">
+
+  <div class="grid__item small--text-center">
+    <div class="section-width-control small-width">
+      <div class="text-center">
+        <h1 class="section-header__title">{{ 'customer.register.title' | t }}</h1>
+      </div>
+      <div class="card">
+
+        {% comment %}
+          This form must use 'create_customer'
+        {% endcomment %}
+        <form method="post" action="/account/register">
+          <input type="hidden" name="_token" value="{% csrf %}">
+
+          {{ form.errors | default_errors }}
+		  <div class="grid">
+            <div class="grid__item one-half">
+              <label for="FirstName" class="label--hidden">{{ 'customer.register.first_name' | t }}</label>
+              <input type="text" name="customer[first_name]" id="FirstName" placeholder="{{ 'customer.register.first_name' | t }}" {% if form.first_name %}value="{{ form.first_name }}"{% endif %} autocapitalize="words" autofocus required>
+            </div>
+            <div class="grid__item one-half">
+              <label for="LastName" class="label--hidden">{{ 'customer.register.last_name' | t }}</label>
+              <input type="text" name="customer[last_name]" id="LastName" placeholder="{{ 'customer.register.last_name' | t }}" {% if form.last_name %}value="{{ form.last_name }}"{% endif %} autocapitalize="words" required>
+            </div>
+          </div>
+          
+          <div class="grid">
+            <div class="grid__item one-half">
+              <label for="Gender" class="label--hidden">{{ 'customer.register.gender' | t }}</label>
+              <select name="customer[gender]" id="Gender">
+                <option value disabled selected>{{ 'customer.register.gender' | t }}</option>
+                <option value="male">{{ 'customer.register.male' | t }}</option>
+                <option value="female">{{ 'customer.register.female' | t }}</option>
+              </select>
+            </div>
+            <div class="grid__item one-half" id="birthdate-toggle">
+              <label for="birthdate" class="label--hidden">{{ 'customer.register.birthdate' | t }}</label>
+          		<input type="text" name="customer[birthdate]" id="birthdate" placeholder="{{ 'customer.register.birthdate' | t }}" max="{{ "now" | date: "%Y-%m-%d" }}" class="events-none">
+            </div>
+          </div>
+
+          
+              
+              
+          {%if shop.phone_account_enabled == true %}
+            {% assign account_placeholder = 'customer.register.email_or_phone' %}
+          {% else %}
+            {% assign account_placeholder = 'customer.register.email' %}
+          {% endif %}
+
+          <label for="EmailOrPhone" class="label--hidden">{{ account_placeholder | t }}</label>
+          <input type="text" name="customer[email_or_phone]" id="EmailOrPhone" placeholder="{{ account_placeholder | t }}" {% if form.errors contains "email_or_phone" %} class="error"{% elsif form.email_or_phone %} value="{{ form.email_or_phone }}"{% endif %} autocorrect="off" autocapitalize="off" required>
+
+          <label for="CreatePassword" class="label--hidden">{{ 'customer.register.password' | t }}</label>
+          <input type="password" name="customer[password]" id="CreatePassword" placeholder="{{ 'customer.register.password' | t }}" {% if form.errors contains "password" %} class="error"{% endif %} autocomplete required>
+
+          <input type="text" name="customer[display_name]" id="displayName" class="hp" tabindex="-1" autocomplete="off">
+          <input type="password" name="customer[confirm_password]" id="confirmPassword" class="hp" tabindex="-1" autocomplete="off">
+          <input type="email" name="customer[confirm_email]" id="confirmEmail" class="hp" tabindex="-1" autocomplete="off">
+          <style>.hp{ display:none !important }</style>
+          
+          <p>
+            {{ shop.name | register_tos: contents.terms-policy.links }}
+          </p>
+
+          <p>
+            <input type="submit" id="create_acc" value="{{ 'customer.register.submit' | t }}" class="btn">
+            {% app_snippet 'register/button' %}
+          </p>
+          <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
+
+        </form>
+  	 </div>
+  	</div>
+  </div>
+
+</div>
+{% app_snippet 'register/content_bottom' %}
+
+{{ 'datepicker.js' | asset_url | script_tag }}
+
+<script>
+	$(function() {
+      $('#birthdate').datepicker({
+        autoHide: true,
+        endDate: '0d',
+        startView: 2,
+        date: '{{ "now" | date: "%Y" | minus: 18 }}{{ "now" | date: "-%m-%d" }}',
+        format: 'yyyy-mm-dd',
+        trigger: $('#birthdate-toggle'),
+        months: [
+          '{{ "date_formats.months.jan" | t }}',
+          '{{ "date_formats.months.feb" | t }}',
+          '{{ "date_formats.months.mar" | t }}',
+          '{{ "date_formats.months.apr" | t }}',
+          '{{ "date_formats.months.may" | t }}',
+          '{{ "date_formats.months.jun" | t }}',
+          '{{ "date_formats.months.jul" | t }}',
+          '{{ "date_formats.months.aug" | t }}',
+          '{{ "date_formats.months.sep" | t }}',
+          '{{ "date_formats.months.oct" | t }}',
+          '{{ "date_formats.months.nov" | t }}',
+          '{{ "date_formats.months.dec" | t }}'
+        ],
+        monthsShort: [
+          '{{ "date_formats.months.jan" | t }}',
+          '{{ "date_formats.months.feb" | t }}',
+          '{{ "date_formats.months.mar" | t }}',
+          '{{ "date_formats.months.apr" | t }}',
+          '{{ "date_formats.months.may" | t }}',
+          '{{ "date_formats.months.jun" | t }}',
+          '{{ "date_formats.months.jul" | t }}',
+          '{{ "date_formats.months.aug" | t }}',
+          '{{ "date_formats.months.sep" | t }}',
+          '{{ "date_formats.months.oct" | t }}',
+          '{{ "date_formats.months.nov" | t }}',
+          '{{ "date_formats.months.dec" | t }}'
+        ],
+      });
+      
+      $('#birthdate').on('show.datepicker', function (e) {
+        $(this).addClass('on-focus');
+      });
+      $('#birthdate').on('hide.datepicker', function (e) {
+        $(this).removeClass('on-focus');
+      });
+      
+	});
+</script>

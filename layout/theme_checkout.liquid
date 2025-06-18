@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% if settings.favicon_enable == 'true' or settings.favicon_enable == '1' %}
+	<link rel="icon" href="{{ settings.favicon_img }}" />
+	{% endif %}
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>{{shop_name}} - {{ 'checkout.layout.title' | t }} - {{page_title}}</title>
+
+	<!-- Bootstrap -->
+	<link href="/assets/css/stylesheet.css" rel="stylesheet">
+
+	<!-- Google icons -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	  <script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', '{{ GA_code }}', 'auto','myTracker');
+		  ga('myTracker.send', 'pageview');
+  	</script>
+  <!-- Header hook for plugins ================================================== -->
+  {{ content_for_header }}
+
+  {% include 'oldIE-js' %}
+
+  {% app_snippet 'global/head' %}
+</head>
+<body>
+{% app_snippet 'global/body_start' %}
+	<div class="wrapper">
+
+		
+		<header class="checkout-header margin-top-50">
+			<a class="logo-text" href="/">
+				<h1>{{shop_name}}</h1>
+			</a>
+		</header>
+
+		
+
+
+		{{ content_for_layout }}
+
+
+		
+
+		
+
+
+		<footer class="margin-top-20 size-12 color-light padding-top-20 margin-bottom-30 width-full">
+			&copy; {{ 'checkout.layout.footer' | t: shop_name }} 
+			{% if contents.terms-policy.links %}
+
+			{% else %}
+				<i class="fa fa-lock" aria-hidden="true" style="margin-left:5px"></i>
+			{% endif %}
+
+			<span class="sm-up-pull-right footer-links">
+				{% for link in contents.terms-policy.links %}
+					{{ link.title | link_to: link.url, true }}
+	            {% endfor %}
+				{% app_snippet 'global/nav_bottom' %}
+				{% if contents.terms-policy.links %}
+				<i class="fa fa-lock" aria-hidden="true"></i>
+				{% endif %}
+			</span>
+
+		</footer>
+	</div>
+
+	
+
+
+
+
+
+	
+	<script src="/assets/js/breakpoints/breakpoints.min.js"></script>
+	<script src="/assets/js/bootstrap/bootstrap.min.js"></script>
+	<script src="/assets/js/sticky-kit/jquery.sticky-kit.min.js"></script>
+	
+
+
+
+	<!-- Stick the cart -->
+	<script>
+		$(document).ready(function() {
+	        $(".side-right #cart").stick_in_parent({
+	            'inner_scrolling': false,
+	            'no_recalc': true
+			});
+	    });
+
+		jQuery( window ).on ( 'resize', function() {
+		    jQuery(document.body).trigger("sticky_kit:recalc");
+		});
+	</script>
+
+
+
+	<!-- Move the cart (for responsive) -->
+	<script>
+
+		$(".show-cart-mobile").on("click",function(){
+			$("#cart-mobile .cart").toggle();
+		})
+
+	</script>
+
+	<script>
+		$(".remark").on("input", function(){
+			if($(this).hasClass("desktop-remark")){
+				$(".mobile-remark").val($(this).val());
+			}
+			else{
+				$(".desktop-remark").val($(this).val());
+			}
+		});
+	</script>
+
+	<!-- Discount code -->
+	<script>
+		$(".btn-discount").on("click",function(){
+
+			var discount_code = $(this).closest(".input-group").find("input[name=discount_code]").val();
+
+			$.ajax({
+				type: 'post',
+				url: '/checkout/discount',
+				dataType: "json",
+				data: {
+					discount_code: discount_code,
+             		_token: "{% csrf %}"
+				},
+				success: function(d){
+			
+					if(d.status == "success"){
+						location.reload();
+					}else{
+						$(".discount-error").text(d.data);
+						$(".discount-error").css("color", "#a94442")
+					}
+					
+				},
+				error: function(d){
+					console.log("error");
+				}
+			});
+			return false;
+		});
+
+		$(".btn-del-discount").on("click",function(){
+			$.ajax({
+				type: 'delete',
+				url: '/checkout/discount-remove',
+				dataType: "json",
+				data: {
+             		_token: "{% csrf %}"
+				},
+				success: function(d){
+					location.reload();
+				},
+				error: function(d){
+					console.log("error");
+				}
+			});
+			return false;
+		});
+
+		$(".btn-credit").on("click",function(){
+			var html = $(this).html();
+            $.ajax({
+                type: 'post',
+                url: '/checkout/credit',
+                dataType: "json",
+                data: {
+                     _token: "{% csrf %}"
+                },
+                beforeSend: function(){
+                	$(".btn-credit").html("").prop("disabled", true).addClass("fa fa-spinner");
+                },
+                success: function(d){
+                	location.reload();
+                },
+                error: function(d){
+                	$(".btn-credit").html(html).prop("disabled", false).removeClass("fa fa-spinner");
+                    console.log("error");
+                }
+            });
+            return false;
+        });
+
+        $(".btn-del-credit").on("click",function(){
+            $.ajax({
+                type: 'delete',
+                url: '/checkout/credit-remove',
+                dataType: "json",
+                data: {
+                     _token: "{% csrf %}"
+                },
+                success: function(d){
+                    location.reload();
+                },
+                error: function(d){
+                    console.log("error");
+                }
+            });
+            return false;
+        });
+
+	</script>
+{% app_snippet 'global/body_end' %}
+</body>
+</html>

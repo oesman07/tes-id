@@ -1,0 +1,117 @@
+{% assign products_per_row = settings.products_list_per_row %}
+
+
+{% if product-grid-item == 'related-products' %}
+	{% assign products_per_row = 4 %}
+{% endif %}
+
+{% case products_per_row %}
+  {% when '2' %}
+    {% assign grid_item_width = 'small--one-whole medium--one-half large--one-half' %}
+  {% when '3' %}
+    {% assign grid_item_width = 'small--one-whole medium--one-half large--one-third' %}
+  {% when '4' %}
+    {% assign grid_item_width = 'small--one-half medium--one-half large--one-quarter' %}
+  {% when '5' %}
+    {% assign grid_item_width = 'small--one-half medium--one-half large--one-fifth' %}
+{% endcase %}
+
+{% if product-grid-item == 'collection' %}
+	{% assign products_per_row = settings.collection_products_list_per_row %}
+    {% case products_per_row %}
+      {% when '2' %}
+        {% assign grid_item_width = 'small--one-whole medium--one-half large--one-half' %}
+      {% when '3' %}
+        {% assign grid_item_width = 'small--one-whole medium--one-half large--one-third' %}
+      {% when '4' %}
+        {% assign grid_item_width = 'small--one-half medium--one-half large--one-quarter' %}
+      {% when '5' %}
+        {% assign grid_item_width = 'small--one-half medium--one-half large--one-fifth' %}
+    {% endcase %}
+{% endif %}
+
+{% unless current_collection == blank %}
+  {% assign current_collection = collection %}
+{% endunless %}
+
+{% assign on_sale = false %}
+{% assign sale_text = 'products.product.sale' | t %}
+{% if product.compare_at_price > product.price %}
+  {% assign on_sale = true %}
+{% endif %}
+
+{% assign sold_out = true %}
+{% assign sold_out_text = 'products.product.sold_out' | t %}
+{% if product.available %}
+  {% assign sold_out = false %}
+{% endif %}
+
+
+<div class="product_grid-item grid__item {{settings.product_img_crop}} {{grid_item_width}}{% if sold_out %} sold-out{% endif %}{% if on_sale %} on-sale{% endif %}">
+  <div class="grid-link">
+    <span class="grid-link__image grid-link__image--product">
+      {% if on_sale and settings.collections_show_sale_circle %}
+        <span class="badge badge--sale">
+          <span class="badge__text{% if sale_text.size > 7 %} badge__text--small{% endif %}">{{ 'products.product.sale' | t }}</span>
+        </span>
+      {% endif %}
+      {% if sold_out and settings.collections_show_sold_out_circle %}
+        <span class="badge badge--sold-out">
+          <span class="badge__text{% if sold_out_text.size > 9 %} badge__text--small{% endif %}">{{ 'products.product.sold_out' | t }}</span>
+        </span>
+      {% endif %}
+      {% if sold_out == false and product.price > 0 and settings.home_page_add_to_cart == true %}
+        {% if product.sole_variant_id != blank %}
+          <div class="addToCartList float-btn btn small--hide medium--hide" data-id="{{product.sole_variant_id}}" data-token="{% csrf %}">
+            {% include 'svg-definitions' with 'cart-icon' %}<span> {{ 'products.product.add_to_cart' | t }}</span>
+          </div>
+        {% else %}
+          <a href="{{ product.url | within: collection | escape }}" class="float-btn btn small--hide medium--hide" >
+            {% include 'svg-definitions' with 'cart-icon' %}<span> {{ 'products.product.view_option' | t }}</span>
+          </a>
+        {% endif %}
+      {% endif %}
+      <a href="{{ product.url | within: collection | escape }}" class="grid-link__image-centered">
+        {% if product.secondary_image.src != "" and product.secondary_image.src != '""' %}
+          <img data-src="{{ product.secondary_image.src | img_url: settings.product_img_res }}" alt="{{ product.secondary_image.alt | escape }}" class="product-secondary_image lozad" >
+        {% endif %}
+        <img data-src="{{ product.featured_image.src | img_url: settings.product_img_res }}" alt="{{ product.featured_image.alt | escape }}" class="product-featured_image lozad">
+      </a>
+    </span>
+    <a href="{{ product.url | within: collection | escape }}" class="product-meta_link">
+      {% app_snippet 'collection/product_top' %}
+      <p class="grid-link__title">{{ product.title | escape }}</p>
+      {% comment %}
+        <p class="grid-link__title grid-link__vendor">{{ product.vendor | escape }}</p>
+      {% endcomment %}
+      {% app_snippet 'collection/product_middle' %}
+      <p class="grid-link__meta">
+        {% capture price %}{{ product.price | money: shop.money_format }}{% endcapture %}
+        {% if product.price_varies %}{{ 'products.general.from_html' | t: price }}{% else %}{{ price }}{% endif %}
+        {% if on_sale %}
+        	<br/>
+        	<s class="grid-link__sale_price" data-expires="{{ product.expires }}">{{ product.compare_at_price | money: shop.money_format }}</s> 
+            {% if product.price > 0 %}
+              {% assign product_price = product.price | times: 100.0 %}
+              {% assign product_compare_at_price = product.compare_at_price | times: 100.0 %}
+              <span class="grid-link__sale_price-percent">-{{ product_compare_at_price | minus: product_price | divided_by: product_compare_at_price | times: 100.0 | round: 1 }}%</span>
+            {% endif %}
+        {% endif %}
+      </p>
+    </a>
+    
+      {% if sold_out == false and product.price > 0 and settings.home_page_add_to_cart == true %}
+        {% if product.sole_variant_id != blank %}
+          <div class="addToCartList btn btn--outline large--hide" data-id="{{product.sole_variant_id}}" data-token="{% csrf %}">
+            {% include 'svg-definitions' with 'cart-icon' %}<span> {{ 'products.product.add_to_cart' | t }}</span>
+          </div>
+        {% else %}
+          <a href="{{ product.url | within: collection | escape }}" class="btn btn--outline large--hide" >
+            {% include 'svg-definitions' with 'cart-icon' %}<span> {{ 'products.product.view_option' | t }}</span>
+          </a>
+        {% endif %}
+      {% endif %}
+      
+    {% app_snippet 'collection/product_bottom' %}
+  </div>
+</div>

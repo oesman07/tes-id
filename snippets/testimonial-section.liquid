@@ -1,0 +1,63 @@
+<div id="es_testimonial_section" class="testimonial-section wrapper">
+	<div class="testimonial-section-wrapper">
+  		<div class="flexslider">
+          <ul class="slides">
+            {% for i in (1..6) %}
+            	{% capture slide_img %}testimonial_slide_{{ i }}_img{% endcapture %}
+                {% capture slide_title %}testimonial_slide_{{ i }}_title{% endcapture %}
+                {% capture slide_content %}testimonial_slide_{{ i }}_content{% endcapture %}
+                {% capture slide_link_text %}testimonial_slide_{{ i }}_text_link{% endcapture %}
+                {% capture slide_link %}testimonial_slide_{{ i }}_link{% endcapture %}
+            	{% assign haveContent = false %}
+            	{% assign haveImg = false %}
+            
+            	{% if settings[slide_img] != '""' and settings[slide_img] != '' %}
+            		{% assign haveImg = true %}
+            	{% endif %}
+            
+            	{% if settings[slide_title] != '""' and settings[slide_title] != '' %}
+            		{% assign haveContent = true %}
+            	{% endif %}
+            
+            	{% if settings[slide_content] != '""' and settings[slide_content] != '' %}
+            		{% assign haveContent = true %}
+            	{% endif %}
+            
+            	{% if haveContent == true or haveImg == true %}
+            
+                    <li>
+                      <div class="slide-item{% if haveContent == true %} has-content{% endif %}">
+                        {% if settings[slide_img] != '""' and settings[slide_img] != '' %}
+                        	<div {% if settings.testimonial_slide_img_crop == '1' %}class="profile-img-circle"{% endif %}>
+                              {% if settings[slide_link] != '""' and settings[slide_link] != '' %}
+                        		<a href="{{settings[slide_link]}}"><img src="{{settings[slide_img]}}" alt="{{ shop.name | escape }} - {{settings[slide_title]}}"></a>
+                        	  {% else %}
+                              	<img src="{{settings[slide_img]}}" alt="{{ shop.name | escape }} - {{settings[slide_title]}}">
+                        	  {% endif %}
+                        	</div>
+                        {% endif %}
+                        {% if haveContent == true %}
+                        	<div class="slide-item-content">
+                              {% if settings[slide_title] != '""' and settings[slide_title] != '' %}
+                                <h4>{{settings[slide_title]}}</h4>
+                              {% endif %}
+
+                              {% if settings[slide_content] != '""' and settings[slide_content] != '' %}
+                                <p>{{settings[slide_content]}}</p>
+                              {% endif %}
+
+                              {% if settings[slide_link_text] != '""' and settings[slide_link_text] != '' %}
+                                  <a href="{{settings[slide_link]}}">{{settings[slide_link_text]}}</a>
+                              {% endif %}
+                            </div>
+                        {% endif %}
+                      </div>
+                    </li>
+            
+            	{% endif %}
+            
+            {% endfor %}
+          </ul>
+        </div>
+	</div>
+</div>

@@ -1,0 +1,39 @@
+<div id="es_featured_collections" class="highlight-section">
+  <div class="highlight-bg-wrapper">
+    {% if settings.featured_title != '""' and settings.featured_title != '' %}
+    	<h2 class="section-header__title text-center">{{ settings.featured_title }}</h2>
+    {% endif %}
+    <div class="highlight-wrapper">
+      <div class="highlight-flex">
+        {% for i in (1..8) %}
+            {% capture featured_img %}featured_{{ i }}_img{% endcapture %}
+        	{% capture featured_link %}featured_{{ i }}_link{% endcapture %}
+            {% capture featured_link_text %}featured_{{ i }}_link_text{% endcapture %}
+            {% capture featured_text %}featured_{{ i }}_text{% endcapture %}
+        
+        	{% if settings[featured_img] != '""' and settings[featured_img] != '' %}
+            <div class="highlight-item">
+              <a href="{{ settings[featured_link] }}">
+                <div class="highlight-item-img">
+                	<img class="lozad" data-src="{{settings[featured_img]}}" alt="{{ shop.name | escape }} | {{ settings.featured_title }} - {{ settings[featured_text] }}"/>
+                </div>
+                {% if settings[featured_text] != '' or settings[featured_link_text] != '' %}
+                <div class="highlight-item-detail">
+                  <div>
+                    <h5>{{ settings[featured_text] }}</h5>
+                    <span>
+                      {{ settings[featured_link_text] }}
+                    </span>
+                  </div>
+                </div>
+                {% endif %}
+              </a>
+            </div>
+        
+       		{% endif %}
+        
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

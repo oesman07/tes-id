@@ -1,0 +1,106 @@
+<ol class="breadcrumb">
+	<li><a href="/cart">{{ 'checkout.general.cart' | t }}</a></li>
+	<li><a href="/checkout/detail">{{ 'checkout.general.customer_info' | t }}</a></li>
+	<li class="active"><a href="/checkout/shipping">{{ 'checkout.general.shipping_method' | t }}</a></li>
+	<li>{{ 'checkout.general.payment_method' | t }}</li>
+</ol>
+{% app_snippet 'checkout/content_top' %}
+
+{% include 'mobile-checkout-cart' %}
+
+
+<form class="side-wrap" action="/checkout/shipping" method="post">
+
+	{% if warning %}
+
+		<div class="side-left">
+			<div class="left-container">
+				{% if warning == 1 %}
+					<div>{{ 'checkout.shipping.out_of_zone' | t }}</div>
+				{% else %}
+					<div>{{ 'general.app_error' | t }}{{ warning }}</div>
+				{% endif %}
+
+				<a href="/checkout/detail" class="btn btn-primary btn-lg margin-top-20">{{ 'checkout.shipping.back' | t }}</a>
+			</div>
+		</div>
+
+		<div class="side-right">
+			{% include 'desktop-checkout-cart' %}
+		</div>
+
+	{% else %}
+
+	<div class="side-left">
+		<div class="left-container">
+			{% if errors %}
+			<div class="margin-bottom-20 alert alert-danger">
+				{{errors}}
+			</div>
+			{% endif %}
+			{% if shipping_warning %}
+			<div class="margin-bottom-20 alert alert-danger">
+				{{shipping_warning}}
+			</div>
+			{% endif %}
+			<h4 class="margin-top-0 margin-bottom-20 weight-xbold">{{ 'checkout.shipping.select_shipping' | t }}</h4>
+				<input type="hidden" name="_token" value="{% csrf %}">
+
+				<div class="btn-group card-list-button-group" data-toggle="buttons">
+					{% for s in shipping_method %}
+
+					<input type="hidden" name="s_fee[{{s.shipping_id}}]" value="{{s.shipping_charge}}"/>
+
+					<label for="{{s.shipping_id}}" class="btn btn-block btn-default ">
+						<input type="radio" name="s_id" class="r-shipping" value="{{s.shipping_id}}" id="{{s.shipping_id}}" {% if s.shipping_id == shipping_id  or forloop.index == 1 %} checked {% endif %}/>
+						<div class="flex-vertical-middle">
+							{% if s.courier_url %}
+							<div class="margin-right-10">
+								<img src="{{s.courier_url}}" style="width:80px;">
+							</div>
+							{% endif %}
+
+							<div>
+								<b>{{s.name | escape}}</b>
+								{% if s.handling_fee == 0 and s.shipping_charge == 0 %}
+									<div>{{ 'checkout.shipping.free_shipping' | t }}</div>
+								{% else %}
+									<div>{{ 'checkout.shipping.handle_fee' | t }} {{currency_prefix}} {{s.handling_fee}} {{currency_suffix}}</div>
+									<div>{{ 'checkout.shipping.charge' | t }} {{currency_prefix}} {{s.shipping_charge}} {{currency_suffix}}</div>
+								{% endif %}
+								{% if s.free_min_price > 0 %}
+									<div style="color:grey;font-size:11px">{{ 'checkout.shipping.free_shipping_desc1' | t }} {{currency_prefix}} {{s.free_min_price}} {{currency_suffix}} {{ 'checkout.shipping.free_shipping_desc2' | t }}</div>
+								{% endif %}
+							</div>
+						</div>
+					</label>
+
+					{% endfor %}
+				</div>
+				{% app_snippet 'checkout/content_left' %}
+		</div>
+	</div>
+
+	<div class="side-right">
+		{% include 'desktop-checkout-cart' %}
+	</div>
+
+	<div class="form-group margin-top-50 display-inline width-full">
+		<a href="/checkout/detail"><i class="fa fa-chevron-left margin-right-10"></i> {{ 'checkout.shipping.back' | t }}</a> 
+		<input type="submit" value="{{ 'checkout.shipping.continue' | t }}" class="xs-margin-top-10 xs-btn-block btn btn-primary btn-lg pull-right"/>
+	</div>
+
+	{% endif %}
+	
+</form>
+<script>
+	$(document).ready(function(){
+		$('input.r-shipping').each(function( index ) {
+			if($(this).is(":checked")){
+				$(this).parent().addClass("active");
+			}
+		});
+			
+	});
+</script>
+{% app_snippet 'checkout/content_bottom' %}

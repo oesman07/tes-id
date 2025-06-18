@@ -1,0 +1,187 @@
+{% assign number_of_comments = article.comments_count %}
+
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+ <!-- paginate article.comments by 5 %} -->
+
+{% comment %}{% include 'breadcrumb' %}{% endcomment %}
+
+<div class="grid">
+
+  <article class="grid__item large--four-fifths" itemscope itemtype="http://schema.org/Article">
+  <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{shop.url}}{{article.url}}"/>
+  <meta itemprop="dateModified" content='{{ article.updated_at }}'>
+  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="{{ settings.logo_img }}">
+      <meta itemprop="width" content="600">
+      <meta itemprop="height" content="60">
+    </div>
+    <meta itemprop="name" content="{% if article.author %}{{ article.author }}{% else %}{{ shop.name | escape}}{% endif %}">
+  </div>
+
+    <div class="grid">
+      <div class="grid__item large--ten-twelfths">
+
+        <header class="section-header">
+          <h1 class="section-header__title" itemprop="headline">{{ article.title | escape}}</h1>
+        </header>
+
+        <p>
+          <time itemprop="datePublished" content='{{ article.published_at }}' datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: "%b %d, %y" }}</time>
+          {% if article.author %}
+            <span class="meta-sep" style="font-size:1em;" itemprop="author" itemscope itemtype="https://schema.org/Person">&#8226;
+            <span style="padding:0 5px;" itemprop="name">{{ article.author }}</span>
+            </span>
+            {% else %}
+            <span itemprop="author" itemscope itemtype="https://schema.org/Organization">
+              <meta itemprop="name" content="{{ shop.name | escape}}">
+            </span>
+          {% endif %}
+          {% if article.tags.size > 0 %}
+            <span class="meta-sep">&#8226;</span>
+            {% for tag in article.tags %}
+              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %} <span class="meta-sep">&#8226;</span> {% endunless %}
+            {% endfor %}
+          {% endif %}
+        </p>
+        <div class="rte" itemprop="articleBody">
+          <div itemprop="image" itemscope itemtype="https://schema.org/ImageObject">
+            {% if article.image.src %}
+              {% assign image_alt = article.title | escape %}
+              {{ article | img_url: '1200x' | img_tag: image_alt, 'article__image' }}
+            {% endif %}
+            <meta itemprop="url" content="{{ article.image.src }}">
+            <meta itemprop="width" content="800">
+            <meta itemprop="height" content="800">
+          </div>
+          {{ article.body_html }}
+        </div>
+
+        {% if settings.social_sharing_blog %}
+          <hr class="hr--clear hr--small">
+          {% include 'social-sharing' %}
+        {% endif %}
+
+        {% comment %}
+          Create links to the next and previous articles, if available.
+        {% endcomment %}
+
+        {% if article.next_article or article.prev_article %}
+          <hr class="hr--clear hr--small">
+          <p class="clearfix">
+            {% if article.prev_article %}
+              <span class="left">
+                &larr; {{ 'blogs.article.older_post' | t | link_to: article.prev_article }}
+              </span>
+            {% endif %}
+            {% if article.next_article %}
+              <span class="right">
+                {{ 'blogs.article.newer_post' | t | link_to: article.next_article }} &rarr;
+              </span>
+            {% endif %}
+          </p>
+        {% endif %}
+
+        {% if blog.comments_enabled? %}
+          <hr class="hr--clear hr--small">
+
+          {% comment %}
+            Just like blog.liquid page, define how many comments should be on each page.
+          {% endcomment %}
+
+            
+            <div id="comments">
+
+              {% if comment and comment.created_at %}
+                <p class="note form-success">
+                  {% if blog.moderated? %}
+                    {{ 'blogs.comments.success_moderated' | t }}
+                  {% else %}
+                    {{ 'blogs.comments.success' | t }}
+                  {% endif %}
+                </p>
+              {% endif %}
+
+              {% if number_of_comments > 0 %}
+                <ul>
+                  {% comment %}
+                    If a comment was just submitted with no blank field, show it.
+                  {% endcomment %}
+                  {% if comment and comment.created_at %}
+                    <li id="{{ comment.id }}" class="comment first{% if article.comments_count == 0 %} last{% endif %}">
+                      {% include 'comment' %}
+                    </li>
+                  {% endif %}
+
+                  {% comment %}
+                    Showing the rest of the comments.
+                  {% endcomment %}
+                  {% for comment in article.comments %}
+                    <li id="{{ comment.id }}" class="comment{% unless number_of_comments > article.comments_count %}{% if forloop.first %} first{% endif %}{% endunless %}{% if forloop.last %} last {% endif %}">
+                      {% include 'comment' %}
+                    </li>
+                  {% endfor %}
+                </ul>
+
+                {% if paginate.pages > 1 %}
+                  <hr class="--clear hr--small">
+                  <div class="text-center">
+                    {% include 'pagination-custom' %}
+                  </div>
+                {% endif %}
+
+                <hr class="hr--clear hr--small">
+
+              {% endif %}
+
+              {% comment %}
+                Comment submission form
+              {% endcomment %}
+              {% form 'new_comment', article %}
+
+                <h4>{{ 'blogs.comments.title' | t }}</h4>
+
+                {{ form.errors | default_errors }}
+
+                <div class="grid">
+
+                  <div class="grid__item large--one-half">
+                    <label for="CommentAuthor" class="label--hidden">{{ 'blogs.comments.name' | t }}</label>
+                    <input {% if form.errors contains "author" %} class="error"{% endif %} type="text" name="comment[author]" placeholder="{{ 'blogs.comments.name' | t }}" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words">
+
+                    <label for="CommentEmail" class="label--hidden">{{ 'blogs.comments.email' | t }}</label>
+                    <input {% if form.errors contains "email" %} class="error"{% endif %} type="email" name="comment[email]" placeholder="{{ 'blogs.comments.email' | t }}" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                  </div>
+
+                  <div class="grid__item">
+                    <label for="CommentBody" class="label--hidden">{{ 'blogs.comments.message' | t }}</label>
+                    <textarea {% if form.errors contains "body" %} class="error"{% endif %} name="comment[body]" id="CommentBody" placeholder="{{ 'blogs.comments.message' | t }}">{{ form.body }}</textarea>
+                  </div>
+
+                </div>
+
+                {% if blog.moderated? %}
+                  <p><small>{{ 'blogs.comments.moderated' | t }}</small></p>
+                {% endif %}
+
+                <input type="submit" class="btn" value="{{ 'blogs.comments.post' | t }}">
+
+              {% endform %}
+
+            </div>
+
+        {% endif %}
+
+      </div>
+    </div>
+  </article>
+
+  <aside class="sidebar grid__item large--one-fifth">
+    {% include 'blog-sidebar' %}
+  </aside>
+</div>
+
+ <!-- endpaginate %} -->

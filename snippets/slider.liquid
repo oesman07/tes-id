@@ -1,0 +1,56 @@
+{% assign slider_enabled = true %}
+<div id="es_slider_section" class="home-top-slider {{settings.nav_below_logo}}">
+  <div class="flexslider {% if settings.slider_full_screen == '1' %}slider-full-screen{% endif %}">
+    <ul class="slides">
+      {% for i in (1..6) %}
+        {% capture slide_link %}slide_{{ i }}_link{% endcapture %}
+        {% capture slide_img %}slide_{{ i }}_jpg{% endcapture %}
+        {% capture slide_mobile_img %}slide_{{ i }}_mobile_jpg{% endcapture %}
+        {% capture slide_alt %}slide_{{ i }}_alt{% endcapture %}
+        {% capture slide_title %}slide_{{ i }}_title{% endcapture %}
+        {% capture slide_subtitle %}slide_{{ i }}_subtitle{% endcapture %}
+        {% capture slide_button_text %}slide_{{ i }}_button_text{% endcapture %}
+
+          {% if settings[slide_img] != '""' and settings[slide_img] != '' %}
+            <li>
+              <div class="slide-item">
+                {% if settings[slide_link] != '""' and settings[slide_link] != '' %}
+                  <a href="{{ settings[slide_link] }}" class="link-bg-wrapper"></a>
+                {% endif %}
+                
+                {% if settings[slide_mobile_img] != '""' and settings[slide_mobile_img] != '' %}
+                	<div class="slide-mobile-img">
+                      <img src="{{settings[slide_mobile_img]}}" alt="{{ shop.name | escape }} | {{ settings[slide_title] }}"/>
+                	</div>
+                {% endif %}
+                <div class="slide-img">
+                  <img src="{{settings[slide_img]}}" alt="{{ shop.name | escape }} | {{ settings[slide_title] }}"/>
+                </div>
+                <div class="slide-item-content">
+                  <div class="slide-item-animation">
+                    {% if settings[slide_link] != '""' and settings[slide_link] != '' %}
+                      <a href="{{ settings[slide_link] }}" class="link-bg-wrapper"></a>
+                    {% endif %}
+
+                    {% if settings[slide_title] != '""' and settings[slide_title] != '' %}
+                        <h1 class="slide-title">{{ settings[slide_title] }}</h1>
+                    {% endif %}
+
+                    {% if settings[slide_subtitle] != '""' and settings[slide_subtitle] != '' %}
+                        <h4 class="slide-subtitle">{{ settings[slide_subtitle] }}</h4>
+                    {% endif %}
+
+                    {% if settings[slide_button_text] != '""' and settings[slide_button_text] != '' %}
+                    <a href="{{ settings[slide_link] }}" class="slide-btn btn">
+                      {{ settings[slide_button_text] }}
+                    </a> 
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

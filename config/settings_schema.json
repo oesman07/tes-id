@@ -1,0 +1,2988 @@
+{
+  "theme": "Newday",
+
+  "options": [
+
+    {
+      "label": { "en_US": "General", "zh_TW": "一般設定", "zh_CN": "一般设置", "ms_MY": "Am" },
+      "options": [
+        {
+          "label": { "en_US": "Body text", "zh_TW": "主要字體", "zh_CN": "主体文字", "ms_MY": "Teks badan" },
+          "type": "group",
+          "options": [
+
+            {
+              "type": "select",
+              "id": "body_font_family",
+              "default": "Georgia,'Hoefler Text','Times New Roman',serif",
+              "options": [
+                
+                {
+                  "value": "'Karla','HelveticaNeue','Helvetica Neue',sans-serif",
+                  "label": "Karla",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Avant Garde',Avantgarde,'Century Gothic',CenturyGothic,'AppleGothic',sans-serif",
+                  "label": "Avant Garde",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                  "label": "Gill Sans",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif",
+                  "label": "Helvetica Neue",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Arial,'Helvetica Neue',Helvetica,sans-serif",
+                  "label": "Arial",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Arial Black', Gadget, sans-serif",
+                  "label": "Arial Black",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Candara,Calibri,Segoe,'Segoe UI',Optima,Arial,sans-serif",
+                  "label": "Candara",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Geneva,Tahoma,Verdana,sans-serif",
+                  "label": "Geneva",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Impact, Charcoal, sans-serif",
+                  "label": "Impact",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Comic Sans MS', cursive, sans-serif",
+                  "label": "Comic Sans MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Trebuchet MS', Helvetica, sans-serif",
+                  "label": "Trebuchet MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Big Caslon','Book Antiqua','Palatino Linotype',Georgia,serif",
+                  "label": "Big Calson",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+                  "label": "Palatino Linotype",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Calisto MT','Bookman Old Style',Bookman,'Goudy Old Style',Garamond,'Hoefler Text','Bitstream Charter',Georgia,serif",
+                  "label": "Calisto MT",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Baskerville,'Baskerville Old Face','Hoefler Text',Garamond,'Times New Roman',serif",
+                  "label": "Baskerville",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Garamond,Baskerville,'Baskerville Old Face','Hoefler Text','Times New Roman',serif",
+                  "label": "Garamond",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Georgia,'Hoefler Text','Times New Roman',serif",
+                  "label": "Georgia",
+                  "group": "Serif"
+                },
+                {
+                  "value": "TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif",
+                  "label": "Times New Roman",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Courier New, Courier, monospace",
+                  "label": "Courier New",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'Lucida Console', Monaco, monospace",
+                  "label": "Lucida Console",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','微软雅黑',Arial,sans-serif",
+                  "label": "苹方字体 PingFang SC",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'微软雅黑','Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif",
+                  "label": "微软雅黑",
+                  "group": "Sans-serif"
+                }
+              ]
+            },
+
+            {
+              "type": "select",
+              "id": "body_font_size",
+              "default": "16px",
+              "options": [
+                {
+                  "value": "12px",
+                  "label": "12px"
+                },
+                {
+                  "value": "13px",
+                  "label": "13px"
+                },
+                {
+                  "value": "14px",
+                  "label": "14px"
+                },
+                {
+                  "value": "15px",
+                  "label": "15px"
+                },
+                {
+                  "value": "16px",
+                  "label": "16px"
+                },
+                {
+                  "value": "17px",
+                  "label": "17px"
+                },
+                {
+                  "value": "18px",
+                  "label": "18px"
+                }
+              ]
+            },
+
+            {
+              "type": "color",
+              "id": "body_text_color",
+              "default": "#333333"
+            }
+
+          ]
+        },
+        {
+          "label": { "en_US": "Heading text", "zh_TW": "標題字體", "zh_CN": "标题文字", "ms_MY": "Teks tajuk" },
+          "type": "heading_group",
+          "options": [
+
+            {
+              "type": "select",
+              "id": "heading_font_family",
+              "default": "Georgia,'Hoefler Text','Times New Roman',serif",
+              "options": [
+
+                {
+                  "value": "'Karla','HelveticaNeue','Helvetica Neue',sans-serif",
+                  "label": "Karla",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Avant Garde',Avantgarde,'Century Gothic',CenturyGothic,'AppleGothic',sans-serif",
+                  "label": "Avant Garde",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                  "label": "Gill Sans",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif",
+                  "label": "Helvetica Neue",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Arial,'Helvetica Neue',Helvetica,sans-serif",
+                  "label": "Arial",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Arial Black', Gadget, sans-serif",
+                  "label": "Arial Black",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Candara,Calibri,Segoe,'Segoe UI',Optima,Arial,sans-serif",
+                  "label": "Candara",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Geneva,Tahoma,Verdana,sans-serif",
+                  "label": "Geneva",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Impact, Charcoal, sans-serif",
+                  "label": "Impact",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Comic Sans MS', cursive, sans-serif",
+                  "label": "Comic Sans MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Trebuchet MS', Helvetica, sans-serif",
+                  "label": "Trebuchet MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Big Caslon','Book Antiqua','Palatino Linotype',Georgia,serif",
+                  "label": "Big Calson",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+                  "label": "Palatino Linotype",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Calisto MT','Bookman Old Style',Bookman,'Goudy Old Style',Garamond,'Hoefler Text','Bitstream Charter',Georgia,serif",
+                  "label": "Calisto MT",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Baskerville,'Baskerville Old Face','Hoefler Text',Garamond,'Times New Roman',serif",
+                  "label": "Baskerville",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Garamond,Baskerville,'Baskerville Old Face','Hoefler Text','Times New Roman',serif",
+                  "label": "Garamond",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Georgia,'Hoefler Text','Times New Roman',serif",
+                  "label": "Georgia",
+                  "group": "Serif"
+                },
+                {
+                  "value": "TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif",
+                  "label": "Times New Roman",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Courier New, Courier, monospace",
+                  "label": "Courier New",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'Lucida Console', Monaco, monospace",
+                  "label": "Lucida Console",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','微软雅黑',Arial,sans-serif",
+                  "label": "苹方字体 PingFang SC",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'微软雅黑','Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif",
+                  "label": "微软雅黑",
+                  "group": "Sans-serif"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "heading_font_weight",
+              "default": "500",
+              "options": [
+                {
+                  "value": "normal",
+                  "label": { "en_US": "Normal", "zh_TW": "一般", "zh_CN": "正常", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "bold",
+                  "label": { "en_US": "Bold", "zh_TW": "粗體", "zh_CN": "粗体", "ms_MY": "Tebal" }
+                },
+                {
+                  "value": "bolder",
+                  "label": { "en_US": "Bolder", "zh_TW": "更粗", "zh_CN": "更粗", "ms_MY": "Lebih Tebal" }
+                },
+                {
+                  "value": "lighter",
+                  "label": { "en_US": "Lighter", "zh_TW": "更細", "zh_CN": "更轻", "ms_MY": "Lebihh Cerah" }
+                }                
+              ]
+            },
+            {
+              "type": "select",
+              "id": "heading_font_size",
+              "default": "32px",
+              "options": [
+                {
+                  "value": "26px",
+                  "label": { "en_US": "Extra Small", "zh_TW": "最小", "zh_CN": "特小", "ms_MY": "Sangat kecil" }
+                },
+                {
+                  "value": "28px",
+                  "label": { "en_US": "Small", "zh_TW": "小", "zh_CN": "小", "ms_MY": "Kecil" }
+                },
+                {
+                  "value": "30px",
+                  "label": { "en_US": "Normal", "zh_TW": "普通", "zh_CN": "普通", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "32px",
+                  "label": { "en_US": "Large", "zh_TW": "大", "zh_CN": "大", "ms_MY": "Besar" }
+                },
+                {
+                  "value": "34px",
+                  "label": { "en_US": "Extra Large", "zh_TW": "特大", "zh_CN": "特大", "ms_MY": "Sangat besar" }
+                }
+              ]
+            },
+
+            {
+              "type": "color",
+              "id": "heading_text_color",
+              "default": "#333333"
+            }
+
+          ]
+        },
+        {
+          "label": { "en_US": "Background", "zh_TW": "背景", "zh_CN": "背景", "ms_MY": "Latar belakang" },
+          "type": "background",
+          "options": [
+            {
+              "type": "image",
+              "id": "body_bg_image",
+              "default": ""
+            },
+            {
+              "type": "color",
+              "id": "body_bg_color",
+              "default": "#ffffff"
+            },
+            {
+              "type": "select",
+              "id": "bg_img_position",
+              "default": "center center",
+              "options": [
+                {
+                  "value": "top left",
+                  "label": { "en_US": "Top Left", "zh_TW": "頂端靠左", "zh_CN": "顶端靠左", "ms_MY": "Kiri atas" }
+                },
+                {
+                  "value": "top center",
+                  "label": { "en_US": "Top Center", "zh_TW": "頂端置中", "zh_CN": "顶端置中", "ms_MY": "Pusat atas" }
+                },
+                {
+                  "value": "top right",
+                  "label": { "en_US": "Top Right", "zh_TW": "頂端靠右", "zh_CN": "顶端靠右", "ms_MY": "Kanan atas" }
+                },
+                {
+                  "value": "center left",
+                  "label": { "en_US": "Middle Left", "zh_TW": "中心靠左", "zh_CN": "中心靠左", "ms_MY": "Kiri tengah" }
+                },
+                {
+                  "value": "center center",
+                  "label": { "en_US": "Middle Center", "zh_TW": "中心置中", "zh_CN": "中心置中", "ms_MY": "Pusat tengah" }
+                },
+                {
+                  "value": "center right",
+                  "label": { "en_US": "Middle Right", "zh_TW": "中心靠右", "zh_CN": "中心靠右", "ms_MY": "Tengah kanan" }
+                },
+                {
+                  "value": "bottom left",
+                  "label": { "en_US": "Bottom Left", "zh_TW": "底端靠左", "zh_CN": "底端靠左", "ms_MY": "Bawah kiri" }
+                },
+                {
+                  "value": "bottom center",
+                  "label": { "en_US": "Bottom Center", "zh_TW": "底端置中", "zh_CN": "底端置中", "ms_MY": "Pusat bawah" }
+                },
+                {
+                  "value": "bottom right",
+                  "label": { "en_US": "Bottom Right", "zh_TW": "底端靠右", "zh_CN": "底端靠右", "ms_MY": "Bawah kanan" }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "label": { "en_US": "Use images with original quality", "zh_TW": "使用原始圖像畫質", "zh_CN": "使用原始图像画质", "ms_MY": "Guna gambar asal" },
+          "type": "checkbox",
+          "id": "use_original_image",
+          "id_source": "settings"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Logo", "zh_TW": "網站Logo", "zh_CN": "Logo", "ms_MY": "Logo" },
+      "options": [
+      {
+        "label": { "en_US": "Logo text font", "zh_TW": "Logo字體", "zh_CN": "Logo文本字体", "ms_MY": "Fon teks logo" },
+        "type": "heading_group",
+          "options": [
+
+            {
+              "type": "select",
+              "id": "header_logo_font_family",
+              "default": "Georgia,'Hoefler Text','Times New Roman',serif",
+              "options": [
+                
+                {
+                  "value": "'Karla','HelveticaNeue','Helvetica Neue',sans-serif",
+                  "label": "Karla",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Avant Garde',Avantgarde,'Century Gothic',CenturyGothic,'AppleGothic',sans-serif",
+                  "label": "Avant Garde",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                  "label": "Gill Sans",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif",
+                  "label": "Helvetica Neue",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Arial,'Helvetica Neue',Helvetica,sans-serif",
+                  "label": "Arial",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Arial Black', Gadget, sans-serif",
+                  "label": "Arial Black",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Candara,Calibri,Segoe,'Segoe UI',Optima,Arial,sans-serif",
+                  "label": "Candara",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Geneva,Tahoma,Verdana,sans-serif",
+                  "label": "Geneva",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Impact, Charcoal, sans-serif",
+                  "label": "Impact",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Comic Sans MS', cursive, sans-serif",
+                  "label": "Comic Sans MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Trebuchet MS', Helvetica, sans-serif",
+                  "label": "Trebuchet MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Big Caslon','Book Antiqua','Palatino Linotype',Georgia,serif",
+                  "label": "Big Calson",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+                  "label": "Palatino Linotype",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Calisto MT','Bookman Old Style',Bookman,'Goudy Old Style',Garamond,'Hoefler Text','Bitstream Charter',Georgia,serif",
+                  "label": "Calisto MT",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Baskerville,'Baskerville Old Face','Hoefler Text',Garamond,'Times New Roman',serif",
+                  "label": "Baskerville",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Garamond,Baskerville,'Baskerville Old Face','Hoefler Text','Times New Roman',serif",
+                  "label": "Garamond",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Georgia,'Hoefler Text','Times New Roman',serif",
+                  "label": "Georgia",
+                  "group": "Serif"
+                },
+                {
+                  "value": "TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif",
+                  "label": "Times New Roman",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Courier New, Courier, monospace",
+                  "label": "Courier New",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'Lucida Console', Monaco, monospace",
+                  "label": "Lucida Console",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','微软雅黑',Arial,sans-serif",
+                  "label": "苹方字体 PingFang SC",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'微软雅黑','Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif",
+                  "label": "微软雅黑",
+                  "group": "Sans-serif"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "header_logo_font_weight",
+              "default": "500",
+              "options": [
+                {
+                  "value": "normal",
+                  "label": { "en_US": "Normal", "zh_TW": "一般", "zh_CN": "正常", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "bold",
+                  "label": { "en_US": "Bold", "zh_TW": "粗體", "zh_CN": "粗体", "ms_MY": "Tebal" }
+                },
+                {
+                  "value": "bolder",
+                  "label": { "en_US": "Bolder", "zh_TW": "更粗", "zh_CN": "更粗", "ms_MY": "Lebih Tebal" }
+                },
+                {
+                  "value": "lighter",
+                  "label": { "en_US": "Lighter", "zh_TW": "更細", "zh_CN": "更轻", "ms_MY": "Lebihh Cerah" }
+                }                
+              ]
+            },
+            {
+              "type": "select",
+              "id": "header_logo_font_size",
+              "default": "30px",
+              "options": [
+                {
+                  "value": "24px",
+                  "label": { "en_US": "Extra Small", "zh_TW": "最小", "zh_CN": "特小", "ms_MY": "Sangat kecil" }
+                },
+                {
+                  "value": "27px",
+                  "label": { "en_US": "Small", "zh_TW": "小", "zh_CN": "小", "ms_MY": "Kecil" }
+                },
+                {
+                  "value": "30px",
+                  "label": { "en_US": "Normal", "zh_TW": "普通", "zh_CN": "普通", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "33px",
+                  "label": { "en_US": "Large", "zh_TW": "大", "zh_CN": "大", "ms_MY": "Besar" }
+                },
+                {
+                  "value": "35px",
+                  "label": { "en_US": "Extra Large", "zh_TW": "特大", "zh_CN": "特大", "ms_MY": "Sangat besar" }
+                }
+              ]
+            },
+
+            {
+              "type": "color",
+              "id": "header_logo_color",
+              "default": "#333333"
+            }
+          ]
+      },
+      {
+        "label": { "en_US": "Custom Logo", "zh_TW": "客製化Logo", "zh_CN": "定制Logo", "ms_MY": "Logo tersuai" },
+        "type": "checkbox",
+        "id": "logo_use_image"
+      },
+      {
+        "label": { "en_US": "Logo", "zh_TW": "Logo", "zh_CN": "Logo", "ms_MY": "Logo" },
+        "type": "image",
+        "id": "logo_img",
+        "default": "",
+        "info": "450 x 200px recommended"
+      },
+      {
+        "label": { "en_US": "Logo width", "zh_TW": "Logo寬度", "zh_CN": "Logo宽度", "ms_MY": "Lebar logo" },
+        "type": "number",
+        "id": "logo_width",
+        "default": "200"
+      },
+      {
+        "label": { "en_US": "Favicon icon", "zh_TW": "網站標題列圖示", "zh_CN": "网站图标", "ms_MY": "Ikon favicon" },
+        "type": "image",
+        "id": "favicon_img",
+        "default": "",
+        "info": "16 x 16px required"
+      }
+      ]
+    },
+    {
+      "label": { "en_US": "Top Bar", "zh_TW": "主選單", "zh_CN": "顶部栏", "ms_MY": "Bar atas" },
+      "section_id": "es_header_bar",
+      "options": [
+        {
+          "label": { "en_US": "Stick on top", "zh_TW": "固定在頂部", "zh_CN": "固定顶部", "ms_MY": "Melekat di atas" },
+          "type": "checkbox",
+          "id": "topbar_sticky"
+        },
+        {
+          "label": { "en_US": "Text font", "zh_TW": "內文字體", "zh_CN": "文本字体", "ms_MY": "Fon teks" },
+          "type": "heading_group",
+          "options": [
+                      {
+                        "type": "select",
+                        "id": "topbar_font_family",
+                        "default": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                        "options": [
+
+                          {
+                            "value": "'Karla','HelveticaNeue','Helvetica Neue',sans-serif",
+                            "label": "Karla",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Avant Garde',Avantgarde,'Century Gothic',CenturyGothic,'AppleGothic',sans-serif",
+                            "label": "Avant Garde",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                            "label": "Gill Sans",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif",
+                            "label": "Helvetica Neue",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "Arial,'Helvetica Neue',Helvetica,sans-serif",
+                            "label": "Arial",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Arial Black', Gadget, sans-serif",
+                            "label": "Arial Black",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "Candara,Calibri,Segoe,'Segoe UI',Optima,Arial,sans-serif",
+                            "label": "Candara",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "Geneva,Tahoma,Verdana,sans-serif",
+                            "label": "Geneva",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "Impact, Charcoal, sans-serif",
+                            "label": "Impact",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Comic Sans MS', cursive, sans-serif",
+                            "label": "Comic Sans MS",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Trebuchet MS', Helvetica, sans-serif",
+                            "label": "Trebuchet MS",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'Big Caslon','Book Antiqua','Palatino Linotype',Georgia,serif",
+                            "label": "Big Calson",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+                            "label": "Palatino Linotype",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "'Calisto MT','Bookman Old Style',Bookman,'Goudy Old Style',Garamond,'Hoefler Text','Bitstream Charter',Georgia,serif",
+                            "label": "Calisto MT",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "Baskerville,'Baskerville Old Face','Hoefler Text',Garamond,'Times New Roman',serif",
+                            "label": "Baskerville",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "Garamond,Baskerville,'Baskerville Old Face','Hoefler Text','Times New Roman',serif",
+                            "label": "Garamond",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "Georgia,'Hoefler Text','Times New Roman',serif",
+                            "label": "Georgia",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif",
+                            "label": "Times New Roman",
+                            "group": "Serif"
+                          },
+                          {
+                            "value": "Courier New, Courier, monospace",
+                            "label": "Courier New",
+                            "group": "monospace"
+                          },
+                          {
+                            "value": "'Lucida Console', Monaco, monospace",
+                            "label": "Lucida Console",
+                            "group": "monospace"
+                          },
+                          {
+                            "value": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','微软雅黑',Arial,sans-serif",
+                            "label": "苹方字体 PingFang SC",
+                            "group": "Sans-serif"
+                          },
+                          {
+                            "value": "'微软雅黑','Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif",
+                            "label": "微软雅黑",
+                            "group": "Sans-serif"
+                          }
+                        ]
+                      },
+
+                      {
+                        "type": "select",
+                        "id": "topbar_font_weight",
+                        "default": "700",
+                        "options": [
+                          {
+                            "value": "normal",
+                            "label": { "en_US": "Normal", "zh_TW": "一般", "zh_CN": "正常", "ms_MY": "Biasa" }
+                          },
+                          {
+                            "value": "bold",
+                            "label": { "en_US": "Bold", "zh_TW": "粗體", "zh_CN": "粗体", "ms_MY": "Tebal" }
+                          },
+                          {
+                            "value": "bolder",
+                            "label": { "en_US": "Bolder", "zh_TW": "更粗", "zh_CN": "更粗", "ms_MY": "Lebih Tebal" }
+                          },
+                          {
+                            "value": "lighter",
+                            "label": { "en_US": "Lighter", "zh_TW": "更細", "zh_CN": "更轻", "ms_MY": "Lebih Cerah" }
+                          }                
+                        ]
+                      },
+                      {
+                        "type": "select",
+                        "id": "topbar_font_size",
+                        "default": "14px",
+                        "options": [
+                          {
+                            "value": "12px",
+                            "label": { "en_US": "Extra Small", "zh_TW": "最小", "zh_CN": "特小", "ms_MY": "Sangat kecil" }
+                          },
+                          {
+                            "value": "13px",
+                            "label": { "en_US": "Small", "zh_TW": "小", "zh_CN": "小", "ms_MY": "Kecil" }
+                          },
+                          {
+                            "value": "14px",
+                            "label": { "en_US": "Normal", "zh_TW": "普通", "zh_CN": "普通", "ms_MY": "Biasa" }
+                          },
+                          {
+                            "value": "16px",
+                            "label": { "en_US": "Large", "zh_TW": "大", "zh_CN": "大", "ms_MY": "Besar" }
+                          },
+                          {
+                            "value": "18px",
+                            "label": { "en_US": "Extra Large", "zh_TW": "特大", "zh_CN": "特大", "ms_MY": "Sangat besar" }
+                          }
+                        ]
+                      }
+            ]
+        },
+        
+        {
+          "label": { "en_US": "Logo alignment", "zh_TW": "Logo對齊", "zh_CN": "Logo对齐", "ms_MY": "Penjajaran logo" },
+          "type": "select",
+          "id": "nav_below_logo",
+          "options": [
+            {
+              "value": "",
+              "label": { "en_US": "Center left", "zh_TW": "左邊", "zh_CN": "左边", "ms_MY": "Kiri" }
+            },
+            {
+              "value": "logo_top-center",
+              "label": { "en_US": "Top center", "zh_TW": "頂端置中", "zh_CN": "顶端置中", "ms_MY": "Pusat atas" }
+            },
+            {
+              "value": "logo_top-left",
+              "label": { "en_US": "Top left", "zh_TW": "頂端靠左", "zh_CN": "顶端靠左", "ms_MY": "Kiri atas" }
+            }
+          ]
+        },
+        
+        {
+          "label": { "en_US": "Nav text align", "zh_TW": "導航列文字對齊", "zh_CN": "导航文本对齐", "ms_MY": "Selaraskan teks Nav" },
+          "type": "select",
+          "id": "topbar_text_align",
+          "options": [
+            {
+              "value": "center",
+              "label": { "en_US": "Center", "zh_TW": "中間", "zh_CN": "中间", "ms_MY": "Tengah" }
+            },
+            {
+              "value": "flex-start",
+              "label": { "en_US": "Left", "zh_TW": "左邊", "zh_CN": "左边", "ms_MY": "Kiri" }
+            },
+            {
+              "value": "flex-end",
+              "label": { "en_US": "Right", "zh_TW": "右邊", "zh_CN": "右边", "ms_MY": "Kanan" }
+            }
+          ]
+        },
+        {
+          "label": { "en_US": "Text color", "zh_TW": "文本顏色", "zh_CN": "文本颜色", "ms_MY": "Warna teks" },
+          "type": "color",
+          "id": "topbar_text_color",
+          "default": "#ffffff"
+        },
+        {
+          "label": { "en_US": "Background color", "zh_TW": "背景顏色", "zh_CN": "背景颜色", "ms_MY": "Warna latar belakang" },
+          "type": "color",
+          "id": "topbar_bg_color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Button", "zh_TW": "按鈕", "zh_CN": "按钮", "ms_MY": "Butang" },
+      "options": [
+        {
+          "label": { "en_US": "Button text font", "zh_TW": "按鈕文字的字體", "zh_CN": "按钮文字的字体", "ms_MY": "Fon teks butang" },
+          "type": "heading_group",
+          "options": [
+            
+            {
+                "type": "select",
+              "id": "button_font_family",
+              "default": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+              "options":[
+
+                {
+                  "value": "'Karla','HelveticaNeue','Helvetica Neue',sans-serif",
+                  "label": "Karla",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Avant Garde',Avantgarde,'Century Gothic',CenturyGothic,'AppleGothic',sans-serif",
+                  "label": "Avant Garde",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Gill Sans','Gill Sans MT',Calibri,sans-serif",
+                  "label": "Gill Sans",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif",
+                  "label": "Helvetica Neue",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Arial,'Helvetica Neue',Helvetica,sans-serif",
+                  "label": "Arial",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Arial Black', Gadget, sans-serif",
+                  "label": "Arial Black",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Candara,Calibri,Segoe,'Segoe UI',Optima,Arial,sans-serif",
+                  "label": "Candara",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Geneva,Tahoma,Verdana,sans-serif",
+                  "label": "Geneva",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "Impact, Charcoal, sans-serif",
+                  "label": "Impact",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Comic Sans MS', cursive, sans-serif",
+                  "label": "Comic Sans MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Trebuchet MS', Helvetica, sans-serif",
+                  "label": "Trebuchet MS",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'Big Caslon','Book Antiqua','Palatino Linotype',Georgia,serif",
+                  "label": "Big Calson",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Palatino Linotype', 'Book Antiqua', Palatino, serif",
+                  "label": "Palatino Linotype",
+                  "group": "Serif"
+                },
+                {
+                  "value": "'Calisto MT','Bookman Old Style',Bookman,'Goudy Old Style',Garamond,'Hoefler Text','Bitstream Charter',Georgia,serif",
+                  "label": "Calisto MT",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Baskerville,'Baskerville Old Face','Hoefler Text',Garamond,'Times New Roman',serif",
+                  "label": "Baskerville",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Garamond,Baskerville,'Baskerville Old Face','Hoefler Text','Times New Roman',serif",
+                  "label": "Garamond",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Georgia,'Hoefler Text','Times New Roman',serif",
+                  "label": "Georgia",
+                  "group": "Serif"
+                },
+                {
+                  "value": "TimesNewRoman,'Times New Roman',Times,Baskerville,Georgia,serif",
+                  "label": "Times New Roman",
+                  "group": "Serif"
+                },
+                {
+                  "value": "Courier New, Courier, monospace",
+                  "label": "Courier New",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'Lucida Console', Monaco, monospace",
+                  "label": "Lucida Console",
+                  "group": "monospace"
+                },
+                {
+                  "value": "'PingFang SC','Hiragino Sans GB','Microsoft YaHei','微软雅黑',Arial,sans-serif",
+                  "label": "苹方字体 PingFang SC",
+                  "group": "Sans-serif"
+                },
+                {
+                  "value": "'微软雅黑','Microsoft YaHei','PingFang SC','Hiragino Sans GB',Arial,sans-serif",
+                  "label": "微软雅黑",
+                  "group": "Sans-serif"
+                }
+              ]
+            },
+            {
+              "type": "select",
+              "id": "btn_font_weight",
+              "default": "bold",
+              "options": [
+                {
+                  "value": "normal",
+                  "label": { "en_US": "Normal", "zh_TW": "一般", "zh_CN": "正常", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "bold",
+                  "label": { "en_US": "Bold", "zh_TW": "粗體", "zh_CN": "粗体", "ms_MY": "Tebal" }
+                },
+                {
+                  "value": "bolder",
+                  "label": { "en_US": "Bolder", "zh_TW": "更粗", "zh_CN": "更粗", "ms_MY": "Lebih Tebal" }
+                },
+                {
+                  "value": "lighter",
+                  "label": { "en_US": "Lighter", "zh_TW": "更細", "zh_CN": "更轻", "ms_MY": "Lebihh Cerah" }
+                }                
+              ]
+            }
+            
+          ]
+        },
+        {
+          "label": { "en_US": "Button text color", "zh_TW": "按鈕文字的顏色", "zh_CN": "按钮文字的颜色", "ms_MY": "Warna teks butang" },
+          "type": "color",
+          "id": "btn_text_color",
+          "default": "#ffffff"
+        },
+        {
+          "label": { "en_US": "Button background color", "zh_TW": "按鈕背景顏色", "zh_CN": "按钮背景颜色", "ms_MY": "Warna latar butang" },
+          "type": "color",
+          "id": "btn_bg_color",
+          "default": "#ffffff"
+        },
+        {
+          "label": { "en_US": "Scroll to top button", "zh_TW": "滾動到上方按鈕", "zh_CN": "滚动到顶部按钮", "ms_MY": "Tatal ke butang atas" },
+          "type": "select",
+          "id": "scroll_to_top_button",
+          "options": [
+            {
+              "value": "hide",
+              "label": { "en_US": "None", "zh_TW": "無", "zh_CN": "无", "ms_MY": "Tiada" }
+            },
+            {
+              "value": "on-right",
+              "label": { "en_US": "Stick on right", "zh_TW": "靠右", "zh_CN": "靠右", "ms_MY": "Kanan" }
+            },
+            {
+              "value": "on-left",
+              "label": { "en_US": "Stick on left", "zh_TW": "靠左", "zh_CN": "靠左", "ms_MY": "Kiri" }
+            }
+          ]
+        },
+        {
+          "label": { "en_US": "Checkout button color", "zh_TW": "結帳按鈕的顏色", "zh_CN": "结账按钮的颜色", "ms_MY": "Warna butang checkout" },
+          "type": "color",
+          "id": "nav_checkout_btn_color",
+          "default": "#ffffff"
+        },
+        {
+          "label": { "en_US": "Checkout button text color", "zh_TW": "結帳按鈕的文字顏色", "zh_CN": "结账按钮的文字颜色", "ms_MY": "Warna teks butang checkout" },
+          "type": "color",
+          "id": "nav_checkout_btn_text_color",
+          "default": "#000000"
+        },
+        {
+          "label": { "en_US": "Variants tag options (Product page)", "zh_TW": "規格標籤選項 (商品頁)", "zh_CN": "选项标签选项 (商品页面)", "ms_MY": "Pilihan tag varian (halaman Produk)" },
+          "type": "checkbox",
+          "id": "product_page_variants_tag"
+        }
+
+
+      ]
+    },
+
+    {
+      "label": { "en_US": "Link", "zh_TW": "連結", "zh_CN": "链接", "ms_MY": "Pautan" },
+      "options": [
+        {
+          "label": { "en_US": "Link text color", "zh_TW": "連結文字顏色", "zh_CN": "链接文本颜色", "ms_MY": "Pautan warna teks" },
+          "type": "color",
+          "id": "link_text_color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Border", "zh_TW": "邊框", "zh_CN": "边框", "ms_MY": "Barisan" },
+      "options": [
+        {
+          "label": { "en_US": "Border color", "zh_TW": "邊框顏色", "zh_CN": "边框颜色", "ms_MY": "Warna barisan" },
+          "type": "color",
+          "id": "navi_border_color",
+          "default": "#ffffff"
+        }
+
+      ]
+    },
+    
+    {
+      "label": { "en_US": "Layout", "zh_TW": "佈局", "zh_CN": "布局", "ms_MY": "Susun atur" },
+      "options": [
+          {
+          "type": "select",
+          "id": "home_section_1",
+          "label": { "en_US": "Section 1", "zh_TW": "第1部分", "zh_CN": "第1部分", "ms_MY": "Seksyen 1" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_2",
+          "label": { "en_US": "Section 2", "zh_TW": "第2部分", "zh_CN": "第2部分", "ms_MY": "Seksyen 2" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_3",
+          "label": { "en_US": "Section 3", "zh_TW": "第3部分", "zh_CN": "第3部分", "ms_MY": "Seksyen 3" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_4",
+          "label": { "en_US": "Section 4", "zh_TW": "第4部分", "zh_CN": "第4部分", "ms_MY": "Seksyen 4" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_5",
+          "label": { "en_US": "Section 5", "zh_TW": "第5部分", "zh_CN": "第5部分", "ms_MY": "Seksyen 5" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_6",
+          "label": { "en_US": "Section 6", "zh_TW": "第6部分", "zh_CN": "第6部分", "ms_MY": "Seksyen 6" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "home_section_7",
+          "label": { "en_US": "Section 7", "zh_TW": "第7部分", "zh_CN": "第7部分", "ms_MY": "Seksyen 7" },
+          "options": [
+            {
+              "value": "",
+              "label": "None"
+            },
+            {
+              "value": "featured-product",
+              "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" }
+            },
+            {
+              "value": "featured-single-product",
+              "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" }
+            },
+            {
+              "value": "home-content",
+              "label": { "en_US": "Page content", "zh_TW": "頁面內容", "zh_CN": "页面内容", "ms_MY": "Kandungan halaman" }
+            },
+            {
+              "value": "highlight-section",
+              "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" }
+            },
+            {
+              "value": "testimonial-section",
+              "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" }
+            },
+            {
+              "value": "parallax-section",
+              "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" }
+            },
+            {
+              "value": "logo-list",
+              "label": { "en_US": "Logo list section", "zh_TW": "Logo列表", "zh_CN": "Logo列表部分", "ms_MY": "Bahagian senarai logo" }
+            },
+            {
+              "value": "featured-blog",
+              "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" }
+            },
+            {
+              "value": "video-section",
+              "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" }
+            },
+            {
+              "value": "img-text-section",
+              "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Slider settings", "zh_TW": "輪播設定", "zh_CN": "幻灯片设置", "ms_MY": "Tetapan slaid" },
+      "section_id": "es_slider_section",
+      "options": [
+        {
+          "label": { "en_US": "Auto-rotate slides", "zh_TW": "自動切換輪播圖面", "zh_CN": "自动旋转幻灯片", "ms_MY": "Putar slaid automatik" },
+          "type": "checkbox",
+          "id": "slider_home_auto"
+        },
+        {
+          "label": { "en_US": "Show dot indicators", "zh_TW": "顯示圓點", "zh_CN": "显示圆点指示器", "ms_MY": "Tunjukkan penunjuk titik" },
+          "type": "checkbox",
+          "id": "slider_home_show_dots"
+        },
+        {
+          "type": "select",
+          "id": "slider_home_rate",
+          "label": { "en_US": "Rotation interval", "zh_TW": "輪播時間間隔", "zh_CN": "旋转时间间隔", "ms_MY": "Selang putaran" },
+          "options": [
+            {
+              "value": "3000",
+              "label": { "en_US": "3 seconds", "zh_TW": "3 秒", "zh_CN": "3 秒", "ms_MY": "3 saat" }
+            },
+            {
+              "value": "4000",
+              "label": { "en_US": "4 seconds", "zh_TW": "4 秒", "zh_CN": "4 秒", "ms_MY": "4 saat" }
+            },
+            {
+              "value": "5000",
+              "label": { "en_US": "5 seconds", "zh_TW": "5 秒", "zh_CN": "5 秒", "ms_MY": "5 saat" }
+            },
+            {
+              "value": "7000",
+              "label": { "en_US": "7 seconds", "zh_TW": "7 秒", "zh_CN": "7 秒", "ms_MY": "7 saat" }
+            },
+            {
+              "value": "10000",
+              "label": { "en_US": "10 seconds", "zh_TW": "10 秒", "zh_CN": "10 秒", "ms_MY": "10 saat" }
+            },
+            {
+              "value": "15000",
+              "label": { "en_US": "15 seconds", "zh_TW": "15 秒", "zh_CN": "15 秒", "ms_MY": "15 saat" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "slider_home_transition",
+          "label": { "en_US": "Transition effect", "zh_TW": "切換效果", "zh_CN": "过渡效果", "ms_MY": "Kesan peralihan" },
+          "options": [
+            {
+              "value": "fade",
+              "label": { "en_US": "Fade", "zh_TW": "淡入", "zh_CN": "淡入", "ms_MY": "Pudar" }
+            },
+            {
+              "value": "slide",
+              "label": { "en_US": "Slide", "zh_TW": "滑動", "zh_CN": "滑动", "ms_MY": "Gelongsor" }
+            }
+          ]
+        },
+        {
+          "label": { "en_US": "Slider text", "zh_TW": "輪播文字", "zh_CN": "幻灯片文字", "ms_MY": "Teks gelangsar" },
+          "type": "heading_group",
+          "options": [
+            {
+              "type": "select",
+              "id": "slider_text_font_size",
+              "default": "25px",
+              "options": [
+                {
+                  "value": "13px",
+                  "label": { "en_US": "Extra Small", "zh_TW": "最小", "zh_CN": "特小", "ms_MY": "Sangat kecil" }
+                },
+                {
+                  "value": "15px",
+                  "label": { "en_US": "Small", "zh_TW": "小", "zh_CN": "小", "ms_MY": "Kecil" }
+                },
+                {
+                  "value": "19px",
+                  "label": { "en_US": "Normal", "zh_TW": "普通", "zh_CN": "普通", "ms_MY": "Biasa" }
+                },
+                {
+                  "value": "22px",
+                  "label": { "en_US": "Large", "zh_TW": "大", "zh_CN": "大", "ms_MY": "Besar" }
+                },
+                {
+                  "value": "27px",
+                  "label": { "en_US": "Extra Large", "zh_TW": "特大", "zh_CN": "特大", "ms_MY": "Sangat besar" }
+                }
+              ]
+            },
+
+            {
+              "type": "color",
+              "id": "slider_text_color",
+              "default": "#333333"
+            }
+
+          ]
+        },
+        {
+          "type": "color",
+          "id": "slider_overlay_color",
+          "label": { "en_US": "Overlay color", "zh_TW": "濾鏡顏色", "zh_CN": "覆盖物颜色", "ms_MY": "Warna tindanan" },
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "slider_overlay_opacity",
+          "label": { "en_US": "Overlay transparency", "zh_TW": "濾鏡透明度", "zh_CN": "覆盖层透明度", "ms_MY": "Ketelusan tindinan" },
+          "options": [
+            {
+              "value": "0",
+              "label": { "en_US": "None", "zh_TW": "無", "zh_CN": "无", "ms_MY": "Tiada" }
+            },
+            {
+              "value": "0.2",
+              "label": { "en_US": "Lightest", "zh_TW": "最淺", "zh_CN": "最浅", "ms_MY": "Paling terang" }
+            },
+            {
+              "value": "0.3",
+              "label": { "en_US": "Lighter", "zh_TW": "較淺", "zh_CN": "较浅", "ms_MY": "Lebih terang" }
+            },
+            {
+              "value": "0.4",
+              "label": { "en_US": "Normal", "zh_TW": "正常", "zh_CN": "正常", "ms_MY": "Biasa" }
+            },
+            {
+              "value": "0.5",
+              "label": { "en_US": "Darker", "zh_TW": "較深", "zh_CN": "较深", "ms_MY": "Lebih gelap" }
+            },
+            {
+              "value": "0.6",
+              "label": { "en_US": "Darkest", "zh_TW": "最深", "zh_CN": "最深", "ms_MY": "Paling gelap" }
+            }
+          ]
+        },
+        {
+          "type": "color",
+          "id": "slider_button_color",
+          "label": { "en_US": "Button color", "zh_TW": "按鈕背景顏色", "zh_CN": "按钮背景颜色", "ms_MY": "Warna latar butang" },
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "slider_button_text_color",
+          "label": { "en_US": "Button text color", "zh_TW": "按鈕文字的顏色", "zh_CN": "按钮文字的颜色", "ms_MY": "Warna teks butang" },
+          "default": "#000000"
+        }
+
+      ]
+    },
+
+    {
+      "label": { "en_US": "Slider content", "zh_TW": "輪播内容", "zh_CN": "幻灯片内容", "ms_MY": "Kandungan gelangsar" },
+      "section_id": "es_slider_section",
+      "options": [
+        {
+          "label": { "en_US": "Slide 1", "zh_TW": "輪播 1", "zh_CN": "幻灯片 1", "ms_MY": "Gelangsar 1" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_1_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 1 (Optional)", "zh_TW": "輪播 1 手機圖片 (可選)", "zh_CN": "幻灯片 1 手机图片 (可选)", "ms_MY": "Imej mudah alih 1 (Pilihan)" },
+            "type": "image",
+            "id": "slide_1_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide 1 title", "zh_TW": "輪播 1 標題", "zh_CN": "幻灯片 1 标题", "ms_MY": "Tajuk slaid 1" },
+            "type": "text",
+            "id": "slide_1_title"
+          },
+          {
+            "label": { "en_US": "Slide 1 subtitle", "zh_TW": "輪播 1 副標題", "zh_CN": "幻灯片 1 副标题", "ms_MY": "Sarikata slaid 1" },
+            "type": "text",
+            "id": "slide_1_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 1 button text", "zh_TW": "輪播 1 按鈕文字", "zh_CN": "幻灯片 1 按钮文字", "ms_MY": "Teks slaid 1" },
+            "type": "text",
+            "id": "slide_1_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 1 link", "zh_TW": "輪播 1 連結", "zh_CN": "幻灯片 1 链接", "ms_MY": "Pautan slaid 1" },
+            "type": "text",
+            "id": "slide_1_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 2", "zh_TW": "輪播 2", "zh_CN": "幻灯片 2", "ms_MY": "Gelangsar 2" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_2_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 2 (Optional)", "zh_TW": "輪播 2 手機圖片 (可選)", "zh_CN": "幻灯片 2 手机图片 (可选)", "ms_MY": "Imej mudah alih 2 (Pilihan)" },
+            "type": "image",
+            "id": "slide_2_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide 2 title", "zh_TW": "輪播 2 標題", "zh_CN": "幻灯片 2 标题", "ms_MY": "Tajuk slaid 2" },
+            "type": "text",
+            "id": "slide_2_title"
+          },
+          {
+            "label": { "en_US": "Slide 2 subtitle ", "zh_TW": "輪播 2 副標題 2", "zh_CN": "幻灯片 2 副标题 2", "ms_MY": "Sarikata slaid 2" },
+            "type": "text",
+            "id": "slide_2_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 2 button text", "zh_TW": "輪播 2 按鈕文字", "zh_CN": "幻灯片 2 按钮文字", "ms_MY": "Teks slaid 2" },
+            "type": "text",
+            "id": "slide_2_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 2 link", "zh_TW": "輪播 2 連結", "zh_CN": "幻灯片 2 链接", "ms_MY": "Pautan slaid 2" },
+            "type": "text",
+            "id": "slide_2_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 3", "zh_TW": "輪播 3", "zh_CN": "幻灯片 3", "ms_MY": "Gelangsar 3" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_3_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 3 (Optional)", "zh_TW": "輪播 3 手機圖片 (可選)", "zh_CN": "幻灯片 3 手机图片 (可选)", "ms_MY": "Imej mudah alih 3 (Pilihan)" },
+            "type": "image",
+            "id": "slide_3_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide 3 title", "zh_TW": "輪播 3 標題", "zh_CN": "幻灯片 3 标题", "ms_MY": "Tajuk slaid 3" },
+            "type": "text",
+            "id": "slide_3_title"
+          },
+          {
+            "label": { "en_US": "Slide 3 subtitle", "zh_TW": "輪播 3 副標題", "zh_CN": "幻灯片 3 副标题", "ms_MY": "Sarikata slaid 3" },
+            "type": "text",
+            "id": "slide_3_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 3 button text", "zh_TW": "輪播 3 按鈕文字", "zh_CN": "幻灯片 3 按钮文字", "ms_MY": "Teks slaid 3" },
+            "type": "text",
+            "id": "slide_3_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 3 link", "zh_TW": "輪播 3 連結", "zh_CN": "幻灯片 3 链接", "ms_MY": "Pautan slaid 3" },
+            "type": "text",
+            "id": "slide_3_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 4", "zh_TW": "輪播 4", "zh_CN": "幻灯片 4", "ms_MY": "Gelangsar 4" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_4_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 4 (Optional)", "zh_TW": "輪播 4 手機圖片 (可選)", "zh_CN": "幻灯片 4 手机图片 (可选)", "ms_MY": "Imej mudah alih 4 (Pilihan)" },
+            "type": "image",
+            "id": "slide_4_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide 4 title", "zh_TW": "輪播 4 標題", "zh_CN": "幻灯片 4 标题", "ms_MY": "Tajuk slaid 4" },
+            "type": "text",
+            "id": "slide_4_title"
+          },
+          {
+            "label": { "en_US": "Slide 4 subtitle", "zh_TW": "輪播 4 副標題", "zh_CN": "幻灯片 4 副标题", "ms_MY": "Sarikata slaid 4" },
+            "type": "text",
+            "id": "slide_4_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 4 button text", "zh_TW": "輪播 4 按鈕文字", "zh_CN": "幻灯片 4 按钮文字", "ms_MY": "Teks slaid 4" },
+            "type": "text",
+            "id": "slide_4_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 4 link", "zh_TW": "輪播 4 連結", "zh_CN": "幻灯片 4 链接", "ms_MY": "Pautan slaid 4" },
+            "type": "text",
+            "id": "slide_4_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 5", "zh_TW": "輪播 5", "zh_CN": "幻灯片 5", "ms_MY": "Gelangsar 5" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_5_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 5 (Optional)", "zh_TW": "輪播 5 手機圖片 (可選)", "zh_CN": "幻灯片 5 手机图片 (可选)", "ms_MY": "Imej mudah alih 5 (Pilihan)" },
+            "type": "image",
+            "id": "slide_5_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide 5 title", "zh_TW": "輪播 5 標題", "zh_CN": "幻灯片 5 标题", "ms_MY": "Tajuk slaid 5" },
+            "type": "text",
+            "id": "slide_5_title"
+          },
+          {
+            "label": { "en_US": "Slide 5 subtitle", "zh_TW": "輪播 5 副標題", "zh_CN": "幻灯片 5 副标题", "ms_MY": "Sarikata slaid 5" },
+            "type": "text",
+            "id": "slide_5_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 5 button text", "zh_TW": "輪播 5 按鈕文字", "zh_CN": "幻灯片 5 按钮文字", "ms_MY": "Teks slaid 5" },
+            "type": "text",
+            "id": "slide_5_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 5 link", "zh_TW": "輪播 5 連結", "zh_CN": "幻灯片 5 链接", "ms_MY": "Pautan slaid 5" },
+            "type": "text",
+            "id": "slide_5_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 6", "zh_TW": "輪播 6", "zh_CN": "幻灯片 6", "ms_MY": "Gelangsar 6" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "slide_6_jpg"
+          },
+          {
+            "label": { "en_US": "Mobile image 6 (Optional)", "zh_TW": "輪播 6 手機圖片 (可選)", "zh_CN": "幻灯片 6 手机图片 (可选)", "ms_MY": "Imej mudah alih 6 (Pilihan)" },
+            "type": "image",
+            "id": "slide_6_mobile_jpg"
+          },
+          {
+            "label": { "en_US": "Slide title 6", "zh_TW": "輪播 6 標題", "zh_CN": "幻灯片 6 标题", "ms_MY": "Tajuk slaid 6" },
+            "type": "text",
+            "id": "slide_6_title"
+          },
+          {
+            "label": { "en_US": "Slide 6 subtitle", "zh_TW": "輪播 6 副標題", "zh_CN": "幻灯片 6 副标题", "ms_MY": "Sarikata slaid 6" },
+            "type": "text",
+            "id": "slide_6_subtitle"
+          },
+          {
+            "label": { "en_US": "Slide 6 button text", "zh_TW": "輪播 6 按鈕文字", "zh_CN": "幻灯片 6 按钮文字", "ms_MY": "Teks slaid 6" },
+            "type": "text",
+            "id": "slide_6_button_text"
+          },
+          {
+            "label": { "en_US": "Slide 6 link", "zh_TW": "輪播 6 連結", "zh_CN": "幻灯片 6 链接", "ms_MY": "Pautan slaid 6" },
+            "type": "text",
+            "id": "slide_6_link"
+          }
+        ]
+       }
+
+      ]
+    },
+    
+    {
+      "label": { "en_US": "Featured products", "zh_TW": "特色商品", "zh_CN": "特色产品", "ms_MY": "Produk terpilih" },
+      "section_id": "es_feature_product",
+      "options": [
+        {
+          "label": { "en_US": "Featured products title", "zh_TW": "特色商品標題", "zh_CN": "特色产品标题", "ms_MY": "Tajuk produk terpilih" },
+          "type": "text",
+          "id": "featured_product_title"
+        },
+        {
+          "label": { "en_US": "Home page add to cart button", "zh_TW": "首頁加入購物車按鈕", "zh_CN": "主页添加到购物车按钮", "ms_MY": "Halaman utama menambah butang troli" },
+          "type":"checkbox",
+          "id":"home_page_add_to_cart"
+        },
+        {
+          "type": "select",
+          "id": "products_list_per_row",
+          "label": { "en_US": "Product per row", "zh_TW": "每行商品", "zh_CN": "每行产品", "ms_MY": "Produk setiap baris" },
+          "options": [
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            },
+            {
+              "value": "5",
+              "label": "5"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "product_img_crop",
+          "label": { "en_US": "Product image", "zh_TW": "商品圖片", "zh_CN": "产品图片", "ms_MY": "Imej produk" },
+          "options": [
+            {
+              "value": "img-equal-height",
+              "label": { "en_US": "Original", "zh_TW": "原始圖片", "zh_CN": "原始图片", "ms_MY": "Asal" }
+            },
+            {
+              "value": "product_img-crop ratio_1-1",
+              "label": { "en_US": "Ratio 1:1", "zh_TW": "比例 1:1", "zh_CN": "比例 1:1", "ms_MY": "Nisbah 1:1" }
+            },
+            {
+              "value": "product_img-crop ratio_1_3-1",
+              "label": { "en_US": "Ratio 4:3", "zh_TW": "比例 4:3", "zh_CN": "比例 4:3", "ms_MY": "Nisbah 4:3" }
+            },
+            {
+              "value": "product_img-crop ratio_1_5-1",
+              "label": { "en_US": "Ratio 3:2", "zh_TW": "比例 3:2", "zh_CN": "比例 3:2", "ms_MY": "Nisbah 3:2" }
+            },
+            {
+              "value": "product_img-crop ratio_1-1_3",
+              "label": { "en_US": "Ratio 4:3 (Landscape)", "zh_TW": "商品圖片 (横向)", "zh_CN": "比例 4:3 (横向)", "ms_MY": "Nisbah 4:3 (Melintang)" }
+            },
+            {
+              "value": "product_img-crop ratio_1-1_5",
+              "label": { "en_US": "Ratio 3:2 (Landscape)", "zh_TW": "商品圖片 (横向)", "zh_CN": "比例 3:2 (横向)", "ms_MY": "Nisbah 3:2 (Melintang)" }
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "product_img_res",
+          "label": { "en_US": "Product list image resolution", "zh_TW": "商品列表圖片分辨率", "zh_CN": "产品列表图片分辨率", "ms_MY": "Resolusi imej senarai produk" },
+          "options": [
+            {
+              "value":"grande",
+              "label": { "en_US": "Mobile optimised", "zh_TW": "手機優化", "zh_CN": "手机优化", "ms_MY": "Mudah alih dioptimumkan" }
+            },
+            {
+              "value":"",
+              "label": { "en_US": "Original resolution", "zh_TW": "原始圖片分辨率", "zh_CN": "原始图片分辨率", "ms_MY": "Asal resolusi imej" }
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Highlighted product", "zh_TW": "亮點產品", "zh_CN": "亮点产品", "ms_MY": "Produk serlah" },
+      "section_id": "es_featured_single_product",
+      "options": [
+        {
+          "label": { "en_US": "Select product", "zh_TW": "選擇產品", "zh_CN": "选择产品", "ms_MY": "Pilih produk" },
+          "type": "product",
+          "id": "featured_single_product_handle"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Featured collections", "zh_TW": "特色商品目錄", "zh_CN": "特色系列", "ms_MY": "Koleksi terpilih" },
+      "section_id": "es_featured_collections",
+      "options": [
+        
+        {
+          "label": { "en_US": "Featured title", "zh_TW": "特色商品標題", "zh_CN": "特色标题", "ms_MY": "Tajuk koleksi terpilih" },
+          "type": "text",
+          "id": "featured_title"
+        },
+        
+        {
+          "label": { "en_US": "Collections 1", "zh_TW": "目錄 1", "zh_CN": "收藏品 1", "ms_MY": "Koleksi 1" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_1_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_1_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_1_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_1_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 2", "zh_TW": "目錄 2", "zh_CN": "收藏品 2", "ms_MY": "Koleksi 2" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_2_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_2_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_2_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_2_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 3", "zh_TW": "目錄 3", "zh_CN": "收藏品 3", "ms_MY": "Koleksi 3" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_3_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_3_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_3_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_3_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 4", "zh_TW": "目錄 4", "zh_CN": "收藏品 4", "ms_MY": "Koleksi 4" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_4_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_4_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_4_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_4_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 5", "zh_TW": "目錄 5", "zh_CN": "收藏品 5", "ms_MY": "Koleksi 5" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_5_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_5_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_5_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_5_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 6", "zh_TW": "目錄 6", "zh_CN": "收藏品 6", "ms_MY": "Koleksi 6" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_6_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_6_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_6_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_6_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 7", "zh_TW": "目錄 7", "zh_CN": "收藏品 7", "ms_MY": "Koleksi 7" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_7_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_7_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_7_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_7_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Collections 8", "zh_TW": "目錄 8", "zh_CN": "收藏品 8", "ms_MY": "Koleksi 8" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "featured_8_img"
+          },
+          {
+            "label": { "en_US": "Collections name", "zh_TW": "目錄名稱", "zh_CN": "收藏品名称", "ms_MY": "Nama koleksi" },
+            "type": "text",
+            "id": "featured_8_text"
+          },
+          {
+            "label": { "en_US": "Collections link text", "zh_TW": "目錄連結文字", "zh_CN": "收藏品链接文本", "ms_MY": "Teks pautan koleksi" },
+            "type": "text",
+            "id": "featured_8_link_text"
+          },
+          {
+            "label": { "en_US": "Collections link", "zh_TW": "目錄連結", "zh_CN": "收藏品链接", "ms_MY": "Pautan koleksi" },
+            "type": "text",
+            "id": "featured_8_link"
+          }
+         ]
+        }
+
+      ]
+    },
+    
+    {
+      "label": { "en_US": "Testimonial slider", "zh_TW": "精選推薦輪播", "zh_CN": "证言滑块", "ms_MY": "Jendela testimoni" },
+      "section_id": "es_testimonial_section",
+      "options": [
+        {
+          "label": { "en_US": "Circular profile picture crop", "zh_TW": "圓形輪廓圖裁剪", "zh_CN": "圆形轮廓图裁剪", "ms_MY": "Potongan imej profil bulat" },
+          "type": "checkbox",
+          "id": "testimonial_slide_img_crop"
+        },
+        {
+          "label": { "en_US": "Text color", "zh_TW": "文字顏色", "zh_CN": "文字颜色", "ms_MY": "Warna teks" },
+          "type": "color",
+          "id": "testimonial_slide_text_color",
+          "default": "#000000"
+        },
+        {
+          "label": { "en_US": "Background color", "zh_TW": "背景顏色", "zh_CN": "背景颜色", "ms_MY": "Warna latar belakang" },
+          "type": "color",
+          "id": "testimonial_slide_bg_color",
+          "default": "rgba(245, 245, 245, 1)"
+        },
+        {
+          "label": { "en_US": "Link color", "zh_TW": "連結顏色", "zh_CN": "链接颜色", "ms_MY": "Warna pautan" },
+          "type": "color",
+          "id": "testimonial_slide_link_color",
+          "default": "#E5AE49"
+        },
+        {
+          "label": { "en_US": "Slide 1" , "zh_TW": "輪播幻燈片 1", "zh_CN": "幻灯片 1", "ms_MY": "Slaid 1" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_1_img"
+          },
+          {
+            "label": { "en_US": "Slide 1 title", "zh_TW": "輪播幻燈片 1 標題", "zh_CN": "幻灯片 1 标题", "ms_MY": "Tajuk slaid 1" },
+            "type": "text",
+            "id": "testimonial_slide_1_title"
+          },
+          {
+            "label": { "en_US": "Slide 1 content", "zh_TW": "輪播幻燈片 1 內容", "zh_CN": "幻灯片 1 内容", "ms_MY": "Kandungan slaid 1" },
+            "type": "text",
+            "id": "testimonial_slide_1_content"
+          },
+          {
+            "label": { "en_US": "Slide 1 link text", "zh_TW": "輪播幻燈片 1 文字", "zh_CN": "幻灯片 1 链接文本", "ms_MY": "Teks pautan slaid 1" },
+            "type": "text",
+            "id": "testimonial_slide_1_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 1 link", "zh_TW": "輪播幻燈片 1 連結", "zh_CN": "幻灯片 1 链接", "ms_MY": "Pautan slaid 1" },
+            "type": "text",
+            "id": "testimonial_slide_1_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 2" , "zh_TW": "輪播幻燈片 2", "zh_CN": "幻灯片 2", "ms_MY": "Slaid 2" },
+        "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_2_img"
+          },
+          {
+            "label": { "en_US": "Slide 2 title", "zh_TW": "輪播幻燈片 2 標題", "zh_CN": "幻灯片 2 标题", "ms_MY": "Tajuk slaid 2" },
+            "type": "text",
+            "id": "testimonial_slide_2_title"
+          },
+          {
+            "label": { "en_US": "Slide 2 content", "zh_TW": "輪播幻燈片 2 內容", "zh_CN": "幻灯片 2 内容", "ms_MY": "Kandungan slaid 2" },
+            "type": "text",
+            "id": "testimonial_slide_2_content"
+          },
+          {
+            "label": { "en_US": "Slide 2 link text", "zh_TW": "輪播幻燈片 2 文字", "zh_CN": "幻灯片 2 链接文本", "ms_MY": "Teks pautan slaid 2" },
+            "type": "text",
+            "id": "testimonial_slide_2_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 2 link", "zh_TW": "輪播幻燈片 2 連結", "zh_CN": "幻灯片 2 链接", "ms_MY": "Pautan slaid 2" },
+            "type": "text",
+            "id": "testimonial_slide_2_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 3" , "zh_TW": "輪播幻燈片 3", "zh_CN": "幻灯片 3", "ms_MY": "Slaid 3" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_3_img"
+          },
+          {
+            "label": { "en_US": "Slide 3 title", "zh_TW": "輪播幻燈片 3 標題", "zh_CN": "幻灯片 3 标题", "ms_MY": "Tajuk slaid 3" },
+            "type": "text",
+            "id": "testimonial_slide_3_title"
+          },
+          {
+            "label": { "en_US": "Slide 3 content", "zh_TW": "輪播幻燈片 3 內容", "zh_CN": "幻灯片 3 内容", "ms_MY": "Kandungan slaid 3" },
+            "type": "text",
+            "id": "testimonial_slide_3_content"
+          },
+          {
+            "label": { "en_US": "Slide 3 link text", "zh_TW": "輪播幻燈片 3 文字", "zh_CN": "幻灯片 3 链接文本", "ms_MY": "Teks pautan slaid 3" },
+            "type": "text",
+            "id": "testimonial_slide_3_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 3 link", "zh_TW": "輪播幻燈片 3 連結", "zh_CN": "幻灯片 3 链接", "ms_MY": "Pautan slaid 3" },
+            "type": "text",
+            "id": "testimonial_slide_3_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 4" , "zh_TW": "輪播幻燈片 4", "zh_CN": "幻灯片 4", "ms_MY": "Slaid 4" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_4_img"
+          },
+          {
+            "label": { "en_US": "Slide 4 title", "zh_TW": "輪播幻燈片 4 標題", "zh_CN": "幻灯片 4 标题", "ms_MY": "Tajuk slaid 4" },
+            "type": "text",
+            "id": "testimonial_slide_4_title"
+          },
+          {
+            "label": { "en_US": "Slide 4 content", "zh_TW": "輪播幻燈片 4 內容", "zh_CN": "幻灯片 4 内容", "ms_MY": "Kandungan slaid 4" },
+            "type": "text",
+            "id": "testimonial_slide_4_content"
+          },
+          {
+            "label": { "en_US": "Slide 4 link text", "zh_TW": "輪播幻燈片 4 文字", "zh_CN": "幻灯片 4 链接文本", "ms_MY": "Teks pautan slaid 4" },
+            "type": "text",
+            "id": "testimonial_slide_4_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 4 link", "zh_TW": "輪播幻燈片 4 連結", "zh_CN": "幻灯片 4 链接", "ms_MY": "Pautan slaid 4" },
+            "type": "text",
+            "id": "testimonial_slide_4_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 5" , "zh_TW": "輪播幻燈片 5", "zh_CN": "幻灯片 5", "ms_MY": "Slaid 5" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_5_img"
+          },
+          {
+            "label": { "en_US": "Slide 5 title", "zh_TW": "輪播幻燈片 5 標題", "zh_CN": "幻灯片 5 标题", "ms_MY": "Tajuk slaid 5" },
+            "type": "text",
+            "id": "testimonial_slide_5_title"
+          },
+          {
+            "label": { "en_US": "Slide 5 content", "zh_TW": "輪播幻燈片 5 內容", "zh_CN": "幻灯片 5 内容", "ms_MY": "Kandungan slaid 5" },
+            "type": "text",
+            "id": "testimonial_slide_5_content"
+          },
+          {
+            "label": { "en_US": "Slide 5 link text", "zh_TW": "輪播幻燈片 5 文字", "zh_CN": "幻灯片 5 链接文本", "ms_MY": "Teks pautan slaid 5" },
+            "type": "text",
+            "id": "testimonial_slide_5_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 5 link", "zh_TW": "輪播幻燈片 5 連結", "zh_CN": "幻灯片 5 链接", "ms_MY": "Pautan slaid 5" },
+            "type": "text",
+            "id": "testimonial_slide_5_link"
+          }
+        ]
+       },
+       {
+        "label": { "en_US": "Slide 6" , "zh_TW": "輪播幻燈片 6", "zh_CN": "幻灯片 6", "ms_MY": "Slaid 6" },
+         "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "testimonial_slide_6_img"
+          },
+          {
+            "label": { "en_US": "Slide 6 title", "zh_TW": "輪播幻燈片 6 標題", "zh_CN": "幻灯片 6 标题", "ms_MY": "Tajuk slaid 6" },
+            "type": "text",
+            "id": "testimonial_slide_6_title"
+          },
+          {
+            "label": { "en_US": "Slide 6 content", "zh_TW": "輪播幻燈片 6 內容", "zh_CN": "幻灯片 6 内容", "ms_MY": "Kandungan slaid 6" },
+            "type": "text",
+            "id": "testimonial_slide_6_content"
+          },
+          {
+            "label": { "en_US": "Slide 6 link text", "zh_TW": "輪播幻燈片 6 文字", "zh_CN": "幻灯片 6 链接文本", "ms_MY": "Teks pautan slaid 6" },
+            "type": "text",
+            "id": "testimonial_slide_6_text_link"
+          },
+          {
+            "label": { "en_US": "Slide 6 link", "zh_TW": "輪播幻燈片 6 連結", "zh_CN": "幻灯片 6 链接", "ms_MY": "Pautan slaid 6" },
+            "type": "text",
+            "id": "testimonial_slide_6_link"
+          }
+        ]
+       }
+
+      ]
+    },
+
+    {
+      "label": { "en_US": "Image with text", "zh_TW": "帶文字的圖片", "zh_CN": "带文字的图片", "ms_MY": "Gambar dengan teks" },
+      "section_id": "es_img_text_section",
+      "options": [
+        {
+          "label": { "en_US": "Feature image", "zh_TW": "特色圖片", "zh_CN": "特色图片", "ms_MY": "Gambar ciri" },
+          "type": "image",
+          "id": "img_text_section_img"
+        },
+        {
+          "label": { "en_US": "Image position", "zh_TW": "圖片位置", "zh_CN": "图片位置", "ms_MY": "Kedudukan imej" },
+          "type": "select",
+          "id": "img_text_section_class",
+          "options": [
+            	{
+                  "value": "image-left",
+                  "label": { "en_US": "Left", "zh_TW": "左邊", "zh_CN": "左边", "ms_MY": "Kiri" }
+                },
+            	{
+                  "value": "image-right",
+                  "label": { "en_US": "Right", "zh_TW": "右邊", "zh_CN": "右边", "ms_MY": "Kanan" }
+                }
+          ]
+        },
+        {
+          "label": { "en_US": "Heading", "zh_TW": "標題", "zh_CN": "标题", "ms_MY": "Tajuk" },
+          "type": "text",
+          "id": "img_text_section_heading"
+        },
+        {
+          "label": { "en_US": "Content", "zh_TW": "內容", "zh_CN": "内容", "ms_MY": "Kandungan" },
+          "type": "text",
+          "id": "img_text_section_text"
+        },
+        {
+          "label": { "en_US": "Link text", "zh_TW": "連結名稱", "zh_CN": "链接文本", "ms_MY": "Teks pautan" },
+          "type": "text",
+          "id": "img_text_section_link_text"
+        },
+        {
+          "label": { "en_US": "Link URL", "zh_TW": "連結網址", "zh_CN": "链接网址", "ms_MY": "Pautan URL" },
+          "type": "text",
+          "id": "img_text_section_url"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Video section", "zh_TW": "影片部分", "zh_CN": "视频部分", "ms_MY": "Bahagian video" },
+      "section_id": "es_video_section",
+      "options": [
+        {
+          "label": { "en_US": "YouTube URL", "zh_TW": "YouTube 連結", "zh_CN": "YouTube 链接", "ms_MY": "Pautan YouTube" },
+          "type": "text",
+          "id": "video_section_id"
+        },
+        {
+          "label": { "en_US": "Video thumbnail", "zh_TW": "影片縮圖", "zh_CN": "视频缩略图", "ms_MY": "Imej kecil video" },
+          "type": "image",
+          "id": "video_section_img"
+        },
+        {
+          "label": { "en_US": "Play icon color", "zh_TW": "播放圖示顏色", "zh_CN": "播放图标颜色", "ms_MY": "Mainkan ikon warna" },
+          "type": "color",
+          "id": "video_section_color",
+          "default": "#FFFFFF"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Blog post", "zh_TW": "部落格", "zh_CN": "博客", "ms_MY": "Blog" },
+      "section_id": "es_featured_blogs",
+      "options": [
+        {
+          "label": { "en_US": "Heading", "zh_TW": "標題", "zh_CN": "标题", "ms_MY": "Tajuk" },
+          "type": "text",
+          "id": "featured_blog_title"
+        },
+        {
+          "label": { "en_US": "Articles 1", "zh_TW": "文章 1", "zh_CN": "文章 1", "ms_MY": "Artikel 1" },
+          "type": "article",
+          "id": "articles_handle_1"
+        },
+        {
+          "label": { "en_US": "Articles 2", "zh_TW": "文章 2", "zh_CN": "文章 2", "ms_MY": "Artikel 2" },
+          "type": "article",
+          "id": "articles_handle_2"
+        },
+        {
+          "label": { "en_US": "Articles 3", "zh_TW": "文章 3", "zh_CN": "文章 3", "ms_MY": "Artikel 3" },
+          "type": "article",
+          "id": "articles_handle_3"
+        }
+      ]
+    },
+
+    {
+      "label": { "en_US": "Logo list", "zh_TW": "Logo列表", "zh_CN": "标志列表", "ms_MY": "Senarai logo" },
+      "section_id": "es_logo_list_section",
+      "options":[
+        {
+          "label": { "en_US": "Show on footer", "zh_TW": "在頁尾顯示", "zh_CN": "在页脚显示", "ms_MY": "Tunjukkan pada kaki" },
+          "type": "checkbox",
+          "id": "logo_list_on_footer"
+        },
+        {
+          "label": { "en_US": "Title", "zh_TW": "標題", "zh_CN": "标题", "ms_MY": "Tajuk" },
+          "type": "text",
+          "id": "logo_list_title"
+        },
+        {
+          "label": { "en_US": "Background color", "zh_TW": "背景顏色", "zh_CN": "背景颜色", "ms_MY": "Warna latar belakang" },
+          "type": "color",
+          "id": "logo_list_bg_color",
+          "default": "rgba(245, 245, 245, 1)"
+        },
+        {
+          "label": { "en_US": "Text color", "zh_TW": "文字顏色", "zh_CN": "文字颜色", "ms_MY": "Warna teks" },
+          "type": "color",
+          "id": "logo_list_text_color",
+          "default": "#000000"
+        },
+        {
+          "label": { "en_US": "Logo 1", "zh_TW": "Logo 1", "zh_CN": "Logo 1", "ms_MY": "Logo 1" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_1_img"
+          },
+          {
+            "label": { "en_US": "Logo 1 link", "zh_TW": "Logo 1 連結", "zh_CN": "Logo 1 链接", "ms_MY": "Pautan Logo 1" },
+            "type": "text",
+            "id": "logo_list_1_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 2", "zh_TW": "Logo 2", "zh_CN": "Logo 2", "ms_MY": "Logo 2" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_2_img"
+          },
+          {
+            "label": { "en_US": "Logo 2 link", "zh_TW": "Logo 2 連結", "zh_CN": "Logo 2 链接", "ms_MY": "Pautan Logo 2" },
+            "type": "text",
+            "id": "logo_list_2_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 3", "zh_TW": "Logo 3", "zh_CN": "Logo 3", "ms_MY": "Logo 3" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_3_img"
+          },
+          {
+            "label": { "en_US": "Logo 3 link", "zh_TW": "Logo 3 連結", "zh_CN": "Logo 3 链接", "ms_MY": "Pautan Logo 3" },
+            "type": "text",
+            "id": "logo_list_3_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 4", "zh_TW": "Logo 4", "zh_CN": "Logo 4", "ms_MY": "Logo 4" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_4_img"
+          },
+          {
+            "label": { "en_US": "Logo 4 link", "zh_TW": "Logo 4 連結", "zh_CN": "Logo 4 链接", "ms_MY": "Pautan Logo 4" },
+            "type": "text",
+            "id": "logo_list_4_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 5", "zh_TW": "Logo 5", "zh_CN": "Logo 5", "ms_MY": "Logo 5" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_5_img"
+          },
+          {
+            "label": { "en_US": "Logo 5 link", "zh_TW": "Logo 5 連結", "zh_CN": "Logo 5 链接", "ms_MY": "Pautan Logo 5" },
+            "type": "text",
+            "id": "logo_list_5_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 6", "zh_TW": "Logo 6", "zh_CN": "Logo 6", "ms_MY": "Logo 6" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_6_img"
+          },
+          {
+            "label": { "en_US": "Logo 6 link", "zh_TW": "Logo 6 連結", "zh_CN": "Logo 6 链接", "ms_MY": "Pautan Logo 6" },
+            "type": "text",
+            "id": "logo_list_6_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 7", "zh_TW": "Logo 7", "zh_CN": "Logo 7", "ms_MY": "Logo 7" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_7_img"
+          },
+          {
+            "label": { "en_US": "Logo 7 link", "zh_TW": "Logo 7 連結", "zh_CN": "Logo 7 链接", "ms_MY": "Pautan Logo 7" },
+            "type": "text",
+            "id": "logo_list_7_link"
+          }
+         ]
+        },
+        {
+          "label": { "en_US": "Logo 8", "zh_TW": "Logo 8", "zh_CN": "Logo 8", "ms_MY": "Logo 8" },
+          "type": "heading_group",
+         "options": [
+          {
+            "type": "image",
+            "id": "logo_list_8_img"
+          },
+          {
+            "label": { "en_US": "Logo 8 link", "zh_TW": "Logo 8 連結", "zh_CN": "Logo 8 链接", "ms_MY": "Pautan Logo 8" },
+            "type": "text",
+            "id": "logo_list_8_link"
+          }
+         ]
+        }
+        
+        
+        
+      ]
+    },
+    
+    {
+      "label": { "en_US": "Promotional banner", "zh_TW": "宣傳欄", "zh_CN": "宣传栏", "ms_MY": "Bar promosi" },
+      "section_id": "es_parallax_section",
+      "options":[
+        {
+          "label": { "en_US": "Background image", "zh_TW": "背景圖片", "zh_CN": "背景图片", "ms_MY": "Imej latar" },
+          "type": "image",
+          "id": "parallax_img"
+        },
+        {
+          "label": { "en_US": "Mobile background image (Optional)", "zh_TW": "手機背景圖片 (可選)", "zh_CN": "手机背景图片 (可选)", "ms_MY": "Imej latar mudah alih (Pilihan)" },
+          "type": "image",
+          "id": "parallax_mobile_img"
+        },
+        {
+          "label": { "en_US": "Title", "zh_TW": "標題", "zh_CN": "标题", "ms_MY": "Tajuk" },
+          "type": "text",
+          "id": "parallax_title"
+        },
+        {
+          "label": { "en_US": "Description", "zh_TW": "描述", "zh_CN": "描述", "ms_MY": "Penerangan" },
+          "type": "text",
+          "id": "parallax_subtitle"
+        },
+        {
+          "label": { "en_US": "Button text", "zh_TW": "按鈕文字", "zh_CN": "按钮文字", "ms_MY": "Teks butang" },
+          "type": "text",
+          "id": "parallax_button_text"
+        },
+        {
+          "label": { "en_US": "Button link", "zh_TW": "按鈕連結", "zh_CN": "按钮链接", "ms_MY": "Pautan butang" },
+          "type": "text",
+          "id": "parallax_button_link"
+        },
+        {
+          "label": { "en_US": "Title text color", "zh_TW": "標題文字顏色", "zh_CN": "标题文本颜色", "ms_MY": "Warna teks tajuk" },
+          "type": "color",
+          "id": "parallax_title_text_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "label": { "en_US": "Button text color", "zh_TW": "按鈕文字的顏色", "zh_CN": "按钮文字的颜色", "ms_MY": "Warna teks butang" },
+          "type": "color",
+          "id": "parallax_button_text_color",
+          "default": "#FFFFFF"
+        },
+        {
+          "label": { "en_US": "Button color", "zh_TW": "按鈕背景顏色", "zh_CN": "按钮背景颜色", "ms_MY": "Warna latar butang" },
+          "type": "color",
+          "id": "parallax_button_color",
+          "default": "#000000"
+        }
+      ]
+    },
+
+
+    {
+      "label": { "en_US":"Mobile menu", "zh_TW": "手機版目錄", "zh_CN": "手机菜单", "ms_MY": "Menu mudah alih" },
+      "options": [
+        {
+          "label": { "en_US":"Mobile menu background", "zh_TW": "手機版目錄背景", "zh_CN": "手机菜单背景", "ms_MY": "Latar belakang menu mudah alih" },
+          "type": "color",
+          "id": "mobile_nav_bg_color",
+          "default": "rgb(0,0,0)"
+        },
+        {
+          "label": { "en_US": "Mobile menu text color", "zh_TW": "手機版目錄文字顏色", "zh_CN": "手机菜单文本颜色", "ms_MY": "Warna teks menu mudah alih" },
+          "type": "color",
+          "id": "mobile_nav_text_color",
+          "default": "#ffffff"
+        }
+      ]
+    },
+    
+    {
+    	"label": { "en_US": "Mobile navigation bar", "zh_TW": "手機版導航列", "zh_CN": "手机导航栏", "ms_MY": "Bar navigasi mudah alih" },
+        "options": [
+          {
+          	"label" : { "en_US": "Mobile navigation bar", "zh_TW": "手機版導航列", "zh_CN": "手机导航栏", "ms_MY": "Bar navigasi mudah alih" },
+            "type": "checkbox",
+            "id": "footer_bar"
+          },
+          {
+          	"label" : { "en_US": "Background color", "zh_TW": "背景顏色", "zh_CN": "背景颜色", "ms_MY": "Warna latar belakang" },
+            "type": "color",
+            "id": "footer_bar_icon_bg_color",
+            "default": "rgba(255,255,255,1)"
+          },
+          {
+          	"label" : { "en_US": "Text color", "zh_TW": "文字顏色", "zh_CN": "文字颜色", "ms_MY": "Warna teks" },
+            "type": "color",
+            "id": "footer_bar_icon_text_color",
+            "default": "#000000"
+          },
+          {
+          	"label" : { "en_US": "Mobile nav bar icon (Product page)", "zh_TW": "手機版導航欄圖標（商品頁)", "zh_CN": "移动导航栏图标（产品页)", "ms_MY": "Ikon bar navigasi mudah alih (Halaman produk)" },
+            "type": "select",
+            "id": "footer_bar_icon_product_page",
+            "options": [
+            	{
+                  "value": "0",
+                  "label": { "en_US": "None", "zh_TW": "無", "zh_CN": "无", "ms_MY": "Tiada" }
+                },
+            	{
+                  "value": "1",
+                  "label": { "en_US": "Navigation icon 1", "zh_TW": "導航列圖示 1", "zh_CN": "导航图标 1", "ms_MY": "Ikon navigasi 1" }
+                },
+            	{
+                  "value": "2",
+                  "label": { "en_US": "Navigation icon 2", "zh_TW": "導航列圖示 2", "zh_CN": "导航图标 2", "ms_MY": "Ikon navigasi 2" }
+                },
+            	{
+                  "value": "3",
+                  "label": { "en_US": "Navigation icon 3", "zh_TW": "導航列圖示 3", "zh_CN": "导航图标 3", "ms_MY": "Ikon navigasi 3" }
+                },
+            	{
+                  "value": "4",
+                  "label": { "en_US": "Navigation icon 4", "zh_TW": "導航列圖示 4", "zh_CN": "导航图标 4", "ms_MY": "Ikon navigasi 4" }
+                }
+            ]
+          },
+          {
+            "label" : { "en_US": "Navigation icon 1", "zh_TW": "導航列圖示 1", "zh_CN": "导航图标 1", "ms_MY": "Ikon navigasi 1" },
+            "type": "heading_group",
+              "options": [
+                  {
+                    "type": "image",
+                    "id": "footer_bar_icon_1"
+                  },
+                  {
+                    "label": { "en_US": "Icon text 1", "zh_TW": "圖示文字 1", "zh_CN": "图标文本 1", "ms_MY": "Ikon teks 1" },
+                    "type": "text",
+                    "id": "footer_bar_icon_1_text"
+                  },
+                  {
+                    "label": { "en_US": "Icon link 1", "zh_TW": "圖示連結 1", "zh_CN": "图标链接 1", "ms_MY": "Pautan ikon 1" },
+                    "type": "text",
+                    "id": "footer_bar_icon_1_link"
+                  }
+
+              ]
+          },
+          {
+            "label" : { "en_US": "Navigation icon 2", "zh_TW": "導航列圖示 2", "zh_CN": "导航图标 2", "ms_MY": "Ikon navigasi 2" },
+            "type": "heading_group",
+              "options": [
+                  {
+                    "type": "image",
+                    "id": "footer_bar_icon_2"
+                  },
+                  {
+                    "label": { "en_US": "Icon text 2", "zh_TW": "圖示文字 2", "zh_CN": "图标文本 2", "ms_MY": "Ikon teks 2" },
+                    "type": "text",
+                    "id": "footer_bar_icon_2_text"
+                  },
+                  {
+                    "label": { "en_US": "Icon link 2", "zh_TW": "圖示連結 2", "zh_CN": "图标链接 2", "ms_MY": "Pautan ikon 2" },
+                    "type": "text",
+                    "id": "footer_bar_icon_2_link"
+                  }
+
+              ]
+          },
+          {
+            "label" : { "en_US": "Navigation icon 3", "zh_TW": "導航列圖示 3", "zh_CN": "导航图标 3", "ms_MY": "Ikon navigasi 3" },
+            "type": "heading_group",
+              "options": [
+                  {
+                    "type": "image",
+                    "id": "footer_bar_icon_3"
+                  },
+                  {
+                    "label": { "en_US": "Icon text 3", "zh_TW": "圖示文字 3", "zh_CN": "图标文本 3", "ms_MY": "Ikon teks 3" },
+                    "type": "text",
+                    "id": "footer_bar_icon_3_text"
+                  },
+                  {
+                    "label": { "en_US": "Icon link 3", "zh_TW": "圖示連結 3", "zh_CN": "图标链接 3", "ms_MY": "Pautan ikon 3" },
+                    "type": "text",
+                    "id": "footer_bar_icon_3_link"
+                  }
+
+              ]
+          },
+          {
+            "label" : { "en_US": "Navigation icon 4", "zh_TW": "導航列圖示 4", "zh_CN": "导航图标 4", "ms_MY": "Ikon navigasi 4" },
+            "type": "heading_group",
+              "options": [
+                  {
+                    "type": "image",
+                    "id": "footer_bar_icon_4"
+                  },
+                  {
+                    "label": { "en_US": "Icon text 4", "zh_TW": "圖示文字 4", "zh_CN": "图标文本 4", "ms_MY": "Ikon teks 4" },
+                    "type": "text",
+                    "id": "footer_bar_icon_4_text"
+                  },
+                  {
+                    "label": { "en_US": "Icon link 4", "zh_TW": "圖示連結 4", "zh_CN": "图标链接 4", "ms_MY": "Pautan ikon 4" },
+                    "type": "text",
+                    "id": "footer_bar_icon_4_link"
+                  }
+
+              ]
+          }
+
+        ]
+    },
+    
+    
+    
+    
+    {
+      "label": { "en_US": "Footer", "zh_TW": "頁尾", "zh_CN": "页脚", "ms_MY": "Kaki" },
+      "section_id": "es_footer_section",
+      "options": [
+      {
+        "label": { "en_US": "Footer logo", "zh_TW": "頁尾 Logo", "zh_CN": "页脚标志", "ms_MY": "Kaki logo" },
+        "type": "image",
+        "id": "footer_logo_img",
+        "default": "",
+        "info": "Shown on footer"
+      },
+      
+     {
+      "label": { "en_US": "Footer text color", "zh_TW": "頁尾文字顏色", "zh_CN": "页脚文本颜色", "ms_MY": "Warna teks kaki" },
+      "type": "color",
+        "id": "footer_text_color",
+        "default": "#000000"
+      },
+      {
+        "label": { "en_US": "Footer background color", "zh_TW": "頁尾背景顏色", "zh_CN": "页脚背景颜色", "ms_MY": "Warna latar kaki" },
+        "type": "color",
+        "id": "footer_bg_color",
+        "default": "#ffffff"
+      },
+        
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+        
+      {
+        "label": { "en_US": "Social Media", "zh_TW": "社群媒體", "zh_CN": "社交媒体", "ms_MY": "Media Sosial" },
+        "type": "checkbox",
+        "id": "footer_social_enable"
+      },
+      {
+        "type": "color",
+        "id": "social_link_color",
+        "label": { "en_US": "Social icon / text", "zh_TW": "社群媒體Logo / 文字", "zh_CN": "社交图标/文本", "ms_MY": "Ikon / teks sosial" },
+        "default": "#55555"
+      },      
+      {
+        "type": "text",
+        "id": "facebook_url",
+        "label": "Facebook",
+        "info": "https://www.facebook.com/"
+      },
+      {
+        "type": "text",
+        "id": "instagram_url",
+        "label": "Instagram",
+        "info": "https://instagram.com/"
+      },
+      {
+        "type": "text",
+        "id": "twitter_url",
+        "label": "Twitter",
+        "info": "https://twitter.com/"
+      },
+      {
+        "type": "text",
+        "id": "pinterest_url",
+        "label": "Pinterest",
+        "info": "https://www.pinterest.com/"
+      },
+      {
+        "type": "text",
+        "id": "tumblr_url",
+        "label": "Tumblr",
+        "info": "https://www.tumblr.com/"
+      },
+      {
+        "type": "text",
+        "id": "youtube_url",
+        "label": "YouTube",
+        "info": "https:/www.youtube.com/"
+      },
+      {
+        "type": "text",
+        "id": "vimeo_url",
+        "label": "Vimeo",
+        "info": "https:/vimeo.com/"
+      },
+      {
+        "type": "text",
+        "id": "wechat_url",
+        "label": "Wechat",
+        "info": "https://www.wechat.com/"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_url",
+        "label": "Whatsapp",
+        "info": "https://whatsapp.com/"
+      },
+      {
+        "type": "text",
+        "id": "line_url",
+        "label": "Line",
+        "info": "https://line.me/en/"
+      },
+      {
+        "type": "text",
+        "id": "featured_blog",
+        "label": "Blog",
+        "info": "blogs/news.atom"
+      },
+        
+      {
+        "type": "header",
+        "content": "Footer Logo"
+      },
+      {
+        "label": { "en_US": "Credit Card logo", "zh_TW": "信用卡標誌", "zh_CN": "信用卡标志", "ms_MY": "Logo Kad Kredit" },
+        "type": "checkbox",
+        "id": "footer_show_credit_card_logo"
+      },
+      {
+        "label": "Visa",
+        "type": "checkbox",
+        "id": "footer_visa"
+      },
+      {
+        "label": "Master",
+        "type": "checkbox",
+        "id": "footer_master"
+      },
+      {
+        "label": "American Express",
+        "type": "checkbox",
+        "id": "footer_american_express"
+      },
+      {
+        "label": "Japan Credit Bureau (JCB)",
+        "type": "checkbox",
+        "id": "footer_jcb"
+      },
+      {
+        "label": "Diners Club",
+        "type": "checkbox",
+        "id": "footer_diners_club"
+      },
+      {
+        "label": "Discover",
+        "type": "checkbox",
+        "id": "footer_discover"
+      },
+      {
+        "label": { "en_US": "Show payment methods", "zh_TW": "顯示支付方式", "zh_CN": "显示支付方式", "ms_MY": "Tunjukkan kaedah pembayaran" },
+        "type": "checkbox",
+        "id": "footer_show_methods_of_payment"
+      },
+      {
+        "label": { "en_US": "Show SSL logo", "zh_TW": "顯示SSL標誌", "zh_CN": "显示SSL标志", "ms_MY": "Tunjukkan logo SSL" },
+        "type": "checkbox",
+        "id": "footer_ssl"
+      }
+    ]
+  }
+
+  ]
+
+}

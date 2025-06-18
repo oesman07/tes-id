@@ -1,0 +1,14 @@
+{% assign number_of_products = 4 %}
+{% assign number_of_products_to_fetch = number_of_products | plus: 1 %}
+{% if recommend and recommend.products_count >= 1 %}
+  <hr class="hr--clear hr--small">
+  <div class="section-header section-header--medium">
+    <h3 class="section-header__title">{{ recommend.settings.title | t }}</h3>
+  </div>
+  <div class="grid-uniform grid-link__container">
+    {% for product in recommend.products limit: number_of_products_to_fetch %}
+      {% assign grid_item_width = 'small--one-half medium--one-half large--one-quarter' %}
+      {% include 'product-grid-item' with 'related-products' %}
+    {% endfor %}
+  </div>
+{% endif %}

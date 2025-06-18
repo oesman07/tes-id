@@ -1,0 +1,38 @@
+<div class="form-horizontal">
+  <b>
+    <label for="SortBy" class="h4">{{ 'collections.sorting.title' | t }}</label>
+  </b><br/>
+  <select name="SortBy" id="SortBy">
+    <option value="featured">{{ 'collections.sorting.featured' | t }}</option>
+    <option value="title+asc">{{ 'collections.sorting.az' | t }}</option>
+    <option value="title+desc">{{ 'collections.sorting.za' | t }}</option>
+    <option value="price+asc">{{ 'collections.sorting.price_ascending' | t }}</option>
+    <option value="price+desc">{{ 'collections.sorting.price_descending' | t }}</option>
+    <option value="date+desc">{{ 'collections.sorting.date_descending' | t }}</option>
+    <option value="date+asc">{{ 'collections.sorting.date_ascending' | t }}</option>
+  </select>
+</div>
+
+<script>
+  /*============================================================================
+    Inline JS because collection liquid object is only available
+    on collection pages, and not external JS files
+  ==============================================================================*/
+  $(function() {
+    $('select[name="SortBy"]')
+      .val('{{ collection.sort_by | default: collection.default_sort_by }}')
+      .bind('change', function() {
+        url=window.location.href;
+        newParam="sort="+$(this).val();
+        if(url.indexOf("sort=")===-1){
+          separator = (url.indexOf("?")===-1)?"?":"&";
+          newUrl= url + separator + newParam;
+        }else{
+          oldParam="sort={{ collection.sort_by | default: collection.default_sort_by }}";
+          newUrl=url.replace(oldParam,newParam); 
+        }
+        window.location.href =newUrl;        
+      }
+    );
+  });
+</script>

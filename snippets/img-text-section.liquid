@@ -1,0 +1,18 @@
+<div id="es_img_text_section" class="img-text-section wrapper {{settings.img_text_section_class}}">
+  <div class="img-text-wrapper grid">
+    {% if settings.img_text_section_img != '' and settings.img_text_section_img != '""' %}
+      <div class="it-section-image grid__item small--one-whole medium--one-half large--one-half">
+        <a href="{{settings.img_text_section_url}}">
+          <img data-src="{{settings.img_text_section_img}}" class="lozad"/>
+        </a>
+      </div>
+    {% endif %}
+    <div class="it-section-detail grid__item small--one-whole medium--one-half large--one-half">
+        <h3><a href="{{settings.img_text_section_url}}">{{settings.img_text_section_heading}}</a></h3>
+        <p>
+        	{{settings.img_text_section_text}}
+        </p>
+        <a href="{{settings.img_text_section_url}}">{{settings.img_text_section_link_text}}</a>
+    </div>
+  </div>
+</div>

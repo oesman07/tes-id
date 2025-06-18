@@ -1,0 +1,131 @@
+<ol class="breadcrumb">
+	<li>{{ 'checkout.general.cart' | t }}</li>
+	<li>{{ 'checkout.general.customer_info' | t }}</li>
+	<li>{{ 'checkout.general.shipping_method' | t }}</li>
+	<li>{{ 'checkout.general.payment_method' | t }}</li>
+</ol>
+{% app_snippet 'checkout/content_top' %}
+
+{% include 'mobile-checkout-cart' %}
+
+<div class="side-wrap">
+	<div class="side-left">
+		<div class="left-container">
+
+			<!--================ Successful transaction -->
+			<div class="row text-center">
+
+				
+				<div class="col-sm-12  margin-top-30">
+					<i class="ti-check notification-icon"></i>
+
+					<h4 class="margin-top-0 weight-xbold margin-bottom-10">{{ 'checkout.payment_status.thank_you' | t }}</h4>
+
+					<p class="margin-bottom-0">{{ 'checkout.payment_status.email_noti' | t: email }}</p>
+
+					<div class="color-light margin-top-20 margin-bottom-30">{{ 'checkout.payment_status.order_no' | t }} {{cart.order_number}}</div>
+
+					<a class="btn btn-primary btn-lg " href="/">{{ 'checkout.payment_status.back' | t }}</a>
+
+					{% if t_status == 1 %}
+						<p class="margin-top-10 margin-bottom-0">{{ 'checkout.payment_status.payment_amount' | t }} {{currency_prefix}} {{cart.total_amount_include_transaction}} {{currency_suffix}}</p>
+						{% if cart.credit_earn > 0 %}
+							<p class="margin-top-10 margin-bottom-0">{{ 'checkout.payment_status.creadit_earn' | t }} {{currency_prefix}} {{cart.credit_earn}} {{currency_suffix}}</p>
+						{% endif %}
+
+					{% elsif t_status == 0 %}
+						<p class="margin-top-10 margin-bottom-0">{{ 'checkout.payment_status.payment_due' | t }} {{currency_prefix}} {{cart.total_amount_include_transaction}} {{currency_suffix}}</p>
+					{% endif %}
+				</div>
+			</div>
+
+			<hr class="margin-top-40 margin-bottom-40">
+			<!-- Successful transaction ends ====================-->
+
+
+
+			{% if body_html %}
+				<div id="bank-transfer-content">
+					{{ body_html }}
+				</div>
+
+				<hr class="margin-top-40 margin-bottom-40">
+			{% endif %}
+
+
+			<div>
+				<div class="row">
+					<div class="col-sm-6">
+						{% if cart.pickup_location == empty %}
+						<h5 class="margin-top-0 weight-xbold">{{ 'checkout.payment_status.shipping_addr' | t }}</h5>
+
+						{% assign s = cart.shipping_address %}  
+						<div>{{ s.first_name }} {{s.last_name }}</div>
+						<div>{{ s.email }}</div>
+						<div>{{ s.company }}</div>
+						<div>{{ s.address1 }}</div>
+						<div>{{ s.address2 }}</div>
+						<div>{{ s.zip }}, {{s.city}}, {{s.province}}</div>
+						<div>{{ s.country }}</div>
+						<div>{{ s.phone }}</div>
+
+						{% else %}
+						{% assign p = cart.pickup_location %}  
+						<h5 class="margin-top-0 weight-xbold">{{ 'checkout.payment_status.pickup_loc' | t }}</h5>
+						<div>{{ p.name }}</div>
+						<div>{{ p.email }}</div>
+						<div>{{ p.address1 }}</div>
+						<div>{{ p.address2 }}</div>
+						<div>{{ p.zip }}, {{p.city}}, {{p.province}}</div>
+						<div>{{ p.country }}</div>
+						<div>{{ p.phone }}</div>
+						{% if p.pickup_at %}
+						<div>{{ p.pickup_at | date: "%d %b %Y %I"}}:{{p.pickup_at | date: "%M %p" }}</div>
+						{% endif %}
+
+						{% endif %}
+					</div>
+
+					<div class="xs-margin-top-40 col-sm-6">
+						<h5 class="margin-top-0 weight-xbold">{{ 'checkout.payment_status.billing_addr' | t }}</h5>
+						{% assign b = cart.billing_address %}  
+						<div>{{ b.first_name }} {{b.last_name }}</div>
+						<div>{{ b.email }}</div>
+						<div>{{ b.company }}</div>
+						<div>{{ b.address1 }}</div>
+						<div>{{ b.address2 }}</div>
+						<div>{{ b.zip }}, {{b.city}}, {{b.province}}</div>
+						<div>{{ b.country }}</div>
+						<div>{{ b.phone }}</div>
+					</div>
+				</div>
+
+				<div class="row margin-top-30 xs-margin-top-0">
+					{% if cart.pickup_location == empty %}
+					<div class="xs-margin-top-40 col-sm-6">
+						<h5 class="margin-top-0 weight-xbold">{{ 'checkout.payment_status.shipping_method' | t }}</h5>
+						<div>
+							{{cart.shipping_method_name}}
+						</div>
+					</div>
+					{% endif %}
+
+					<div class="xs-margin-top-40 col-sm-6">
+						<h5 class="margin-top-0 weight-xbold">{{ 'checkout.payment_status.billing_method' | t }}</h5>
+						<div>
+							{{p_method}}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div data-app-purchase='{{purchase_app}}'></div>
+			{% app_snippet 'checkout/content_left' %}
+		</div>
+	</div>
+
+	<div class="side-right">
+		{% include 'desktop-checkout-cart' %}
+	</div>
+</div>
+
+{% app_snippet 'checkout/content_bottom' %}

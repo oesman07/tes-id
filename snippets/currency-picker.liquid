@@ -1,0 +1,17 @@
+{% assign supported_codes = settings.supported_currencies | split: ' ' %}
+{% if template != 'customers' %}
+{% if supported_codes.size > 2 %}
+<label class="currency-picker__wrapper">
+  <!-- <span class="currency-picker__label">Pick a currency</span> -->
+  <svg class="svg-icon" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><title>arrow down</title><path d="M50,78.18A7.35,7.35,0,0,1,44.82,76L3.15,34.36A7.35,7.35,0,1,1,13.55,24L50,60.44,86.45,24a7.35,7.35,0,1,1,10.4,10.4L55.21,76A7.32,7.32,0,0,1,50,78.18Z"/></svg>
+  <select class="currency-picker" name="currencies" style="display: inline; width: auto; vertical-align: inherit;">
+  <option value="{{ shop.currency }}" selected="selected">{{ shop.currency }}</option>
+  {% for code in supported_codes %}
+    {% if code != shop.currency and code != ''%}
+    <option value="{{ code }}">{{ code }}</option>
+    {% endif %}
+  {% endfor %}
+  </select>
+</label>
+{% endif %}
+{% endif %}

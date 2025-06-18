@@ -1,0 +1,49 @@
+{% if template contains 'article' or template contains 'blog' %}
+  {% assign permalinkURL = shop.url | append: article.url %}
+  {% assign shareTitle = article.title | url_param_escape %}
+{% elsif template contains 'product' %}
+  {% assign permalinkURL = shop.url | append: product.url %}
+  {% assign shareTitle = product.title | url_param_escape %}
+{% elsif template == 'password' %}
+  {% assign permalinkURL = shop.url %}
+  {% capture shareTitle %}{% unless shop.description == '' %}{{ shop.description | url_param_escape }}{% else %}{{ shop.name | url_param_escape }}{% endunless %}{% endcapture %}
+{% endif %}
+
+{% comment %}
+  Share button styles are:
+  * is-clean
+  * normal
+{% endcomment %}
+{% assign shareButtonStyle = 'is-clean' %}
+
+<div class="social-sharing {{ shareButtonStyle }}" data-permalink="{{ permalinkURL }}">
+
+  {% if settings.share_facebook %}
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
+      {% include 'svg-definitions' with 'facebook-share-icon' %}
+    </a>
+  {% endif %}
+
+  {% if settings.share_twitter %}
+    <a target="_blank" href="//twitter.com/share?text={{ shareTitle }}&amp;url={{ permalinkURL }}" class="share-twitter">
+      {% include 'svg-definitions' with 'twitter-share-icon' %}
+    </a>
+  {% endif %}
+
+  {% if product.featured_image or article.image %}
+
+    {% if settings.share_pinterest %}
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={% if template contains 'product' %}{{ product | img_url: 'social-share' }}{% else %}{{ article | img_url: 'social-share' }}{% endif %}&amp;description={{ shareTitle }}" class="share-pinterest">
+        {% include 'svg-definitions' with 'pinterest-share-icon' %}
+      </a>
+    {% endif %}
+
+  {% endif %}
+  
+  {% if settings.share_line %}
+    <a target="_blank" href="//social-plugins.line.me/lineit/share?url={{ permalinkURL }}" class="share-line">
+      {% include 'svg-definitions' with 'line-share-icon' %}
+    </a>
+  {% endif %}
+{% app_snippet 'product/share' %}
+</div>
